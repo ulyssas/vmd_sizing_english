@@ -22,53 +22,53 @@ class CameraPanel(BasePanel):
         self.header_panel = CameraHeaderPanel(self.frame, self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.header_sizer = wx.BoxSizer(wx.VERTICAL)
 
-        self.description_txt = wx.StaticText(self.header_panel, wx.ID_ANY, u"指定されたカメラモーションのサイジングを、ボーンモーションのサイジングと同時に行えます。\n" \
-                                             + "全長オフセットYは、カメラに映す変換先モデルの全長を調整するオフセット値を指定できます。", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.description_txt = wx.StaticText(self.header_panel, wx.ID_ANY, u"You can perform sizing of the specified camera motion and bone motion sizing at the same time.\n" \
+                                             + "Total length offset Y allows you to specify an offset value to adjust the total length of the target model shown in the camera.", wx.DefaultPosition, wx.DefaultSize, 0)
         self.header_sizer.Add(self.description_txt, 0, wx.ALL, 5)
 
         self.static_line01 = wx.StaticLine(self.header_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL)
         self.header_sizer.Add(self.static_line01, 0, wx.EXPAND | wx.ALL, 5)
 
-        camera_only_flg_spacer_ctrl = wx.StaticText(self.header_panel, wx.ID_ANY, u"　　　　　　　　　　　　　　　　　　　　　", wx.DefaultPosition, wx.DefaultSize, 0)
+        camera_only_flg_spacer_ctrl = wx.StaticText(self.header_panel, wx.ID_ANY, u"                                          ", wx.DefaultPosition, wx.DefaultSize, 0)
 
         # カメラサイジングのみ実行
-        self.camera_only_flg_ctrl = wx.CheckBox(self.header_panel, wx.ID_ANY, u"カメラサイジングのみ実行", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.camera_only_flg_ctrl.SetToolTip(u"ボーンサイジング済みファイルを出力ファイルに指定した上でチェックを入れると、\nそのサイジング済みVMDを元にカメラサイジングを実行します。")
+        self.camera_only_flg_ctrl = wx.CheckBox(self.header_panel, wx.ID_ANY, u"Run Camera Sizing Only", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.camera_only_flg_ctrl.SetToolTip(u"If you specify a motion file with sizing applied as the output and check this, camera sizing will be performed based on that sized VMD.")
         self.camera_only_flg_ctrl.Bind(wx.EVT_CHECKBOX, self.set_output_vmd_path)
 
         # カメラVMDファイルコントロール
-        self.camera_vmd_file_ctrl = HistoryFilePickerCtrl(self.frame, self.header_panel, u"カメラモーションVMD", u"カメラモーションVMDファイルを開く", ("vmd"), wx.FLP_DEFAULT_STYLE, \
-                                                          u"調整したいカメラモーションのVMDパスを指定してください。\nD&Dでの指定、開くボタンからの指定、履歴からの選択ができます。", \
+        self.camera_vmd_file_ctrl = HistoryFilePickerCtrl(self.frame, self.header_panel, u"Camera Motion VMD", u"Open Camera Motion VMD File", ("vmd"), wx.FLP_DEFAULT_STYLE, \
+                                                          u"Specify the VMD path of the camera motion you want to adjust.\nYou can specify by D&D, open button, or select from history.", \
                                                           file_model_spacer=0, title_parts_ctrl=camera_only_flg_spacer_ctrl, title_parts2_ctrl=self.camera_only_flg_ctrl, file_histories_key="camera_vmd", \
                                                           is_change_output=True, is_aster=False, is_save=False, set_no=1)
         self.header_sizer.Add(self.camera_vmd_file_ctrl.sizer, 1, wx.EXPAND, 0)
 
         # 出力先VMDファイルコントロール
-        self.output_camera_vmd_file_ctrl = BaseFilePickerCtrl(frame, self.header_panel, u"出力カメラVMD", u"出力カメラVMDファイルを開く", ("vmd"), wx.FLP_OVERWRITE_PROMPT | wx.FLP_SAVE | wx.FLP_USE_TEXTCTRL, \
-                                                              u"調整結果のカメラVMD出力パスを指定してください。\nカメラVMDファイル名に基づいて自動生成されますが、任意のパスに変更することも可能です。", \
+        self.output_camera_vmd_file_ctrl = BaseFilePickerCtrl(frame, self.header_panel, u"Output Camera VMD", u"Open Output Camera VMD File", ("vmd"), wx.FLP_OVERWRITE_PROMPT | wx.FLP_SAVE | wx.FLP_USE_TEXTCTRL, \
+                                                              u"Specify the output path for the adjusted camera VMD.\nThe camera VMD file name is automatically generated, but you can change it to any path.", \
                                                               is_aster=False, is_save=True, set_no=1)
         self.header_sizer.Add(self.output_camera_vmd_file_ctrl.sizer, 1, wx.EXPAND, 0)
 
         # カメラ距離調整スライダー
         self.camera_length_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.camera_length_txt = wx.StaticText(self.header_panel, wx.ID_ANY, u"距離可動範囲", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.camera_length_txt.SetToolTip(u"ステージの大きさなどにより、カメラの距離の調整範囲を限定したい場合に\n" \
-                                          + "カメラの距離可動範囲を限定することができます。\n" \
-                                          + "可動範囲は手動で調整する事も可能です。")
+        self.camera_length_txt = wx.StaticText(self.header_panel, wx.ID_ANY, u"Camera Distance Range", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.camera_length_txt.SetToolTip(u"If you want to limit the adjustment range of the camera distance due to stage size, etc.,\n" \
+                                          + "you can limit the camera distance range.\n" \
+                                          + "You can also manually adjust the range.")
         self.camera_length_txt.Wrap(-1)
         self.camera_length_sizer.Add(self.camera_length_txt, 0, wx.ALL, 5)
 
-        self.camera_length_type_ctrl = wx.Choice(self.header_panel, id=wx.ID_ANY, choices=["距離制限強", "距離制限弱", "距離制限なし"])
+        self.camera_length_type_ctrl = wx.Choice(self.header_panel, id=wx.ID_ANY, choices=["Strong Distance Limit", "Weak Distance Limit", "No Distance Limit"])
         self.camera_length_type_ctrl.SetSelection(2)
         self.camera_length_type_ctrl.Bind(wx.EVT_CHOICE, self.on_camera_length_type)
-        self.camera_length_type_ctrl.SetToolTip(u"「距離制限強」　…　小さめのステージ用。距離可動範囲を厳しめに制限します。\n" \
-                                                + "「距離制限弱」　…　中くらいのステージ用。距離可動範囲を多少制限します。\n" \
-                                                + "「距離制限なし」　…　距離可動範囲を無制限とし、元モデルと同じ映り具合になるよう、最大限調整します。")
+        self.camera_length_type_ctrl.SetToolTip(u"Strong Distance Limit: For small stages. Strictly limits the camera distance range.\n" \
+                                                + "Weak Distance Limit: For medium stages. Slightly limits the camera distance range.\n" \
+                                                + "No Distance Limit: Unlimited camera distance range, camera will be fully adjusted to match the source.")
         self.camera_length_sizer.Add(self.camera_length_type_ctrl, 0, wx.ALL, 5)
 
-        self.camera_length_label = wx.StaticText(self.header_panel, wx.ID_ANY, u"（5）", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.camera_length_label.SetToolTip(u"現在指定されているカメラ距離の可動範囲です。")
+        self.camera_length_label = wx.StaticText(self.header_panel, wx.ID_ANY, u"(5)", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.camera_length_label.SetToolTip(u"The currently specified camera distance range.")
         self.camera_length_label.Wrap(-1)
         self.camera_length_sizer.Add(self.camera_length_label, 0, wx.ALL, 5)
 
@@ -191,8 +191,7 @@ class CameraHeaderPanel(wx.Panel):
         self.parent.output_camera_vmd_file_ctrl.file_ctrl.SetPath(output_camera_vmd_path)
 
         if len(output_camera_vmd_path) >= 255 and os.name == "nt":
-            logger.error("生成予定のファイルパスがWindowsの制限を超えています。\n生成予定パス: {0}".format(output_camera_vmd_path), decoration=MLogger.DECORATION_BOX)
-        
+            logger.error("File path exceeds Windows limit.\nFile path: {0}".format(output_camera_vmd_path), decoration=MLogger.DECORATION_BOX)
 
 class CameraSet():
 
@@ -203,7 +202,7 @@ class CameraSet():
         self.set_idx = set_idx
         self.file_set = file_set
 
-        self.set_sizer = wx.StaticBoxSizer(wx.StaticBox(self.window, wx.ID_ANY, "【No.{0}】".format(set_idx)), orient=wx.VERTICAL)
+        self.set_sizer = wx.StaticBoxSizer(wx.StaticBox(self.window, wx.ID_ANY, "No.{0}".format(set_idx)), orient=wx.VERTICAL)
 
         self.model_name_txt = wx.StaticText(self.window, wx.ID_ANY, \
                                             "{0} → {1}".format(file_set.org_model_file_ctrl.file_model_ctrl.txt_ctrl.GetValue()[1:-1], \
@@ -212,24 +211,24 @@ class CameraSet():
         self.set_sizer.Add(self.model_name_txt, 0, wx.ALL, 5)
 
         # カメラPMXファイルコントロール
-        self.camera_model_file_ctrl = HistoryFilePickerCtrl(frame, window, u"カメラ作成元モデルPMX", u"カメラ作成元モデルPMXファイルを開く", ("pmx"), wx.FLP_DEFAULT_STYLE, \
-                                                            u"カメラ作成に使用されたモデルのPMXパスを指定してください。\n未指定の場合、モーション作成元モデルPMXを使用します。" \
-                                                            + "\n精度は落ちますが、類似したサイズ・ボーン構造のモデルでも代用できます。\nD&Dでの指定、開くボタンからの指定、履歴からの選択ができます。", \
+        self.camera_model_file_ctrl = HistoryFilePickerCtrl(frame, window, u"Source Camera Model PMX", u"Open Source Camera Model PMX File", ("pmx"), wx.FLP_DEFAULT_STYLE, \
+                                                            u"Specify the PMX path of the model used for camera creation.\nIf not specified, the source motion model PMX will be used." \
+                                                            + "\nAccuracy will decrease, but you can substitute similar size/bone structure models.\nYou can specify by D&D, open button, or select from history.", \
                                                             file_model_spacer=20, title_parts_ctrl=None, title_parts2_ctrl=None, file_histories_key="camera_pmx", \
                                                             is_change_output=True, is_aster=False, is_save=False, set_no=set_idx)
         self.set_sizer.Add(self.camera_model_file_ctrl.sizer, 1, wx.EXPAND, 0)
 
         self.offset_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.camera_offset_y_txt = wx.StaticText(self.window, wx.ID_ANY, u"全長Yオフセット", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.camera_offset_y_txt = wx.StaticText(self.window, wx.ID_ANY, u"Total Length Y Offset", wx.DefaultPosition, wx.DefaultSize, 0)
         self.camera_offset_y_txt.Wrap(-1)
         self.offset_sizer.Add(self.camera_offset_y_txt, 0, wx.ALL, 5)
 
         # オフセットYコントロール
         self.camera_offset_y_ctrl = wx.SpinCtrlDouble(self.window, id=wx.ID_ANY, size=wx.Size(100, -1), value="0.0", min=-1000, max=1000, initial=0.0, inc=0.1)
-        self.camera_offset_y_ctrl.SetToolTip(u"カメラに映す変換先モデルの全長を調整するオフセット値を指定できます。\n" \
-                                             + "髪飾り等、「頭頂部より上にあるオブジェクトを除外したい」場合、マイナス値を指定して下さい。\n" \
-                                             + "アホ毛等、「頭頂部より上にあるオブジェクトを含めたい」場合、プラス値を指定して下さい。")
+        self.camera_offset_y_ctrl.SetToolTip(u"You can specify an offset value to adjust the total length of the target model shown in the camera.\n" \
+                                             + "If you want to exclude objects above the top of the head (e.g., hair ornaments), specify a negative value.\n" \
+                                             + "If you want to include objects above the top of the head (e.g., ahoge), specify a positive value.")
         self.camera_offset_y_ctrl.Bind(wx.EVT_MOUSEWHEEL, lambda event: self.frame.on_wheel_spin_ctrl(event, 0.2))
         self.offset_sizer.Add(self.camera_offset_y_ctrl, 0, wx.ALL, 5)
 

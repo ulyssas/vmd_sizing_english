@@ -23,15 +23,16 @@ class ArmPanel(BasePanel):
         # 剛体用ダイアログ
         self.avoidance_dialog = AvoidanceDialog(self.frame)
 
-        avoidance_tooltip = "指定文字列名のボーン追従剛体と手首・指先との接触を回避します。\n選択ボタンから、変換先モデルの回避させたいボーン追従剛体を選択してください。\n" \
-                            + "「頭接触回避」は頭を中心とした球体剛体を自動で計算します。"
-        alignment_tooltip = "変換先モデルの手首位置が、作成元モデルの手首とほぼ同じ位置になるよう、手首位置を調整します。"
+        avoidance_tooltip = "Avoid contact between bone-tracking rigid bodies with the specified name and the wrist/fingertips.\n" \
+                            + "Select the bone-tracking rigid bodies you want to avoid from the target model using the select button.\n" \
+                            + "\"Head Contact Avoidance\" automatically calculates a spherical rigid body centered on the head."
+        alignment_tooltip = "Adjust the wrist position of the target model so that it roughly matches the source model's wrist position."
 
         # Bulk用接触回避データ
         self.bulk_avoidance_set_dict = {}
 
-        self.description_txt = wx.StaticText(self, wx.ID_ANY, "腕を変換先モデルに合わせて調整する事ができます。\n「接触回避」と「位置合わせ」を合わせて実行できます。（接触回避→位置合わせの順に実行）" + \
-                                             "\n腕の動きが、元々のモーションから変わる事があります。いずれもそれなりに時間がかかります。", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.description_txt = wx.StaticText(self, wx.ID_ANY, "You can adjust the arms to match the target model.\nYou can execute both \"Contact Avoidance\" and \"Alignment\" together. (Contact Avoidance → Alignment)" + \
+                                             "\nArm movement may change from the original motion. Both processes take some time.", wx.DefaultPosition, wx.DefaultSize, 0)
         self.sizer.Add(self.description_txt, 0, wx.ALL, 5)
 
         self.static_line01 = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL)
@@ -41,7 +42,7 @@ class ArmPanel(BasePanel):
         self.avoidance_title_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # 剛体接触回避タイトル
-        self.avoidance_title_txt = wx.StaticText(self, wx.ID_ANY, u"接触回避", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.avoidance_title_txt = wx.StaticText(self, wx.ID_ANY, u"Contact Avoidance", wx.DefaultPosition, wx.DefaultSize, 0)
         self.avoidance_title_txt.SetToolTip(avoidance_tooltip)
         self.avoidance_title_txt.Wrap(-1)
         self.avoidance_title_txt.SetFont(wx.Font(wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString))
@@ -66,8 +67,8 @@ class ArmPanel(BasePanel):
         self.avoidance_target_txt_ctrl.Bind(wx.EVT_TEXT, self.on_check_arm_process_avoidance)
         self.avoidance_target_sizer.Add(self.avoidance_target_txt_ctrl, 1, wx.EXPAND | wx.ALL, 5)
 
-        self.avoidance_target_btn_ctrl = wx.Button(self, wx.ID_ANY, u"剛体選択", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.avoidance_target_btn_ctrl.SetToolTip(u"変換先モデルにあるボーン追従剛体を選択できます")
+        self.avoidance_target_btn_ctrl = wx.Button(self, wx.ID_ANY, u"Select Rigid Body", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.avoidance_target_btn_ctrl.SetToolTip(u"You can select bone-tracking rigid bodies in the target model")
         self.avoidance_target_btn_ctrl.Bind(wx.EVT_BUTTON, self.on_click_avoidance_target)
         self.avoidance_target_sizer.Add(self.avoidance_target_btn_ctrl, 0, wx.ALIGN_BOTTOM | wx.ALL, 5)
 
@@ -80,9 +81,9 @@ class ArmPanel(BasePanel):
         self.alignment_title_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # 手首位置合わせタイトル
-        self.alignment_title_txt = wx.StaticText(self, wx.ID_ANY, u"位置合わせ", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.alignment_title_txt.SetToolTip("両手を合わせたり、床に手をついたりするモーションを、変換先モデルの手首位置に合わせて調整します。\n" + \
-                                            "それぞれの距離を調整することで、位置合わせの適用範囲を調整することができます。")
+        self.alignment_title_txt = wx.StaticText(self, wx.ID_ANY, u"Alignment", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.alignment_title_txt.SetToolTip("Adjust motions such as joining hands or touching the floor, to match the wrist position of the target model.\n" + \
+                                            "You can adjust the effective range of alignment by adjusting each distance.")
         self.alignment_title_txt.Wrap(-1)
         self.alignment_title_txt.SetFont(wx.Font(wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString))
         self.alignment_title_txt.Bind(wx.EVT_LEFT_DOWN, self.on_check_arm_process_alignment)
@@ -102,15 +103,14 @@ class ArmPanel(BasePanel):
         self.alignment_option_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # 指位置合わせ
-        self.arm_alignment_finger_flg_ctrl = wx.CheckBox(self, wx.ID_ANY, u"指の位置で位置合わせを行う", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.arm_alignment_finger_flg_ctrl.SetToolTip(u"チェックを入れると、フィンガータットモーション等、指間の距離を基準に手首位置を調整できます。" \
-                                                      + "複数人数モーションではOFFのままの方が綺麗になります。")
+        self.arm_alignment_finger_flg_ctrl = wx.CheckBox(self, wx.ID_ANY, u"Align by finger position", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.arm_alignment_finger_flg_ctrl.SetToolTip(u"If checked, you can adjust the wrist position based on the distance between fingers, useful for finger-tutting motions.\nFor multi-person motions, it's better to leave it OFF for cleaner results.")
         self.arm_alignment_finger_flg_ctrl.Bind(wx.EVT_CHECKBOX, self.on_check_arm_process_alignment)
         self.alignment_option_sizer.Add(self.arm_alignment_finger_flg_ctrl, 0, wx.ALL, 5)
 
         # 床位置合わせ
-        self.arm_alignment_floor_flg_ctrl = wx.CheckBox(self, wx.ID_ANY, u"床との位置合わせも一緒に行う", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.arm_alignment_floor_flg_ctrl.SetToolTip(u"チェックを入れると、手首が床に沈み込んだり浮いてたりする場合に、元モデルに合わせて手首の位置を調整できます。\nセンター位置も一緒に調整します。")
+        self.arm_alignment_floor_flg_ctrl = wx.CheckBox(self, wx.ID_ANY, u"Align with the floor as well", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.arm_alignment_floor_flg_ctrl.SetToolTip(u"If checked, you can adjust the wrist position to match the source model when the wrist sinks into or floats above the floor.\nThe center position will also be adjusted together.")
         self.arm_alignment_floor_flg_ctrl.Bind(wx.EVT_CHECKBOX, self.on_check_arm_process_alignment)
         self.alignment_option_sizer.Add(self.arm_alignment_floor_flg_ctrl, 0, wx.ALL, 5)
 
@@ -119,14 +119,14 @@ class ArmPanel(BasePanel):
         # 手首位置スライダー
         self.alignment_distance_wrist_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.alignment_distance_wrist_txt = wx.StaticText(self, wx.ID_ANY, u"手首間の距離　  ", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.alignment_distance_wrist_txt.SetToolTip(u"どのくらい手首が近付いた場合に、手首位置合わせを実行するか指定してください。\n値が小さいほど、手首が近付いた時だけ手首位置合わせを行います。\n距離の単位は、元モデルの手のひらの大きさです。" \
-                                                     + "\nサイジング実行時、手首間の距離がメッセージ欄に出てますので、参考にしてください。\nスライダーを最大に設定すると、常に手首位置合わせを行います。（両手剣等に便利です）")
+        self.alignment_distance_wrist_txt = wx.StaticText(self, wx.ID_ANY, u"Wrist Distance    ", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.alignment_distance_wrist_txt.SetToolTip(u"Specify how close the wrists should be to execute wrist alignment.\nSmaller values mean alignment happens only when wrists are close.\nThe unit of distance is the size of the palm of the source model." \
+                                                     + "\nDuring sizing, the wrist distance is shown in the message area for reference.\nSetting the slider to maximum always performs wrist alignment. (Useful for two-handed sword, etc.)")
         self.alignment_distance_wrist_txt.Wrap(-1)
         self.alignment_distance_wrist_sizer.Add(self.alignment_distance_wrist_txt, 0, wx.ALL, 5)
 
-        self.alignment_distance_wrist_label = wx.StaticText(self, wx.ID_ANY, u"（1.7）", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.alignment_distance_wrist_label.SetToolTip(u"現在指定されている手首間の距離です。元モデルの両手首位置がこの範囲内である場合、手首間の位置合わせを行います。")
+        self.alignment_distance_wrist_label = wx.StaticText(self, wx.ID_ANY, u"(1.7)", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.alignment_distance_wrist_label.SetToolTip(u"The currently specified wrist distance. If the wrist positions of the source model are within this range, wrist alignment will be performed.")
         self.alignment_distance_wrist_label.Wrap(-1)
         self.alignment_distance_wrist_sizer.Add(self.alignment_distance_wrist_label, 0, wx.ALL, 5)
 
@@ -139,14 +139,14 @@ class ArmPanel(BasePanel):
         # 指位置スライダー
         self.alignment_distance_finger_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.alignment_distance_finger_txt = wx.StaticText(self, wx.ID_ANY, u"指間の距離　　  ", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.alignment_distance_finger_txt.SetToolTip(u"どのくらい指が近付いた場合に、指位置合わせを実行するか指定してください。\n値が小さいほど、指が近付いた時だけ指位置合わせを行います。\n距離の単位は、元モデルの手のひらの大きさです。\n" \
-                                                      + "\nサイジング実行時、指間の距離がメッセージ欄に出てますので、参考にしてください。\nスライダーを最大に設定すると、常に指位置合わせを行います。")
+        self.alignment_distance_finger_txt = wx.StaticText(self, wx.ID_ANY, u"Finger Distance      ", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.alignment_distance_finger_txt.SetToolTip(u"Specify how close the fingers should be to execute finger alignment.\nSmaller values mean alignment happens only when fingers are close.\nThe unit of distance is the size of the palm of the source model.\n" \
+                                                      + "\nDuring sizing, the finger distance is shown in the message area for reference.\nSetting the slider to maximum always performs finger alignment.")
         self.alignment_distance_finger_txt.Wrap(-1)
         self.alignment_distance_finger_sizer.Add(self.alignment_distance_finger_txt, 0, wx.ALL, 5)
 
-        self.alignment_distance_finger_label = wx.StaticText(self, wx.ID_ANY, u"（1.4）", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.alignment_distance_finger_label.SetToolTip(u"現在指定されている指間の距離です。元モデルの両指位置がこの範囲内である場合、指間の位置合わせを行います。")
+        self.alignment_distance_finger_label = wx.StaticText(self, wx.ID_ANY, u"(1.4)", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.alignment_distance_finger_label.SetToolTip(u"The currently specified finger distance. If the finger positions of the source model are within this range, finger alignment will be performed.")
         self.alignment_distance_finger_label.Wrap(-1)
         self.alignment_distance_finger_sizer.Add(self.alignment_distance_finger_label, 0, wx.ALL, 5)
 
@@ -159,14 +159,14 @@ class ArmPanel(BasePanel):
         # 手首と床との位置スライダー
         self.alignment_distance_floor_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.alignment_distance_floor_txt = wx.StaticText(self, wx.ID_ANY, u"手首と床との距離", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.alignment_distance_floor_txt.SetToolTip(u"どのくらい手首と床が近付いた場合に、手首と床との位置合わせを実行するか指定してください。\n値が小さいほど、手首と床が近付いた時だけ位置合わせを行います。\n距離の単位は、元モデルの手のひらの大きさです。" \
-                                                     + "\nサイジング実行時、手首と床との間の距離がメッセージ欄に出てますので、参考にしてください。\nスライダーを最大に設定すると、常に手首と床との位置合わせを行います。")
+        self.alignment_distance_floor_txt = wx.StaticText(self, wx.ID_ANY, u"Wrist-Floor Distance", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.alignment_distance_floor_txt.SetToolTip(u"Specify how close the wrist and floor should be to execute wrist-floor alignment.\nSmaller values mean alignment is performed only when wrist and floor are close.\nThe unit of distance is the size of the palm of the source model." \
+                                                     + "\nDuring sizing, the wrist-floor distance is shown in the message area for reference.\nSetting the slider to maximum always performs wrist-floor alignment.")
         self.alignment_distance_floor_txt.Wrap(-1)
         self.alignment_distance_floor_sizer.Add(self.alignment_distance_floor_txt, 0, wx.ALL, 5)
 
-        self.alignment_distance_floor_label = wx.StaticText(self, wx.ID_ANY, u"（1.2）", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.alignment_distance_floor_label.SetToolTip(u"現在指定されている手首と床との間の距離です。元モデルの両手首と床との距離がこの範囲内である場合、手首と床との位置合わせを行います。")
+        self.alignment_distance_floor_label = wx.StaticText(self, wx.ID_ANY, u"(1.2)", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.alignment_distance_floor_label.SetToolTip(u"The currently specified wrist-floor distance. If the wrist-floor distance of the source model is within this range, wrist-floor alignment will be performed.")
         self.alignment_distance_floor_label.Wrap(-1)
         self.alignment_distance_floor_sizer.Add(self.alignment_distance_floor_label, 0, wx.ALL, 5)
 
@@ -182,12 +182,12 @@ class ArmPanel(BasePanel):
         # 腕チェックスキップ --------------------
         self.arm_check_skip_sizer = wx.BoxSizer(wx.VERTICAL)
 
-        self.arm_check_skip_flg_ctrl = wx.CheckBox(self, wx.ID_ANY, u"腕～手首のサイジング可能チェックをスキップする", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.arm_check_skip_flg_ctrl.SetToolTip(u"サイジング可能チェック（腕IKがあると不可）をスキップして、必ず処理を行うようにします。")
+        self.arm_check_skip_flg_ctrl = wx.CheckBox(self, wx.ID_ANY, u"Skip arm-wrist sizing check", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.arm_check_skip_flg_ctrl.SetToolTip(u"Skip the sizing check (not possible if IKArm/腕IK exists) and always perform processing.")
         self.arm_check_skip_sizer.Add(self.arm_check_skip_flg_ctrl, 0, wx.ALL, 5)
 
-        self.arm_check_skip_description = wx.StaticText(self, wx.ID_ANY, u"腕サイジング可能チェック（腕IKがあると不可）をスキップして、必ず腕関係処理を行うようにします。\n" \
-                                                        + "※サイジング結果がおかしくなる可能性がありますが、サポート対象外です。", \
+        self.arm_check_skip_description = wx.StaticText(self, wx.ID_ANY, u"Skip the arm sizing check (not possible if IKArm/腕IK exists) and always perform arm-related processing.\n" \
+                                                        + "* The sizing result may be incorrect, as it is not supported.", \
                                                         wx.DefaultPosition, wx.DefaultSize, 0)
         self.arm_check_skip_description.Wrap(-1)
         self.arm_check_skip_sizer.Add(self.arm_check_skip_description, 0, wx.ALL, 5)
@@ -209,14 +209,14 @@ class ArmPanel(BasePanel):
             if self.avoidance_set_dict[1].equal_hashdigest(self.frame.file_panel_ctrl.file_set):
                 target[0] = [self.avoidance_set_dict[1].rep_avoidance_names[n] for n in self.avoidance_set_dict[1].rep_choices.GetSelections()]
             else:
-                logger.warning("【No.%s】接触回避設定後、ファイルセットが変更されたため、接触回避をクリアします", 1, decoration=MLogger.DECORATION_BOX)
+                logger.warning("No.%s: Contact avoidance settings cleared because the file set was changed after setting contact avoidance.", 1, decoration=MLogger.DECORATION_BOX)
 
         for set_no in list(self.avoidance_set_dict.keys())[1:]:
             if set_no in self.avoidance_set_dict and self.avoidance_set_dict[set_no].rep_choices:
                 if len(self.frame.multi_panel_ctrl.file_set_list) >= set_no - 1 and self.avoidance_set_dict[set_no].equal_hashdigest(self.frame.multi_panel_ctrl.file_set_list[set_no - 2]):
                     target[set_no - 1] = [self.avoidance_set_dict[set_no].rep_avoidance_names[n] for n in self.avoidance_set_dict[set_no].rep_choices.GetSelections()]
                 else:
-                    logger.warning("【No.%s】接触回避設定後、ファイルセットが変更されたため、接触回避をクリアします", set_no, decoration=MLogger.DECORATION_BOX)
+                    logger.warning("No.%s: Contact avoidance settings cleared because the file set was changed after setting contact avoidance.", set_no, decoration=MLogger.DECORATION_BOX)
 
         return target
     
@@ -232,7 +232,7 @@ class ArmPanel(BasePanel):
             # 選択肢ごとの表示文言
             if set_data.rep_choices:
                 selections = [set_data.rep_choices.GetString(n) for n in set_data.rep_choices.GetSelections()]
-                self.avoidance_target_txt_ctrl.WriteText("【No.{0}】{1}\n".format(set_no, ', '.join(selections)))
+                self.avoidance_target_txt_ctrl.WriteText("No.{0}: {1}\n".format(set_no, ', '.join(selections)))
 
         self.arm_process_flg_avoidance.SetValue(1)
         self.avoidance_dialog.Hide()
@@ -291,28 +291,28 @@ class ArmPanel(BasePanel):
         if self.frame.file_panel_ctrl.file_set.is_loaded():
             if not self.frame.file_panel_ctrl.file_set.org_model_file_ctrl.data.can_arm_sizing:
                 # 腕不可の場合、リスト追加
-                disable_arm_model_names.append("【No.1】作成元モデル: {0}".format(self.frame.file_panel_ctrl.file_set.org_model_file_ctrl.data.name))
+                disable_arm_model_names.append("No.1 Source Model: {0}".format(self.frame.file_panel_ctrl.file_set.org_model_file_ctrl.data.name))
 
             if not self.frame.file_panel_ctrl.file_set.rep_model_file_ctrl.data.can_arm_sizing:
                 # 腕不可の場合、リスト追加
-                disable_arm_model_names.append("【No.1】変換先モデル: {0}".format(self.frame.file_panel_ctrl.file_set.rep_model_file_ctrl.data.name))
+                disable_arm_model_names.append("No.1 Target Model: {0}".format(self.frame.file_panel_ctrl.file_set.rep_model_file_ctrl.data.name))
 
         for multi_file_set_idx, multi_file_set in enumerate(self.frame.multi_panel_ctrl.file_set_list):
             set_no = multi_file_set_idx + 2
             if multi_file_set.is_loaded():
                 if not multi_file_set.org_model_file_ctrl.data.can_arm_sizing:
                     # 腕不可の場合、リスト追加
-                    disable_arm_model_names.append("【No.{0}】作成元モデル: {1}".format(set_no, multi_file_set.org_model_file_ctrl.data.name))
+                    disable_arm_model_names.append("No.{0} Source Model: {1}".format(set_no, multi_file_set.org_model_file_ctrl.data.name))
 
                 if not multi_file_set.rep_model_file_ctrl.data.can_arm_sizing:
                     # 腕不可の場合、リスト追加
-                    disable_arm_model_names.append("【No.{0}】変換先モデル: {1}".format(set_no, multi_file_set.rep_model_file_ctrl.data.name))
+                    disable_arm_model_names.append("No.{0} Target Model: {1}".format(set_no, multi_file_set.rep_model_file_ctrl.data.name))
             
         if len(disable_arm_model_names) > 0 and not self.arm_check_skip_flg_ctrl.GetValue():
             # 腕不可モデルがいる場合、ダイアログ表示
-            with wx.MessageDialog(self, "下記モデルに「腕IK」に類する文字列が含まれているため、該当ファイルセットの腕系処理\n（腕スタンス補正・捩り分散・接触回避・位置合わせ）がこのままではスルーされます。\n" \
-                                  + "腕チェックスキップFLGをONにすると、強制的に腕系処理が実行されます。\n※ただし、結果がおかしくなってもサポート対象外となります。\n" \
-                                  + "腕チェックスキップFLGをONにしますか？ \n\n{0}".format('\n'.join(disable_arm_model_names)), style=wx.YES_NO | wx.ICON_WARNING) as dialog:
+            with wx.MessageDialog(self, "The following models contain strings related to \"IKArm/腕IK\", so arm-related processing for the corresponding file set\n(Arm Stance Correction, Twist Distribution, Contact Avoidance, Alignment) will be skipped as is.\n" \
+                                  + "If you turn ON the arm check skip flag, arm-related processing will be forcibly executed.\n* However, if the result is incorrect, it will not be supported.\n" \
+                                  + "Do you want to turn ON the arm check skip flag? \n\n{0}".format('\n'.join(disable_arm_model_names)), style=wx.YES_NO | wx.ICON_WARNING) as dialog:
                 if dialog.ShowModal() == wx.ID_NO:
                     # 腕系チェックスキップOFF
                     self.arm_check_skip_flg_ctrl.SetValue(0)
@@ -325,7 +325,7 @@ class ArmPanel(BasePanel):
     def set_multi_initialize_value(self):
         # 複数件ある場合、手首間の距離デフォルト値変更
         self.alignment_distance_wrist_slider.SetValue(2.5)
-        self.alignment_distance_wrist_label.SetLabel("（2.5）")
+        self.alignment_distance_wrist_label.SetLabel("(2.5)")
 
     def add_set(self, set_idx: int, file_set: SizingFileSet, replace: bool):
         new_avoidance_set = AvoidanceSet(self.frame, self, self.avoidance_dialog.scrolled_window, set_idx, file_set)
@@ -398,11 +398,11 @@ class AvoidanceSet():
         self.set_idx = set_idx
         self.file_set = file_set
         self.rep_model_digest = 0 if not file_set.rep_model_file_ctrl.data else file_set.rep_model_file_ctrl.data.digest
-        self.rep_avoidances = ["頭接触回避 (頭)"]   # 選択肢文言
-        self.rep_avoidance_names = ["頭接触回避"]   # 選択肢文言に紐付く剛体名
+        self.rep_avoidances = ["Avoid Head Contact (Head)"]   # 選択肢文言
+        self.rep_avoidance_names = ["Avoid Head Contact"]   # 選択肢文言に紐付く剛体名
         self.rep_choices = None
 
-        self.set_sizer = wx.StaticBoxSizer(wx.StaticBox(self.window, wx.ID_ANY, "【No.{0}】".format(set_idx)), orient=wx.VERTICAL)
+        self.set_sizer = wx.StaticBoxSizer(wx.StaticBox(self.window, wx.ID_ANY, "No.{0}".format(set_idx)), orient=wx.VERTICAL)
 
         if file_set.is_loaded():
             self.model_name_txt = wx.StaticText(self.window, wx.ID_ANY, file_set.rep_model_file_ctrl.data.name[:15], wx.DefaultPosition, wx.DefaultSize, 0)
@@ -422,12 +422,12 @@ class AvoidanceSet():
             self.set_sizer.Add(self.rep_choices, 0, wx.ALL, 5)
 
             # 一括用コピーボタン
-            self.copy_btn_ctrl = wx.Button(self.window, wx.ID_ANY, u"一括用コピー", wx.DefaultPosition, wx.DefaultSize, 0)
-            self.copy_btn_ctrl.SetToolTip(u"接触回避データを一括CSVの形式に合わせてクリップボードにコピーします")
+            self.copy_btn_ctrl = wx.Button(self.window, wx.ID_ANY, u"Copy for Bulk", wx.DefaultPosition, wx.DefaultSize, 0)
+            self.copy_btn_ctrl.SetToolTip(u"Copy contact avoidance data to the clipboard in bulk CSV format")
             self.copy_btn_ctrl.Bind(wx.EVT_BUTTON, self.on_copy)
             self.set_sizer.Add(self.copy_btn_ctrl, 0, wx.ALL, 5)
         else:
-            self.no_data_txt = wx.StaticText(self.window, wx.ID_ANY, u"データなし", wx.DefaultPosition, wx.DefaultSize, 0)
+            self.no_data_txt = wx.StaticText(self.window, wx.ID_ANY, u"No Data", wx.DefaultPosition, wx.DefaultSize, 0)
             self.no_data_txt.Wrap(-1)
             self.set_sizer.Add(self.no_data_txt, 0, wx.ALL, 5)
 
@@ -443,9 +443,9 @@ class AvoidanceSet():
             wx.TheClipboard.SetData(wx.TextDataObject(";".join(avoidance_txt_list)))
             wx.TheClipboard.Close()
 
-        with wx.TextEntryDialog(self.frame, u"一括CSV用の接触回避データを出力します。\n" \
-                                + "ダイアログを表示した時点で、下記接触回避データがクリップボードにコピーされています。\n" \
-                                + "コピーできてなかった場合、ボックス内の文字列を選択して、CSVに貼り付けてください。", caption=u"一括CSV用接触回避データ",
+        with wx.TextEntryDialog(self.frame, u"Output contact avoidance data for bulk CSV.\n" \
+                                + "When this dialog is displayed, the contact avoidance data below has been copied to the clipboard.\n" \
+                                + "If not copied, select the text in the box and paste it into the CSV.", caption=u"Bulk CSV Contact Avoidance Data",
                                 value=";".join(avoidance_txt_list), style=wx.TextEntryDialogStyle, pos=wx.DefaultPosition) as dialog:
             dialog.ShowModal()
 
@@ -457,14 +457,14 @@ class AvoidanceSet():
 class AvoidanceDialog(wx.Dialog):
 
     def __init__(self, parent):
-        super().__init__(parent, id=wx.ID_ANY, title="接触回避剛体選択", pos=(-1, -1), size=(800, 500), style=wx.DEFAULT_DIALOG_STYLE, name="AvoidanceDialog")
+        super().__init__(parent, id=wx.ID_ANY, title="Select Rigid Body for Avoid Contact", pos=(-1, -1), size=(800, 500), style=wx.DEFAULT_DIALOG_STYLE, name="AvoidanceDialog")
 
         self.sizer = wx.BoxSizer(wx.VERTICAL)
 
         # 説明文
-        self.description_txt = wx.StaticText(self, wx.ID_ANY, u"手を回避させたいボーン追従剛体を変換先モデルから選択する事ができます。\n" \
-                                             + u"「頭接触回避」は、頭の大きさを自動計算した剛体です。結果が思わしくない場合は、選択を外してください。\n" \
-                                             + u"ボーン追従剛体であれば制限はありませんが、あまり多くの剛体を選ぶと手がどこにも避けられず、思わぬ結果になる場合があります。", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.description_txt = wx.StaticText(self, wx.ID_ANY, u"You can select bone-tracking rigid bodies from the target model to avoid hand contact.\n" \
+                                             + u"\"Head Contact Avoidance\" is a rigid body automatically calculated based on head size. If the result is not satisfactory, deselect it.\n" \
+                                             + u"There are no restrictions as long as it is a bone-tracking rigid body, but if you select too many, the hand may not be able to avoid anything and unexpected results may occur.", wx.DefaultPosition, wx.DefaultSize, 0)
         self.sizer.Add(self.description_txt, 0, wx.ALL, 5)
 
         # ボタン
@@ -472,7 +472,7 @@ class AvoidanceDialog(wx.Dialog):
         self.ok_btn = wx.Button(self, wx.ID_OK, "OK")
         self.btn_sizer.Add(self.ok_btn, 0, wx.ALL, 5)
 
-        self.calcel_btn = wx.Button(self, wx.ID_CANCEL, "キャンセル")
+        self.calcel_btn = wx.Button(self, wx.ID_CANCEL, "Cancel")
         self.btn_sizer.Add(self.calcel_btn, 0, wx.ALL, 5)
         self.sizer.Add(self.btn_sizer, 0, wx.ALL, 5)
 

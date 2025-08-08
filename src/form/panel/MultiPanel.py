@@ -21,22 +21,22 @@ class MultiPanel(BasePanel):
         self.header_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.header_sizer = wx.BoxSizer(wx.VERTICAL)
 
-        self.description_txt = wx.StaticText(self.header_panel, wx.ID_ANY, "複数人数モーションなどを比率を合わせてサイジングする事ができます。2人目以降を指定して下さい。" \
-                                             + "\n縮尺を強制的に変えてますので、足などが元モーションからズレる場合があります。" \
-                                             + "\n間違えてファイルセットを追加してしまった場合は、４つのファイル欄をすべて空にしてください。", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.description_txt = wx.StaticText(self.header_panel, wx.ID_ANY, "You can size multi-person motions by matching ratios. Specify from the second person onward." \
+                                             + "\nSince the scale is forcibly changed, legs and other parts may deviate from the original motion." \
+                                             + "\nIf you accidentally add a file set, please clear all four file fields.", wx.DefaultPosition, wx.DefaultSize, 0)
         self.header_sizer.Add(self.description_txt, 0, wx.ALL, 5)
 
         self.btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # ファイルセットクリアボタン
-        self.clear_btn_ctrl = wx.Button(self.header_panel, wx.ID_ANY, u"ファイルセットクリア", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.clear_btn_ctrl.SetToolTip(u"既に入力されたデータをすべて空にします。")
+        self.clear_btn_ctrl = wx.Button(self.header_panel, wx.ID_ANY, u"Clear File Set", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.clear_btn_ctrl.SetToolTip(u"Clears all entered data.")
         self.clear_btn_ctrl.Bind(wx.EVT_BUTTON, self.on_clear_set)
         self.btn_sizer.Add(self.clear_btn_ctrl, 0, wx.ALL, 5)
 
-        # ファイルセットクリアボタン
-        self.add_btn_ctrl = wx.Button(self.header_panel, wx.ID_ANY, u"ファイルセット追加", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.add_btn_ctrl.SetToolTip(u"サイジングに必要なファイルセットをパネルに追加します。")
+        # ファイルセット追加ボタン
+        self.add_btn_ctrl = wx.Button(self.header_panel, wx.ID_ANY, u"Add File Set", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.add_btn_ctrl.SetToolTip(u"Adds a file set panel required for sizing.")
         self.add_btn_ctrl.Bind(wx.EVT_BUTTON, self.on_add_set)
         self.btn_sizer.Add(self.add_btn_ctrl, 0, wx.ALL, 5)
 

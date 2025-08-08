@@ -50,7 +50,7 @@ class MainFrame(wx.Frame):
             self,
             parent,
             id=wx.ID_ANY,
-            title="VMDサイジング ローカル版 {0}".format(self.version_name),
+            title="VMDSizing Local Edition {0}".format(self.version_name),
             pos=wx.DefaultPosition,
             size=wx.Size(600, 650),
             style=wx.DEFAULT_FRAME_STYLE | wx.TAB_TRAVERSAL,
@@ -88,31 +88,31 @@ class MainFrame(wx.Frame):
 
         # ファイルタブ
         self.file_panel_ctrl = FilePanel(self, self.note_ctrl, 0, self.file_hitories)
-        self.note_ctrl.AddPage(self.file_panel_ctrl, "ファイル", True)
+        self.note_ctrl.AddPage(self.file_panel_ctrl, "File", True)
 
         # 複数タブ
         self.multi_panel_ctrl = MultiPanel(self, self.note_ctrl, 1, self.file_hitories)
-        self.note_ctrl.AddPage(self.multi_panel_ctrl, "複数", False)
+        self.note_ctrl.AddPage(self.multi_panel_ctrl, "Multi", False)
 
         # モーフタブ
         self.morph_panel_ctrl = MorphPanel(self, self.note_ctrl, 2)
-        self.note_ctrl.AddPage(self.morph_panel_ctrl, "モーフ", False)
+        self.note_ctrl.AddPage(self.morph_panel_ctrl, "Morph", False)
 
         # 腕タブ
         self.arm_panel_ctrl = ArmPanel(self, self.note_ctrl, 3)
-        self.note_ctrl.AddPage(self.arm_panel_ctrl, "腕", False)
+        self.note_ctrl.AddPage(self.arm_panel_ctrl, "Arm", False)
 
         # 足タブ
         self.leg_panel_ctrl = LegPanel(self, self.note_ctrl, 4)
-        self.note_ctrl.AddPage(self.leg_panel_ctrl, "足", False)
+        self.note_ctrl.AddPage(self.leg_panel_ctrl, "Leg", False)
 
         # カメラタブ
         self.camera_panel_ctrl = CameraPanel(self, self.note_ctrl, 5)
-        self.note_ctrl.AddPage(self.camera_panel_ctrl, "カメラ", False)
+        self.note_ctrl.AddPage(self.camera_panel_ctrl, "Camera", False)
 
         # 一括タブ
         self.bulk_panel_ctrl = BulkPanel(self, self.note_ctrl, 6)
-        self.note_ctrl.AddPage(self.bulk_panel_ctrl, "一括", False)
+        self.note_ctrl.AddPage(self.bulk_panel_ctrl, "Bulk", False)
 
         # CSVタブ
         self.csv_panel_ctrl = CsvPanel(self, self.note_ctrl, 7)
@@ -200,7 +200,7 @@ class MainFrame(wx.Frame):
             self.note_ctrl.SetSelection(self.file_panel_ctrl.tab_idx)
             self.morph_panel_ctrl.fix_tab()
 
-            logger.info("モーフタブ表示準備開始\nファイル読み込み処理を実行します。少しお待ちください....", decoration=MLogger.DECORATION_BOX)
+            logger.info("Preparing to display Morph tab\nExecuting file loading process. Please wait a moment....", decoration=MLogger.DECORATION_BOX)
 
             # 読み込み処理実行
             self.load(event, target_idx=0, is_morph=True)
@@ -214,7 +214,7 @@ class MainFrame(wx.Frame):
             self.note_ctrl.SetSelection(self.file_panel_ctrl.tab_idx)
             self.arm_panel_ctrl.fix_tab()
 
-            logger.info("腕タブ表示準備開始\nファイル読み込み処理を実行します。少しお待ちください....", decoration=MLogger.DECORATION_BOX)
+            logger.info("Preparing to display Arm tab\nExecuting file loading process. Please wait a moment....", decoration=MLogger.DECORATION_BOX)
 
             # 読み込み処理実行
             self.load(event, target_idx=0, is_arm=True)
@@ -228,7 +228,7 @@ class MainFrame(wx.Frame):
             self.note_ctrl.SetSelection(self.file_panel_ctrl.tab_idx)
             self.leg_panel_ctrl.fix_tab()
 
-            logger.info("足タブ表示準備開始\nファイル読み込み処理を実行します。少しお待ちください....", decoration=MLogger.DECORATION_BOX)
+            logger.info("Preparing to display Leg tab\nExecuting file loading process. Please wait a moment....", decoration=MLogger.DECORATION_BOX)
 
             # 読み込み処理実行
             self.load(event, target_idx=0, is_leg=True)
@@ -274,7 +274,7 @@ class MainFrame(wx.Frame):
         # カメラサイジングのみチェックが入ってる場合、カメラファイルパスとサイジング済みデータがある事を確認する
         if self.camera_panel_ctrl.camera_only_flg_ctrl.GetValue():
             if not self.camera_panel_ctrl.camera_vmd_file_ctrl.data:
-                logger.error("カメラサイジングのみ実行する場合、\nカメラVMDデータを指定してください", decoration=MLogger.DECORATION_BOX)
+                logger.error("If executing camera sizing only,\nplease specify the camera VMD data.", decoration=MLogger.DECORATION_BOX)
                 result = False
 
             if not (
@@ -282,8 +282,8 @@ class MainFrame(wx.Frame):
                 and os.path.isfile(self.file_panel_ctrl.file_set.output_vmd_file_ctrl.path())
             ):
                 logger.error(
-                    "カメラサイジングのみ実行する場合、\n1番目のファイルセットの出力VMDには既存のサイジング済みVMDファイルパスを指定してください。"
-                    "\n（出力VMDを「開く」から指定した場合に「上書きしますか？」と警告が出ますが、実際には上書きは行いません。）",
+                    "If executing camera sizing only,\nplease specify an existing sized VMD file path for the output VMD of the first file set."
+                    "\n(If you specify the output VMD from \"Open\", you will see a warning about overwriting, but no overwrite will actually occur.)",
                     decoration=MLogger.DECORATION_BOX,
                 )
                 result = False
@@ -294,8 +294,8 @@ class MainFrame(wx.Frame):
                     and os.path.isfile(file_set.output_vmd_file_ctrl.path())
                 ):
                     logger.error(
-                        f"カメラサイジングのみ実行する場合、\n{fidx+1}番目のファイルセットの出力VMDには既存のサイジング済みVMDファイルパスを指定してください。"
-                        "\n（出力VMDを「開く」から指定した場合に「上書きしますか？」と警告が出ますが、実際には上書きは行いません。）",
+                        f"If executing camera sizing only,\nplease specify an existing sized VMD file path for the output VMD of file set {fidx+1}."
+                        "\n(If you specify the output VMD from \"Open\", you will see a warning about overwriting, but no overwrite will actually occur.)",
                         decoration=MLogger.DECORATION_BOX,
                     )
                     result = False
@@ -307,9 +307,9 @@ class MainFrame(wx.Frame):
         td_m, td_s = divmod(self.elapsed_time, 60)
 
         if td_m == 0:
-            worked_time = "{0:02d}秒".format(int(td_s))
+            worked_time = "{0:02d} sec".format(int(td_s))
         else:
-            worked_time = "{0:02d}分{1:02d}秒".format(int(td_m), int(td_s))
+            worked_time = "{0:02d} min {1:02d} sec".format(int(td_m), int(td_s))
 
         return worked_time
 
@@ -336,17 +336,17 @@ class MainFrame(wx.Frame):
 
         if not result:
             if is_morph or is_arm or is_leg:
-                tab_name = "モーフ" if is_morph else "腕" if is_arm else "足"
+                tab_name = "Morph" if is_morph else "Arm" if is_arm else "Leg"
                 # 読み込み出来なかったらエラー
                 logger.error(
-                    "「ファイル」タブで以下のいずれかのファイルパスが指定されていないため、「{tab_name}」タブが開けません。".format(tab_name=tab_name)
-                    + "\n・調整対象VMDファイル"
-                    + "\n・作成元モデルPMXファイル"
-                    + "\n・変換先モデルPMXファイル"
-                    + "\n既に指定済みの場合、現在読み込み中の可能性があります。"
-                    + "\n特に長いVMDは読み込みに時間がかかります。"
-                    + "\n調整に必要な３ファイルすべてを指定して、"
-                    + "\n「■読み込み成功」のログが出てから、「{tab_name}」タブを開いてください。".format(tab_name=tab_name),
+                    "Cannot open the \"{tab_name}\" tab because one or more file paths are not specified in the \"File\" tab.".format(tab_name=tab_name)
+                    + "\n- Target VMD file"
+                    + "\n- Source model PMX file"
+                    + "\n- Target model PMX file"
+                    + "\nIf already specified, it may currently be loading."
+                    + "\nEspecially for long VMDs, loading may take time."
+                    + "\nPlease specify all three required files for adjustment,"
+                    + "\nand open the \"{tab_name}\" tab after the \"■Load Successful\" log appears.".format(tab_name=tab_name),
                     decoration=MLogger.DECORATION_BOX,
                 )
 
@@ -359,7 +359,7 @@ class MainFrame(wx.Frame):
 
         # 読み込み開始
         if self.load_worker:
-            logger.error("まだ処理が実行中です。終了してから再度実行してください。", decoration=MLogger.DECORATION_BOX)
+            logger.error("Loading still in progress. Please finish it before running again.", decoration=MLogger.DECORATION_BOX)
         else:
             # ファイルタブの処理対象VMD/VPDの実値設定
             target_path = self.get_target_vmd_path(target_idx)
@@ -371,7 +371,7 @@ class MainFrame(wx.Frame):
                 self.file_panel_ctrl.file_set.set_output_vmd_path(event)
 
             # 停止ボタンに切り替え
-            self.file_panel_ctrl.check_btn_ctrl.SetLabel("読み込み処理停止")
+            self.file_panel_ctrl.check_btn_ctrl.SetLabel("Stop Loading Process")
             self.file_panel_ctrl.check_btn_ctrl.Enable()
 
             # 別スレッドで実行
@@ -394,7 +394,7 @@ class MainFrame(wx.Frame):
         self.file_panel_ctrl.gauge_ctrl.SetValue(0)
 
         # チェックボタンに切り替え
-        self.file_panel_ctrl.check_btn_ctrl.SetLabel("変換前チェック")
+        self.file_panel_ctrl.check_btn_ctrl.SetLabel("Pre-conversion Check")
         self.file_panel_ctrl.check_btn_ctrl.Enable()
 
         if not event.result:
@@ -417,7 +417,7 @@ class MainFrame(wx.Frame):
             event.Skip()
             return False
 
-        logger.info("ファイルデータ読み込みが完了しました", decoration=MLogger.DECORATION_BOX, title="OK")
+        logger.info("File data loading completed", decoration=MLogger.DECORATION_BOX, title="OK")
 
         if event.is_exec:
             # そのまま実行する場合、サイジング実行処理に遷移
@@ -437,10 +437,10 @@ class MainFrame(wx.Frame):
             self.file_panel_ctrl.fix_tab()
 
             if self.worker:
-                logger.error("まだ処理が実行中です。終了してから再度実行してください。", decoration=MLogger.DECORATION_BOX)
+                logger.error("Sizing still in progress. Please finish it before running again.", decoration=MLogger.DECORATION_BOX)
             else:
                 # 停止ボタンに切り替え
-                self.file_panel_ctrl.exec_btn_ctrl.SetLabel("VMDサイジング停止")
+                self.file_panel_ctrl.exec_btn_ctrl.SetLabel("Stop VMD Sizing")
                 self.file_panel_ctrl.exec_btn_ctrl.Enable()
 
                 # 別スレッドで実行
@@ -468,7 +468,7 @@ class MainFrame(wx.Frame):
             # 終了音を鳴らす
             self.sound_finish()
 
-            logger.info("\n処理時間: %s", self.show_worked_time())
+            logger.info("\nProcessing time: %s", self.show_worked_time())
 
             event.Skip()
             return True
@@ -476,11 +476,11 @@ class MainFrame(wx.Frame):
     # スレッド実行結果
     def on_exec_result(self, event: wx.Event):
         # 実行ボタンに切り替え
-        self.file_panel_ctrl.exec_btn_ctrl.SetLabel("VMDサイジング実行")
+        self.file_panel_ctrl.exec_btn_ctrl.SetLabel("Start VMD Sizing")
         self.file_panel_ctrl.exec_btn_ctrl.Enable()
 
         self.elapsed_time += event.elapsed_time
-        worked_time = "\n処理時間: {0}".format(self.show_worked_time())
+        worked_time = "\nProcessing time: {0}".format(self.show_worked_time())
         logger.info(worked_time)
 
         if self.is_out_log and event.output_log_path and os.path.exists(event.output_log_path):
@@ -543,7 +543,7 @@ class MainFrame(wx.Frame):
         if not self.popuped_finger_warning:
             dialog = wx.MessageDialog(
                 self,
-                "複数人数モーションで指位置合わせがONになっています。\n指の数だけ組み合わせが膨大になり時間がかかりますが、" + "その割に余計な指に反応して綺麗になりません。よろしいですか？",
+                "Finger alignment is ON for multi-person motion.\nThe number of combinations increases with the number of fingers, which takes a long time, and unnecessary fingers may react, resulting in poor quality. Continue anyway?",
                 style=wx.YES_NO | wx.ICON_WARNING,
             )
             if dialog.ShowModal() == wx.ID_NO:

@@ -21,11 +21,11 @@ class MorphPanel(BasePanel):
         self.header_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.header_sizer = wx.BoxSizer(wx.VERTICAL)
 
-        self.description_txt = wx.StaticText(self.header_panel, wx.ID_ANY, "モーションに使用されているモーフを、変換先モデルにある任意のモーフに置き換える事ができます。" \
-                                             + "\nモーションモーフプルダウンの先頭記号は以下の通りです。" \
-                                             + "\n○　…　モーション・生成元モデル・変換先モデルの全てにあるモーフ" \
-                                             + "\n●　…　モーション・変換先モデルにあり、生成元モデルにないモーフ" \
-                                             + "\n▲　…　モーション・生成元モデルにあり、変換先モデルにないモーフ", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.description_txt = wx.StaticText(self.header_panel, wx.ID_ANY, "You can replace morphs used in the motion with any morphs present in the target model." \
+                                             + "\nThe prefix symbols in the motion morph dropdown are as follows:" \
+                                             + "\n○ ... Morph present in motion, source model, and target model" \
+                                             + "\n● ... Morph present in motion and target model, but not in source model" \
+                                             + "\n▲ ... Morph present in motion and source model, but not in target model", wx.DefaultPosition, wx.DefaultSize, 0)
         self.header_sizer.Add(self.description_txt, 0, wx.ALL, 5)
 
         self.header_panel.SetSizer(self.header_sizer)
@@ -66,7 +66,7 @@ class MorphPanel(BasePanel):
                 # あれば、そのNoのモーフ置換リスト
                 return morph_set.get_morph_list(), True
             else:
-                logger.warning("【No.%s】モーフ置換設定後、ファイルセットが変更されたため、モーフ置換をクリアします", set_no, decoration=MLogger.DECORATION_BOX)
+                logger.warning("No.%s: Morph replacement settings cleared because the file set was changed after setting morph replacement.", set_no, decoration=MLogger.DECORATION_BOX)
                 # ハッシュが一致してない場合空(設定されていた事だけ返す)
                 return [], True
 
@@ -156,7 +156,7 @@ class MorphSet():
         self.rep_buttons = []
         self.ratios = []
 
-        self.set_sizer = wx.StaticBoxSizer(wx.StaticBox(self.window, wx.ID_ANY, "【No.{0}】".format(set_idx)), orient=wx.VERTICAL)
+        self.set_sizer = wx.StaticBoxSizer(wx.StaticBox(self.window, wx.ID_ANY, "No.{0}".format(set_idx)), orient=wx.VERTICAL)
 
         if file_set.is_loaded():
             for mk in file_set.motion_vmd_file_ctrl.data.morphs.keys():
@@ -201,26 +201,26 @@ class MorphSet():
             self.btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
             # 一括用コピーボタン
-            self.copy_btn_ctrl = wx.Button(self.window, wx.ID_ANY, u"一括用コピー", wx.DefaultPosition, wx.DefaultSize, 0)
-            self.copy_btn_ctrl.SetToolTip(u"モーフ置換データを一括CSVの形式に合わせてクリップボードにコピーします")
+            self.copy_btn_ctrl = wx.Button(self.window, wx.ID_ANY, u"Copy for Bulk", wx.DefaultPosition, wx.DefaultSize, 0)
+            self.copy_btn_ctrl.SetToolTip(u"Copy morph replacement data to the clipboard in bulk CSV format")
             self.copy_btn_ctrl.Bind(wx.EVT_BUTTON, self.on_copy)
             self.btn_sizer.Add(self.copy_btn_ctrl, 0, wx.ALL, 5)
 
             # インポートボタン
-            self.import_btn_ctrl = wx.Button(self.window, wx.ID_ANY, u"インポート ...", wx.DefaultPosition, wx.DefaultSize, 0)
-            self.import_btn_ctrl.SetToolTip(u"モーフ置換データをCSVファイルから読み込みます。\nファイル選択ダイアログが開きます。")
+            self.import_btn_ctrl = wx.Button(self.window, wx.ID_ANY, u"Import...", wx.DefaultPosition, wx.DefaultSize, 0)
+            self.import_btn_ctrl.SetToolTip(u"Load morph replacement data from a CSV file.\nA file selection dialog will open.")
             self.import_btn_ctrl.Bind(wx.EVT_BUTTON, self.on_import)
             self.btn_sizer.Add(self.import_btn_ctrl, 0, wx.ALL, 5)
 
             # エクスポートボタン
-            self.export_btn_ctrl = wx.Button(self.window, wx.ID_ANY, u"エクスポート ...", wx.DefaultPosition, wx.DefaultSize, 0)
-            self.export_btn_ctrl.SetToolTip(u"モーフ置換データをCSVファイルに出力します。\n調整対象VMDと同じフォルダに出力します。")
+            self.export_btn_ctrl = wx.Button(self.window, wx.ID_ANY, u"Export...", wx.DefaultPosition, wx.DefaultSize, 0)
+            self.export_btn_ctrl.SetToolTip(u"Export morph replacement data to a CSV file.\nIt will be written to the same folder as the target VMD.")
             self.export_btn_ctrl.Bind(wx.EVT_BUTTON, self.on_export)
             self.btn_sizer.Add(self.export_btn_ctrl, 0, wx.ALL, 5)
 
             # 行追加ボタン
-            self.add_line_btn_ctrl = wx.Button(self.window, wx.ID_ANY, u"行追加", wx.DefaultPosition, wx.DefaultSize, 0)
-            self.add_line_btn_ctrl.SetToolTip(u"モーフ置換の組み合わせ行を追加します。\n上限はありません。")
+            self.add_line_btn_ctrl = wx.Button(self.window, wx.ID_ANY, u"Add Row", wx.DefaultPosition, wx.DefaultSize, 0)
+            self.add_line_btn_ctrl.SetToolTip(u"Add a row for morph replacement combinations.\nThere is no upper limit.")
             self.add_line_btn_ctrl.Bind(wx.EVT_BUTTON, self.on_add_line)
             self.btn_sizer.Add(self.add_line_btn_ctrl, 0, wx.ALL, 5)
 
@@ -236,7 +236,7 @@ class MorphSet():
             self.org_model_name_txt.Wrap(-1)
             self.grid_sizer.Add(self.org_model_name_txt, 0, wx.ALL, 5)
 
-            self.name_arrow_txt = wx.StaticText(self.window, wx.ID_ANY, u"　", wx.DefaultPosition, wx.DefaultSize, 0)
+            self.name_arrow_txt = wx.StaticText(self.window, wx.ID_ANY, u"  ", wx.DefaultPosition, wx.DefaultSize, 0)
             self.name_arrow_txt.Wrap(-1)
             self.grid_sizer.Add(self.name_arrow_txt, 0, wx.CENTER | wx.ALL, 5)
 
@@ -244,27 +244,27 @@ class MorphSet():
             self.rep_model_name_txt.Wrap(-1)
             self.grid_sizer.Add(self.rep_model_name_txt, 0, wx.ALL, 5)
 
-            self.name_ratio_txt = wx.StaticText(self.window, wx.ID_ANY, u"　", wx.DefaultPosition, wx.DefaultSize, 0)
+            self.name_ratio_txt = wx.StaticText(self.window, wx.ID_ANY, u"  ", wx.DefaultPosition, wx.DefaultSize, 0)
             self.name_ratio_txt.Wrap(-1)
             self.grid_sizer.Add(self.name_ratio_txt, 0, wx.CENTER | wx.ALL, 5)
 
             # ------------
-            self.org_morph_txt = wx.StaticText(self.window, wx.ID_ANY, u"モーションモーフ", wx.DefaultPosition, wx.DefaultSize, 0)
-            self.org_morph_txt.SetToolTip(u"調整対象VMD/VPDに登録されているモーフです。")
+            self.org_morph_txt = wx.StaticText(self.window, wx.ID_ANY, u"Motion Morph", wx.DefaultPosition, wx.DefaultSize, 0)
+            self.org_morph_txt.SetToolTip(u"Morphs registered in the target VMD/VPD.")
             self.org_morph_txt.Wrap(-1)
             self.grid_sizer.Add(self.org_morph_txt, 0, wx.ALL, 5)
 
-            self.arrow_txt = wx.StaticText(self.window, wx.ID_ANY, u"　→　", wx.DefaultPosition, wx.DefaultSize, 0)
+            self.arrow_txt = wx.StaticText(self.window, wx.ID_ANY, u"  →  ", wx.DefaultPosition, wx.DefaultSize, 0)
             self.arrow_txt.Wrap(-1)
             self.grid_sizer.Add(self.arrow_txt, 0, wx.CENTER | wx.ALL, 5)
 
-            self.rep_morph_txt = wx.StaticText(self.window, wx.ID_ANY, u"置換後モーフ", wx.DefaultPosition, wx.DefaultSize, 0)
-            self.rep_morph_txt.SetToolTip(u"モーション変換先モデルで定義されているモーフです。")
+            self.rep_morph_txt = wx.StaticText(self.window, wx.ID_ANY, u"Replaced Morph", wx.DefaultPosition, wx.DefaultSize, 0)
+            self.rep_morph_txt.SetToolTip(u"Morphs defined in the target model for motion conversion.")
             self.rep_morph_txt.Wrap(-1)
             self.grid_sizer.Add(self.rep_morph_txt, 0, wx.ALL, 5)
 
-            self.ratio_title_txt = wx.StaticText(self.window, wx.ID_ANY, u"大きさ補正", wx.DefaultPosition, wx.DefaultSize, 0)
-            self.ratio_title_txt.SetToolTip(u"置換後モーフの大きさを補正します。")
+            self.ratio_title_txt = wx.StaticText(self.window, wx.ID_ANY, u"Size Correction", wx.DefaultPosition, wx.DefaultSize, 0)
+            self.ratio_title_txt.SetToolTip(u"Correct the amount of the replaced morph.")
             self.ratio_title_txt.Wrap(-1)
             self.grid_sizer.Add(self.ratio_title_txt, 0, wx.ALL, 5)
 
@@ -273,7 +273,7 @@ class MorphSet():
 
             self.set_sizer.Add(self.grid_sizer, 0, wx.ALL, 5)
         else:
-            self.no_data_txt = wx.StaticText(self.window, wx.ID_ANY, u"データなし", wx.DefaultPosition, wx.DefaultSize, 0)
+            self.no_data_txt = wx.StaticText(self.window, wx.ID_ANY, u"No Data", wx.DefaultPosition, wx.DefaultSize, 0)
             self.no_data_txt.Wrap(-1)
             self.set_sizer.Add(self.no_data_txt, 0, wx.ALL, 5)
 
@@ -303,7 +303,7 @@ class MorphSet():
         self.grid_sizer.Add(self.org_choices[-1], 0, wx.ALL, 5)
 
         # 矢印
-        self.arrow_txt = wx.StaticText(self.window, wx.ID_ANY, u"　→　", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.arrow_txt = wx.StaticText(self.window, wx.ID_ANY, u"  →  ", wx.DefaultPosition, wx.DefaultSize, 0)
         self.arrow_txt.Wrap(-1)
         self.grid_sizer.Add(self.arrow_txt, 0, wx.CENTER | wx.ALL, 5)
 
@@ -358,9 +358,9 @@ class MorphSet():
             wx.TheClipboard.SetData(wx.TextDataObject(";".join(morph_txt_list)))
             wx.TheClipboard.Close()
 
-        with wx.TextEntryDialog(self.frame, u"一括CSV用のモーフデータを出力します。\n" \
-                                + "ダイアログを表示した時点で、下記モーフデータがクリップボードにコピーされています。\n" \
-                                + "コピーできてなかった場合、ボックス内の文字列を選択して、CSVに貼り付けてください。", caption=u"一括CSV用モーフデータ",
+        with wx.TextEntryDialog(self.frame, u"Output morph data for bulk CSV.\n" \
+                                + "When this dialog is displayed, the morph data below has been copied to the clipboard.\n" \
+                                + "If not copied, select the text in the box and paste it into the CSV.", caption=u"Bulk CSV Morph Data",
                                 value=";".join(morph_txt_list), style=wx.TextEntryDialogStyle, pos=wx.DefaultPosition) as dialog:
             dialog.ShowModal()
 
@@ -371,7 +371,7 @@ class MorphSet():
             self.file_set.rep_model_file_ctrl.file_ctrl.GetPath()
         )
 
-        with wx.FileDialog(self.frame, "モーフ組み合わせCSVを読み込む", wildcard=u"CSVファイル (*.csv)|*.csv|すべてのファイル (*.*)|*.*",
+        with wx.FileDialog(self.frame, "Load Morph Combination CSV", wildcard=u"CSV File (*.csv)|*.csv|All Files (*.*)|*.*",
                            defaultDir=os.path.dirname(input_morph_path),
                            style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
 
@@ -435,7 +435,7 @@ class MorphSet():
                 self.file_set.set_output_vmd_path(event)
 
             except Exception:
-                dialog = wx.MessageDialog(self.frame, "CSVファイルが読み込めませんでした '%s'\n\n%s." % (target_morph_path, traceback.format_exc()), style=wx.OK)
+                dialog = wx.MessageDialog(self.frame, "Could not load CSV file '%s'\n\n%s." % (target_morph_path, traceback.format_exc()), style=wx.OK)
                 dialog.ShowModal()
                 dialog.Destroy()
 
@@ -465,14 +465,14 @@ class MorphSet():
                 # 大きさ
                 cw.writerow(ratio_list)
 
-            logger.info("出力成功: %s" % output_morph_path)
+            logger.info("Export successful: %s" % output_morph_path)
 
-            dialog = wx.MessageDialog(self.frame, "モーフデータのエクスポートに成功しました \n'%s'" % (output_morph_path), style=wx.OK)
+            dialog = wx.MessageDialog(self.frame, "Successfully exported morph data \n'%s'" % (output_morph_path), style=wx.OK)
             dialog.ShowModal()
             dialog.Destroy()
 
         except Exception:
-            dialog = wx.MessageDialog(self.frame, "モーフデータのエクスポートに失敗しました \n'%s'\n\n%s." % (output_morph_path, traceback.format_exc()), style=wx.OK)
+            dialog = wx.MessageDialog(self.frame, "Failed to export morph data \n'%s'\n\n%s." % (output_morph_path, traceback.format_exc()), style=wx.OK)
             dialog.ShowModal()
             dialog.Destroy()
 

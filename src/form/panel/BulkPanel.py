@@ -30,15 +30,15 @@ class BulkPanel(BasePanel):
     def __init__(self, frame: wx.Frame, parent: wx.Notebook, tab_idx: int):
         super().__init__(frame, parent, tab_idx)
 
-        self.description_txt = wx.StaticText(self, wx.ID_ANY, "設定を一括で指定して、連続して処理させる事ができます。", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.description_txt = wx.StaticText(self, wx.ID_ANY, "You can specify settings in bulk and process them consecutively.", wx.DefaultPosition, wx.DefaultSize, 0)
         self.sizer.Add(self.description_txt, 0, wx.ALL, 5)
 
         self.static_line = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL)
         self.sizer.Add(self.static_line, 0, wx.EXPAND | wx.ALL, 5)
 
         # バルクBULKファイルコントロール
-        self.bulk_csv_file_ctrl = HistoryFilePickerCtrl(frame, self, u"一括処理用CSV", u"一括処理用CSVファイルを開く", ("csv"), wx.FLP_DEFAULT_STYLE, \
-                                                        u"一括処理用のCSVを指定してください。\nフォーマットは、DLボタンから取得できます。\nD&Dでの指定、開くボタンからの指定、履歴からの選択ができます。", \
+        self.bulk_csv_file_ctrl = HistoryFilePickerCtrl(frame, self, u"Bulk CSV", u"Open CSV file for bulk processing", ("csv"), wx.FLP_DEFAULT_STYLE, \
+                                                        u"Please specify the CSV for bulk processing.\nYou can get the format from the DL button.\nYou can specify by D&D, open button, or select from history.", \
                                                         file_model_spacer=0, title_parts_ctrl=None, title_parts2_ctrl=None, \
                                                         file_histories_key="bulk_csv", is_change_output=False, is_aster=False, is_save=False, set_no=0)
         self.sizer.Add(self.bulk_csv_file_ctrl.sizer, 0, wx.EXPAND | wx.ALL, 0)
@@ -46,22 +46,22 @@ class BulkPanel(BasePanel):
         btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # 一括サイジング保存ボタン
-        self.save_btn_ctrl = wx.Button(self, wx.ID_ANY, u"一括サイジング保存", wx.DefaultPosition, wx.Size(150, 50), 0)
-        self.save_btn_ctrl.SetToolTip(u"現在のサイジング設定をCSVに保存します")
+        self.save_btn_ctrl = wx.Button(self, wx.ID_ANY, u"Save Bulk Sizing", wx.DefaultPosition, wx.Size(150, 50), 0)
+        self.save_btn_ctrl.SetToolTip(u"Save the current sizing settings to CSV")
         self.save_btn_ctrl.Bind(wx.EVT_LEFT_DCLICK, self.on_doubleclick)
         self.save_btn_ctrl.Bind(wx.EVT_LEFT_DOWN, self.on_save_click)
         btn_sizer.Add(self.save_btn_ctrl, 0, wx.ALL, 5)
 
         # 一括サイジング確認ボタン
-        self.check_btn_ctrl = wx.Button(self, wx.ID_ANY, u"一括サイジング確認", wx.DefaultPosition, wx.Size(150, 50), 0)
-        self.check_btn_ctrl.SetToolTip(u"指定されたCSVデータの設定を確認します。")
+        self.check_btn_ctrl = wx.Button(self, wx.ID_ANY, u"Check Bulk Sizing", wx.DefaultPosition, wx.Size(150, 50), 0)
+        self.check_btn_ctrl.SetToolTip(u"Check the settings of the specified CSV data.")
         self.check_btn_ctrl.Bind(wx.EVT_LEFT_DCLICK, self.on_doubleclick)
         self.check_btn_ctrl.Bind(wx.EVT_LEFT_DOWN, self.on_check_click)
         btn_sizer.Add(self.check_btn_ctrl, 0, wx.ALL, 5)
 
         # 一括サイジング実行ボタン
-        self.bulk_btn_ctrl = wx.Button(self, wx.ID_ANY, u"一括サイジング実行", wx.DefaultPosition, wx.Size(150, 50), 0)
-        self.bulk_btn_ctrl.SetToolTip(u"一括でサイジングを実行します")
+        self.bulk_btn_ctrl = wx.Button(self, wx.ID_ANY, u"Start Bulk Sizing", wx.DefaultPosition, wx.Size(150, 50), 0)
+        self.bulk_btn_ctrl.SetToolTip(u"Execute sizing in bulk")
         self.bulk_btn_ctrl.Bind(wx.EVT_LEFT_DCLICK, self.on_doubleclick)
         self.bulk_btn_ctrl.Bind(wx.EVT_LEFT_DOWN, self.on_bulk_click)
         btn_sizer.Add(self.bulk_btn_ctrl, 0, wx.ALL, 5)
@@ -100,7 +100,7 @@ class BulkPanel(BasePanel):
     
     def on_doubleclick(self, event: wx.Event):
         self.timer.Stop()
-        logger.warning("ダブルクリックされました。", decoration=MLogger.DECORATION_BOX)
+        logger.warning("Double-clicked.", decoration=MLogger.DECORATION_BOX)
         event.Skip(False)
         return False
     
@@ -118,7 +118,7 @@ class BulkPanel(BasePanel):
         # 出力先をファイルパネルのコンソールに変更
         sys.stdout = self.console_ctrl
 
-        if self.bulk_btn_ctrl.GetLabel() == "一括サイジング停止" and self.frame.worker:
+        if self.bulk_btn_ctrl.GetLabel() == "Stop Bulk Sizing" and self.frame.worker:
             # フォーム無効化
             self.disable()
             # 停止状態でボタン押下時、停止
@@ -133,7 +133,7 @@ class BulkPanel(BasePanel):
             # プログレス非表示
             self.gauge_ctrl.SetValue(0)
 
-            logger.warning("VMDサイジング一括処理を中断します。", decoration=MLogger.DECORATION_BOX)
+            logger.warning("Aborted Bulk VMD sizing process.", decoration=MLogger.DECORATION_BOX)
             
             event.Skip(False)
         elif not self.frame.worker:
@@ -152,7 +152,7 @@ class BulkPanel(BasePanel):
             
             event.Skip()
         else:
-            logger.error("まだ処理が実行中です。終了してから再度実行してください。", decoration=MLogger.DECORATION_BOX)
+            logger.error("Bulk sizing still in progress. Please finish it before running again.", decoration=MLogger.DECORATION_BOX)
             event.Skip(False)
     
     def on_save_click(self, event: wx.Event):
@@ -170,7 +170,7 @@ class BulkPanel(BasePanel):
         sys.stdout = self.console_ctrl
 
         if not self.frame.file_panel_ctrl.file_set.motion_vmd_file_ctrl.path():
-            logger.warning("ファイルタブの「調整対象モーションVMD/VPD」が空欄のため、処理を中断します。", decoration=MLogger.DECORATION_BOX)
+            logger.warning("The \"Target Motion VMD/VPD\" in the file tab is blank, so the process is aborted.", decoration=MLogger.DECORATION_BOX)
             return
 
         save_key = ["グループNo(複数人モーションは同じNo)", "調整対象モーションVMD/VPD(フルパス)", "モーション作成元モデルPMX(フルパス)", "モーション変換先モデルPMX(フルパス)", \
@@ -179,7 +179,7 @@ class BulkPanel(BasePanel):
                     "接触回避剛体(剛体名;)", "位置合わせ(0:なし、1:あり)", "指位置合わせ(0:なし、1:あり)", "床位置合わせ(0:なし、1:あり)", "手首の距離", "指の距離", "床との距離", \
                     "腕チェックスキップ(0:なし、1:あり)", "全移動量補正値", "足ＩＫオフセット", "カメラモーションVMD(フルパス、グループ1件目のみ)", "距離可動範囲", "カメラ作成元モデルPMX(フルパス)", "全長Yオフセット"]
         
-        output_path = os.path.join(os.path.dirname(self.frame.file_panel_ctrl.file_set.motion_vmd_file_ctrl.path()), f'一括サイジング用データ_{datetime.now():%Y%m%d_%H%M%S}.csv')
+        output_path = os.path.join(os.path.dirname(self.frame.file_panel_ctrl.file_set.motion_vmd_file_ctrl.path()), f'BulkSizingData_{datetime.now():%Y%m%d_%H%M%S}.csv')
 
         with open(output_path, 'w', encoding='cp932', newline='') as f:
             writer = csv.DictWriter(f, save_key)
@@ -192,7 +192,7 @@ class BulkPanel(BasePanel):
         self.frame.sound_finish()
         event.Skip()
 
-        logger.info("一括サイジング用データの保存に成功しました\n\n%s", output_path, decoration=MLogger.DECORATION_BOX)
+        logger.info("Successfully saved bulk sizing data\n\n%s", output_path, decoration=MLogger.DECORATION_BOX)
         return
 
     def create_save_data(self, file_set: SizingFileSet, file_idx: int, save_key: list):
@@ -328,58 +328,57 @@ class BulkPanel(BasePanel):
                             logger.info(service_data_txt, decoration=MLogger.DECORATION_BOX)
 
                         # 先頭モーションの場合
-                        service_data_txt = f"\n【グループNo.{group_no[0]}】 \n"
-
-                        arm_avoidance_txt = "あり" if arm_avoidance_datas[0] == 1 else "なし"
-                        service_data_txt = f"{service_data_txt}　剛体接触回避: {arm_avoidance_txt}\n"
-                        arm_alignment_txt = "あり" if arm_alignment_datas[0] == 1 else "なし"
-                        service_data_txt = f"{service_data_txt}　手首位置合わせ: {arm_alignment_txt} ({arm_alignment_length_datas})\n"
-                        finger_alignment_txt = "あり" if finger_alignment_datas[0] == 1 else "なし"
-                        service_data_txt = f"{service_data_txt}　指位置合わせ: {finger_alignment_txt} ({finger_alignment_length_datas})\n"
-                        floor_alignment_txt = "あり" if floor_alignment_datas[0] == 1 else "なし"
-                        service_data_txt = f"{service_data_txt}　床位置合わせ: {floor_alignment_txt} ({floor_alignment_length_datas})\n"
-                        arm_check_skip_txt = "あり" if arm_check_skip_datas[0] == 1 else "なし"
-                        service_data_txt = f"{service_data_txt}　腕チェックスキップ: {arm_check_skip_txt}\n"
-                        service_data_txt = f"{service_data_txt}　全体移動量補正値: {move_correction_data}\n"
-
-                        service_data_txt = f"{service_data_txt}　カメラ: {org_camera_motion_path}\n"
-                        service_data_txt = f"{service_data_txt}　距離制限: {camera_length_datas}\n"
+                        service_data_txt = f"\n[Group No.{group_no[0]}] \n"
+                        arm_avoidance_txt = "Yes" if arm_avoidance_datas[0] == 1 else "No"
+                        service_data_txt = f"{service_data_txt}  Contact Avoidance: {arm_avoidance_txt}\n"
+                        arm_alignment_txt = "Yes" if arm_alignment_datas[0] == 1 else "No"
+                        service_data_txt = f"{service_data_txt}  Wrist Alignment: {arm_alignment_txt} ({arm_alignment_length_datas})\n"
+                        finger_alignment_txt = "Yes" if finger_alignment_datas[0] == 1 else "No"
+                        service_data_txt = f"{service_data_txt}  Finger Alignment: {finger_alignment_txt} ({finger_alignment_length_datas})\n"
+                        floor_alignment_txt = "Yes" if floor_alignment_datas[0] == 1 else "No"
+                        service_data_txt = f"{service_data_txt}  Floor Alignment: {floor_alignment_txt} ({floor_alignment_length_datas})\n"
+                        arm_check_skip_txt = "Yes" if arm_check_skip_datas[0] == 1 else "No"
+                        service_data_txt = f"{service_data_txt}  Skip Arm Check: {arm_check_skip_txt}\n"
+                        service_data_txt = f"{service_data_txt}  Move Correction Value: {move_correction_data}\n"
+                        service_data_txt = f"{service_data_txt}  Camera: {org_camera_motion_path}\n"
+                        service_data_txt = f"{service_data_txt}  Distance Limit: {camera_length_datas}\n"
                     else:
                         # 複数人モーションの場合、No加算
                         now_model_no += 1
 
-                    service_data_txt = f"{service_data_txt}\n　【人物No.{now_model_no}】 --------- \n"
+                    service_data_txt = f"{service_data_txt}\n  [Person No.{now_model_no}] --------- \n"
 
-                    service_data_txt = f"{service_data_txt}　　モーション: {org_motion_path}\n"
-                    service_data_txt = f"{service_data_txt}　　作成元モデル: {org_model_path}\n"
-                    service_data_txt = f"{service_data_txt}　　変換先モデル: {rep_model_path}\n"
-                    service_data_txt = f"{service_data_txt}　　足ＩＫ補正値: {leg_offset_data}\n"
-                    service_data_txt = f"{service_data_txt}　　カメラ作成元モデル: {org_camera_model_path}\n"
-                    service_data_txt = f"{service_data_txt}　　Yオフセット: {camera_y_offset_datas}\n"
-                    
+                    service_data_txt = f"{service_data_txt}    Motion: {org_motion_path}\n"
+                    service_data_txt = f"{service_data_txt}    Source Model: {org_model_path}\n"
+                    service_data_txt = f"{service_data_txt}    Target Model: {rep_model_path}\n"
+                    service_data_txt = f"{service_data_txt}    Leg IK Offset: {leg_offset_data}\n"
+                    service_data_txt = f"{service_data_txt}    Source Camera Model: {org_camera_model_path}\n"
+                    service_data_txt = f"{service_data_txt}    Y Offset: {camera_y_offset_datas}\n"
+
+                
                     detail_stance_list = []
                     if stance_center_xz_datas[0] == 1:
-                        detail_stance_list.append("センターXZ補正")
+                        detail_stance_list.append("Center XZ Correction")
                     if stance_upper_datas[0] == 1:
-                        detail_stance_list.append("上半身補正")
+                        detail_stance_list.append("Upper Body Correction")
                     if stance_lower_datas[0] == 1:
-                        detail_stance_list.append("下半身補正")
+                        detail_stance_list.append("Lower Body Correction")
                     if stance_leg_ik_datas[0] == 1:
-                        detail_stance_list.append("足ＩＫ補正")
+                        detail_stance_list.append("Leg IK Correction")
                     if stance_toe_datas[0] == 1:
-                        detail_stance_list.append("つま先補正")
+                        detail_stance_list.append("Toe Correction")
                     if stance_toe_ik_datas[0] == 1:
-                        detail_stance_list.append("つま先ＩＫ補正")
+                        detail_stance_list.append("Toe IK Correction")
                     if stance_shoulder_datas[0] == 1:
-                        detail_stance_list.append("肩補正")
+                        detail_stance_list.append("Shoulder Correction")
                     if stance_center_y_datas[0] == 1:
-                        detail_stance_list.append("センターY補正")
+                        detail_stance_list.append("Center Y Correction")
                     detail_stance_txt = ", ".join(detail_stance_list)
 
-                    service_data_txt = f"{service_data_txt}　　スタンス追加補正有無: {detail_stance_txt}\n"
+                    service_data_txt = f"{service_data_txt}    Additional Stance Correction: {detail_stance_txt}\n"
 
-                    twist_txt = "あり" if separate_twist_datas[0] == 1 else "なし"
-                    service_data_txt = f"{service_data_txt}　　捩り分散有無: {twist_txt}\n"
+                    twist_txt = "Yes" if separate_twist_datas[0] == 1 else "No"
+                    service_data_txt = f"{service_data_txt}    Twist Distribution: {twist_txt}\n"
 
                     # モーフデータ
                     morph_list = []
@@ -387,7 +386,7 @@ class BulkPanel(BasePanel):
                         m = re.findall(r"([^\:]+)\:([^\:]+)\:(\d+\.?\d*)\;", morph_data)
                         morph_list.append(f"{m[0][0]} → {m[0][1]} ({float(m[0][2])})")
                     morph_txt = ", ".join(morph_list)
-                    service_data_txt = f"{service_data_txt}　　モーフ置換: {morph_txt}\n"
+                    service_data_txt = f"{service_data_txt}    Morph Replacement: {morph_txt}\n"
 
                     # 接触回避データ
                     arm_avoidance_name_list = []
@@ -395,7 +394,7 @@ class BulkPanel(BasePanel):
                         m = re.findall(r"([^\:]+)\;", avoidance_data)
                         arm_avoidance_name_list.append(m[0])
                     arm_avoidance_name_txt = ", ".join(arm_avoidance_name_list)
-                    service_data_txt = f"{service_data_txt}　　対象剛体名: {arm_avoidance_name_txt}\n"
+                    service_data_txt = f"{service_data_txt}    Target Rigid Body Name: {arm_avoidance_name_txt}\n"
 
                 prev_group_no = group_no[0]
 
@@ -410,13 +409,13 @@ class BulkPanel(BasePanel):
                     logger.info(service_data_txt, decoration=MLogger.DECORATION_BOX)
 
                 # OKかつ確認のみの場合、出力して終了
-                logger.info("CSVデータの確認が成功しました。", decoration=MLogger.DECORATION_BOX, title="OK")
+                logger.info("CSV data check successful.", decoration=MLogger.DECORATION_BOX, title="OK")
 
                 self.enable()
                 self.release_tab()
                 return
         else:
-            logger.error("CSVデータに不整合があるため、処理を中断します", decoration=MLogger.DECORATION_BOX)
+            logger.error("Aborting process as CSV data has inconsistencies.", decoration=MLogger.DECORATION_BOX)
 
             self.enable()
             self.release_tab()
@@ -426,7 +425,7 @@ class BulkPanel(BasePanel):
     def read_csv_row(self, rows: list, row_no: int, row_idx: int, row_name: str, row_required: bool, row_type: type, row_regex: str, row_regex_str: str, path_exts: tuple):
         try:
             if row_required and (len(rows) < row_idx or not rows[row_idx]):
-                logger.warning("%s行目の%s（%s列目）が設定されていません", row_no + 1, row_name, row_idx + 1)
+                logger.warning("%s row: %s (column %s) is not set", row_no + 1, row_name, row_idx + 1)
                 return False, None
             
             try:
@@ -434,22 +433,22 @@ class BulkPanel(BasePanel):
                     pass
             except Exception:
                 row_type_str = "半角整数" if row_type == int else "半角数字"
-                logger.warning("%s行目の%s（%s列目）の型（%s）が合っていません", row_no + 1, row_name, row_idx + 1, row_type_str)
+                logger.warning("%s row: %s (column %s) type (%s) is incorrect", row_no + 1, row_name, row_idx + 1, row_type_str)
                 return False, None
             
             if rows[row_idx] and row_regex and not re.findall(row_regex, rows[row_idx]):
-                logger.warning("%s行目の%s（%s列目）の表示形式（%s）が合っていません", row_no + 1, row_name, row_idx + 1, row_regex_str)
+                logger.warning("%s row: %s (column %s) display format (%s) is incorrect", row_no + 1, row_name, row_idx + 1, row_regex_str)
                 return False, None
 
             if rows[row_idx] and path_exts:
                 if not rows[row_idx] or (not os.path.exists(rows[row_idx]) or not os.path.isfile(rows[row_idx])):
-                    logger.warning("%s行目の%s（%s列目）のファイルが存在していません", row_no + 1, row_name, row_idx + 1)
+                    logger.warning("%s row: %s (column %s) file does not exist", row_no + 1, row_name, row_idx + 1)
                     return False, None
 
                 # ファイル名・拡張子
                 file_name, ext = os.path.splitext(os.path.basename(rows[row_idx]))
                 if (ext not in path_exts):
-                    logger.warning("%s行目の%s（%s列目）のファイル拡張子（%s）が合っていません", row_no + 1, row_name, row_idx + 1, \
+                    logger.warning("%s row: %s (column %s) file extension (%s) is incorrect", row_no + 1, row_name, row_idx + 1, \
                                    ','.join(map(str, path_exts)) if len(path_exts) > 1 else path_exts)
                     return False, None
 
@@ -470,7 +469,7 @@ class BulkPanel(BasePanel):
             
             return True, rows[row_idx]
         except Exception as e:
-            logger.warning("%s行目の%s（%s列目）の読み取りに失敗しました\n%s", row_no + 1, row_name, row_idx + 1, e)
+            logger.warning("%s row: %s (column %s) failed to read\n%s", row_no + 1, row_name, row_idx + 1, e)
             return False, None
 
     # 読み込み
@@ -720,10 +719,10 @@ class BulkPanel(BasePanel):
 
         # 読み込み開始
         if self.frame.load_worker:
-            logger.error("まだ処理が実行中です。終了してから再度実行してください。", decoration=MLogger.DECORATION_BOX)
+            logger.error("Loading still in progress. Please finish it before running again.", decoration=MLogger.DECORATION_BOX)
         else:
             # 停止ボタンに切り替え
-            self.frame.file_panel_ctrl.check_btn_ctrl.SetLabel("読み込み処理停止")
+            self.frame.file_panel_ctrl.check_btn_ctrl.SetLabel("Stop Loading Process")
             self.frame.file_panel_ctrl.check_btn_ctrl.Enable()
 
             # 別スレッドで実行(次行がない場合、-1で終了フラグ)
@@ -763,7 +762,7 @@ class BulkPanel(BasePanel):
             event.Skip()
             return False
         
-        logger.info("ファイルデータ読み込みが完了しました", decoration=MLogger.DECORATION_BOX, title="OK")
+        logger.info("File data loading completed", decoration=MLogger.DECORATION_BOX, title="OK")
 
         # フォーム無効化
         self.frame.file_panel_ctrl.disable()
@@ -771,10 +770,10 @@ class BulkPanel(BasePanel):
         self.frame.file_panel_ctrl.fix_tab()
 
         if self.frame.worker:
-            logger.error("まだ処理が実行中です。終了してから再度実行してください。", decoration=MLogger.DECORATION_BOX)
+            logger.error("Sizing still in progress. Please finish it before running again.", decoration=MLogger.DECORATION_BOX)
         else:
             # 停止ボタンに切り替え
-            self.frame.file_panel_ctrl.exec_btn_ctrl.SetLabel("VMDサイジング停止")
+            self.frame.file_panel_ctrl.exec_btn_ctrl.SetLabel("Stop VMD Sizing")
             self.frame.file_panel_ctrl.exec_btn_ctrl.Enable()
 
             # 別スレッドで実行
@@ -784,7 +783,7 @@ class BulkPanel(BasePanel):
     # スレッド実行結果
     def on_exec_result(self, event: wx.Event):
         # 実行ボタンに切り替え
-        self.frame.file_panel_ctrl.exec_btn_ctrl.SetLabel("VMDサイジング実行")
+        self.frame.file_panel_ctrl.exec_btn_ctrl.SetLabel("Start VMD Sizing")
         self.frame.file_panel_ctrl.exec_btn_ctrl.Enable()
 
         if not event.result:
@@ -795,7 +794,7 @@ class BulkPanel(BasePanel):
             return False
         
         self.frame.elapsed_time += event.elapsed_time
-        worked_time = "\n処理時間: {0}".format(self.frame.show_worked_time())
+        worked_time = "\nProcessing time: {0}".format(self.frame.show_worked_time())
         logger.info(worked_time)
 
         if self.frame.is_out_log and event.output_log_path and os.path.exists(event.output_log_path):
@@ -838,5 +837,5 @@ class BulkPanel(BasePanel):
         # プログレス非表示
         self.frame.file_panel_ctrl.gauge_ctrl.SetValue(0)
 
-        logger.info("全てのサイジング処理が終了しました", decoration=MLogger.DECORATION_BOX, title="一括処理")
+        logger.info("All sizing processes finished", decoration=MLogger.DECORATION_BOX, title="Bulk Process")
         
