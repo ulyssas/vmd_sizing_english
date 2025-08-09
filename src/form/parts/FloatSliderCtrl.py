@@ -49,7 +49,7 @@ class FloatSliderCtrl(wx.Slider):
             self._value = ival * self._res
 
         # logger.debug('OnScroll: value=%f, ival=%d', self._value, ival)
-        self._label.SetLabel("（{0}）".format(round(self._value, 3)))
+        self._label.SetLabel("({0})".format(round(self._value, 3)))
 
         if self._scrollevt:
             self._scrollevt(event)
