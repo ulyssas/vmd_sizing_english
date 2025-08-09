@@ -2,14 +2,18 @@
 # -*- mode: python -*-
 # VMDサイジング 64bit版
 
+from PyInstaller.utils.hooks import collect_data_files
+
 block_cipher = None
 
+# jaraco.text のデータファイルを追加
+datas = collect_data_files('jaraco.text')
 
 a = Analysis(['src\\executor.py'],
              pathex=[],
              binaries=[],
-             datas=[],
-             hiddenimports=['pkg_resources', 'wx._adv', 'wx._html', 'bezier', 'quaternion', 'module.MParams'],
+             datas=datas,
+             hiddenimports=['pkg_resources', 'wx._adv', 'wx._html', 'bezier', 'quaternion', 'module.MParams', 'importlib_resources._adapters'],
              hookspath=[],
              runtime_hooks=[],
              excludes=['mkl','libopenblas', 'tkinter', 'win32comgenpy', 'traitlets', 'PIL', 'IPython', 'pydoc', 'lib2to3', 'pygments', 'matplotlib'],
