@@ -8,9 +8,9 @@ from form.panel.BasePanel import BasePanel
 from form.parts.BaseFilePickerCtrl import BaseFilePickerCtrl
 from form.parts.ConsoleCtrl import ConsoleCtrl
 from form.worker.VmdWorkerThread import VmdWorkerThread
-from module.MMath import MRect, MVector3D, MVector4D, MQuaternion, MMatrix4x4 # noqa
-from utils import MFormUtils, MFileUtils # noqa
-from utils.MLogger import MLogger # noqa
+from module.MMath import MRect, MVector3D, MVector4D, MQuaternion, MMatrix4x4  # noqa
+from utils import MFormUtils, MFileUtils  # noqa
+from utils.MLogger import MLogger  # noqa
 
 logger = MLogger(__name__)
 
@@ -19,59 +19,125 @@ logger = MLogger(__name__)
 
 
 class VmdPanel(BasePanel):
-    
     def __init__(self, frame: wx.Frame, parent: wx.Notebook, tab_idx: int):
         super().__init__(frame, parent, tab_idx)
         self.convert_vmd_worker = None
 
-        self.description_txt = wx.StaticText(self, wx.ID_ANY, "Outputs the specified CSV file (Bone + Morph or Camera) as a VMD file.\n" \
-                                             + "You can output model motion (bone/morph) and camera motion (camera) separately.\n" \
-                                             + "Please define the CSV format to match the data output from the CSV tab.", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.description_txt = wx.StaticText(
+            self,
+            wx.ID_ANY,
+            "Outputs the specified CSV file (Bone + Morph or Camera) as a VMD file.\n"
+            + "You can output model motion (bone/morph) and camera motion (camera) separately.\n"
+            + "Please define the CSV format to match the data output from the CSV tab.",
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            0,
+        )
         self.sizer.Add(self.description_txt, 0, wx.ALL, 5)
 
-        self.static_line = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL)
+        self.static_line = wx.StaticLine(
+            self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL
+        )
         self.sizer.Add(self.static_line, 0, wx.EXPAND | wx.ALL, 5)
 
         # CSVファイルコントロール（ボーン）
-        self.bone_csv_file_ctrl = BaseFilePickerCtrl(frame, self, u"CSV File (Bone)", u"Select CSV File", ("csv"), wx.FLP_DEFAULT_STYLE, \
-                                                     u"Specify the file path of the bone motion you want to convert to VMD.", \
-                                                     is_aster=False, is_save=False, set_no=0, required=False)
+        self.bone_csv_file_ctrl = BaseFilePickerCtrl(
+            frame,
+            self,
+            "CSV File (Bone)",
+            "Select CSV File",
+            ("csv"),
+            wx.FLP_DEFAULT_STYLE,
+            "Specify the file path of the bone motion you want to convert to VMD.",
+            is_aster=False,
+            is_save=False,
+            set_no=0,
+            required=False,
+        )
         self.sizer.Add(self.bone_csv_file_ctrl.sizer, 0, wx.EXPAND | wx.ALL, 0)
 
         # CSVファイルコントロール（モーフ）
-        self.morph_csv_file_ctrl = BaseFilePickerCtrl(frame, self, u"CSV File (Morph)", u"Select CSV File", ("csv"), wx.FLP_DEFAULT_STYLE, \
-                                                      u"Specify the file path of the morph motion you want to convert to VMD.", \
-                                                      is_aster=False, is_save=False, set_no=0, required=False)
+        self.morph_csv_file_ctrl = BaseFilePickerCtrl(
+            frame,
+            self,
+            "CSV File (Morph)",
+            "Select CSV File",
+            ("csv"),
+            wx.FLP_DEFAULT_STYLE,
+            "Specify the file path of the morph motion you want to convert to VMD.",
+            is_aster=False,
+            is_save=False,
+            set_no=0,
+            required=False,
+        )
         self.sizer.Add(self.morph_csv_file_ctrl.sizer, 0, wx.EXPAND | wx.ALL, 0)
 
-        self.static_line2 = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL)
+        self.static_line2 = wx.StaticLine(
+            self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL
+        )
         self.sizer.Add(self.static_line2, 0, wx.EXPAND | wx.ALL, 5)
 
         # CSVファイルコントロール（カメラ）
-        self.camera_csv_file_ctrl = BaseFilePickerCtrl(frame, self, u"CSV File (Camera)", u"Select CSV File", ("csv"), wx.FLP_DEFAULT_STYLE, \
-                                                       u"Specify the file path of the camera motion you want to convert to VMD.", \
-                                                       is_aster=False, is_save=False, set_no=0, required=False)
+        self.camera_csv_file_ctrl = BaseFilePickerCtrl(
+            frame,
+            self,
+            "CSV File (Camera)",
+            "Select CSV File",
+            ("csv"),
+            wx.FLP_DEFAULT_STYLE,
+            "Specify the file path of the camera motion you want to convert to VMD.",
+            is_aster=False,
+            is_save=False,
+            set_no=0,
+            required=False,
+        )
         self.sizer.Add(self.camera_csv_file_ctrl.sizer, 0, wx.EXPAND | wx.ALL, 0)
 
         btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # VMD変換実行ボタン
-        self.vmd_btn_ctrl = wx.Button(self, wx.ID_ANY, u"Start VMD Conversion", wx.DefaultPosition, wx.Size(200, 50), 0)
-        self.vmd_btn_ctrl.SetToolTip(u"Convert CSV to VMD.")
+        self.vmd_btn_ctrl = wx.Button(
+            self,
+            wx.ID_ANY,
+            "Start VMD Conversion",
+            wx.DefaultPosition,
+            wx.Size(200, 50),
+            0,
+        )
+        self.vmd_btn_ctrl.SetToolTip("Convert CSV to VMD.")
         self.vmd_btn_ctrl.Bind(wx.EVT_BUTTON, self.on_convert_vmd)
         btn_sizer.Add(self.vmd_btn_ctrl, 0, wx.ALL, 5)
 
         self.sizer.Add(btn_sizer, 0, wx.ALIGN_CENTER | wx.SHAPED, 5)
 
         # コンソール
-        self.console_ctrl = ConsoleCtrl(self, self.frame.logging_level, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size(-1, 420), \
-                                        wx.TE_MULTILINE | wx.TE_READONLY | wx.BORDER_NONE | wx.HSCROLL | wx.VSCROLL | wx.WANTS_CHARS)
-        self.console_ctrl.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT))
-        self.console_ctrl.Bind(wx.EVT_CHAR, lambda event: MFormUtils.on_select_all(event, self.console_ctrl))
+        self.console_ctrl = ConsoleCtrl(
+            self,
+            self.frame.logging_level,
+            wx.ID_ANY,
+            wx.EmptyString,
+            wx.DefaultPosition,
+            wx.Size(-1, 420),
+            wx.TE_MULTILINE
+            | wx.TE_READONLY
+            | wx.BORDER_NONE
+            | wx.HSCROLL
+            | wx.VSCROLL
+            | wx.WANTS_CHARS,
+        )
+        self.console_ctrl.SetBackgroundColour(
+            wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT)
+        )
+        self.console_ctrl.Bind(
+            wx.EVT_CHAR,
+            lambda event: MFormUtils.on_select_all(event, self.console_ctrl),
+        )
         self.sizer.Add(self.console_ctrl, 1, wx.ALL | wx.EXPAND, 5)
 
         # ゲージ
-        self.gauge_ctrl = wx.Gauge(self, wx.ID_ANY, 100, wx.DefaultPosition, wx.DefaultSize, wx.GA_HORIZONTAL)
+        self.gauge_ctrl = wx.Gauge(
+            self, wx.ID_ANY, 100, wx.DefaultPosition, wx.DefaultSize, wx.GA_HORIZONTAL
+        )
         self.gauge_ctrl.SetValue(0)
         self.sizer.Add(self.gauge_ctrl, 0, wx.ALL | wx.EXPAND, 5)
 
@@ -126,7 +192,10 @@ class VmdPanel(BasePanel):
 
         # VMD変換開始
         if self.convert_vmd_worker:
-            logger.error("Conversion still in progress. Please finish it before running again.", decoration=MLogger.DECORATION_BOX)
+            logger.error(
+                "Conversion still in progress. Please finish it before running again.",
+                decoration=MLogger.DECORATION_BOX,
+            )
         else:
             # 別スレッドで実行
             self.convert_vmd_worker = VmdWorkerThread(self.frame, VmdThreadEvent)
@@ -154,13 +223,14 @@ class VmdPanel(BasePanel):
 
         if not event.result:
             logger.error("VMD conversion failed.", decoration=MLogger.DECORATION_BOX)
-            
+
             event.Skip()
             return False
 
-        logger.info("VMD conversion completed.", decoration=MLogger.DECORATION_BOX, title="OK")
+        logger.info(
+            "VMD conversion completed.", decoration=MLogger.DECORATION_BOX, title="OK"
+        )
 
         # 出力先をデフォルトに戻す
         if sys.stdout != self.frame.file_panel_ctrl.console_ctrl:
             sys.stdout = self.frame.file_panel_ctrl.console_ctrl
-

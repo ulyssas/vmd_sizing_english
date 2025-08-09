@@ -9,17 +9,18 @@ from form.panel.BasePanel import BasePanel
 from form.parts.SizingFileSet import SizingFileSet
 from form.parts.ConsoleCtrl import ConsoleCtrl
 from form.parts.StatusCtrl import StatusCtrl
-from module.MMath import MRect, MVector3D, MVector4D, MQuaternion, MMatrix4x4 # noqa
-from utils import MFormUtils, MFileUtils # noqa
-from utils.MLogger import MLogger # noqa
+from module.MMath import MRect, MVector3D, MVector4D, MQuaternion, MMatrix4x4  # noqa
+from utils import MFormUtils, MFileUtils  # noqa
+from utils.MLogger import MLogger  # noqa
 
 logger = MLogger(__name__)
 TIMER_ID = wx.NewId()
 
 
 class FilePanel(BasePanel):
-    
-    def __init__(self, frame: wx.Frame, parent: wx.Notebook, tab_idx: int, file_hitories: dict):
+    def __init__(
+        self, frame: wx.Frame, parent: wx.Notebook, tab_idx: int, file_hitories: dict
+    ):
         super().__init__(frame, parent, tab_idx)
         self.file_hitories = file_hitories
         self.timer = None
@@ -32,15 +33,26 @@ class FilePanel(BasePanel):
         btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # 変換前チェックボタン
-        self.check_btn_ctrl = wx.Button(self, wx.ID_ANY, u"Pre-conversion Check", wx.DefaultPosition, wx.Size(200, 50), 0)
-        self.check_btn_ctrl.SetToolTip(u"Check if processing is possible with the entered file information.")
+        self.check_btn_ctrl = wx.Button(
+            self,
+            wx.ID_ANY,
+            "Pre-conversion Check",
+            wx.DefaultPosition,
+            wx.Size(200, 50),
+            0,
+        )
+        self.check_btn_ctrl.SetToolTip(
+            "Check if processing is possible with the entered file information."
+        )
         self.check_btn_ctrl.Bind(wx.EVT_LEFT_DCLICK, self.on_doubleclick)
         self.check_btn_ctrl.Bind(wx.EVT_LEFT_DOWN, self.on_check_click)
         btn_sizer.Add(self.check_btn_ctrl, 0, wx.ALL, 5)
 
         # 実行ボタン
-        self.exec_btn_ctrl = wx.Button(self, wx.ID_ANY, u"Start VMD Sizing", wx.DefaultPosition, wx.Size(200, 50), 0)
-        self.exec_btn_ctrl.SetToolTip(u"Execute VMD sizing process.")
+        self.exec_btn_ctrl = wx.Button(
+            self, wx.ID_ANY, "Start VMD Sizing", wx.DefaultPosition, wx.Size(200, 50), 0
+        )
+        self.exec_btn_ctrl.SetToolTip("Execute VMD sizing process.")
         self.exec_btn_ctrl.Bind(wx.EVT_LEFT_DCLICK, self.on_doubleclick)
         self.exec_btn_ctrl.Bind(wx.EVT_LEFT_DOWN, self.on_exec_click)
         btn_sizer.Add(self.exec_btn_ctrl, 0, wx.ALL, 5)
@@ -48,10 +60,27 @@ class FilePanel(BasePanel):
         self.sizer.Add(btn_sizer, 0, wx.ALIGN_CENTER | wx.SHAPED, 5)
 
         # コンソール
-        self.console_ctrl = ConsoleCtrl(self, self.frame.logging_level, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size(-1, -1), \
-                                        wx.TE_MULTILINE | wx.TE_READONLY | wx.BORDER_NONE | wx.HSCROLL | wx.VSCROLL | wx.WANTS_CHARS)
-        self.console_ctrl.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT))
-        self.console_ctrl.Bind(wx.EVT_CHAR, lambda event: MFormUtils.on_select_all(event, self.console_ctrl))
+        self.console_ctrl = ConsoleCtrl(
+            self,
+            self.frame.logging_level,
+            wx.ID_ANY,
+            wx.EmptyString,
+            wx.DefaultPosition,
+            wx.Size(-1, -1),
+            wx.TE_MULTILINE
+            | wx.TE_READONLY
+            | wx.BORDER_NONE
+            | wx.HSCROLL
+            | wx.VSCROLL
+            | wx.WANTS_CHARS,
+        )
+        self.console_ctrl.SetBackgroundColour(
+            wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT)
+        )
+        self.console_ctrl.Bind(
+            wx.EVT_CHAR,
+            lambda event: MFormUtils.on_select_all(event, self.console_ctrl),
+        )
         self.sizer.Add(self.console_ctrl, 1, wx.ALL | wx.EXPAND, 5)
 
         status_sizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -60,39 +89,90 @@ class FilePanel(BasePanel):
         self.process_dialog = None
 
         # 進捗ステータス
-        self.before_bracket_ctrl = wx.TextCtrl(self, wx.ID_ANY, "(", wx.DefaultPosition, wx.Size(5, -1), wx.TE_READONLY | wx.BORDER_NONE | wx.WANTS_CHARS)
-        self.before_bracket_ctrl.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT))
+        self.before_bracket_ctrl = wx.TextCtrl(
+            self,
+            wx.ID_ANY,
+            "(",
+            wx.DefaultPosition,
+            wx.Size(5, -1),
+            wx.TE_READONLY | wx.BORDER_NONE | wx.WANTS_CHARS,
+        )
+        self.before_bracket_ctrl.SetBackgroundColour(
+            wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT)
+        )
         status_sizer.Add(self.before_bracket_ctrl, 0, wx.ALIGN_LEFT, 5)
 
-        self.now_process_ctrl = StatusCtrl(self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size(20, -1), wx.TE_READONLY | wx.BORDER_NONE | wx.WANTS_CHARS)
-        self.now_process_ctrl.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT))
-        self.now_process_ctrl.SetToolTip(u"This is the approximate number of processes currently in progress. Click to display detailed progress in a dialog.")
+        self.now_process_ctrl = StatusCtrl(
+            self,
+            wx.ID_ANY,
+            wx.EmptyString,
+            wx.DefaultPosition,
+            wx.Size(20, -1),
+            wx.TE_READONLY | wx.BORDER_NONE | wx.WANTS_CHARS,
+        )
+        self.now_process_ctrl.SetBackgroundColour(
+            wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT)
+        )
+        self.now_process_ctrl.SetToolTip(
+            "This is the approximate number of processes currently in progress. Click to display detailed progress in a dialog."
+        )
         self.now_process_ctrl.Bind(wx.EVT_LEFT_DOWN, self.show_process_dialog)
         status_sizer.Add(self.now_process_ctrl, 0, wx.ALIGN_LEFT, 5)
 
-        self.slash_ctrl = wx.TextCtrl(self, wx.ID_ANY, "/", wx.DefaultPosition, wx.Size(5, -1), wx.TE_READONLY | wx.BORDER_NONE | wx.WANTS_CHARS)
-        self.slash_ctrl.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT))
+        self.slash_ctrl = wx.TextCtrl(
+            self,
+            wx.ID_ANY,
+            "/",
+            wx.DefaultPosition,
+            wx.Size(5, -1),
+            wx.TE_READONLY | wx.BORDER_NONE | wx.WANTS_CHARS,
+        )
+        self.slash_ctrl.SetBackgroundColour(
+            wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT)
+        )
         status_sizer.Add(self.slash_ctrl, 0, wx.ALIGN_LEFT, 5)
 
-        self.total_process_ctrl = StatusCtrl(self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size(20, -1), wx.TE_READONLY | wx.BORDER_NONE | wx.WANTS_CHARS)
-        self.total_process_ctrl.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT))
-        self.total_process_ctrl.SetToolTip(u"This is the approximate total number of processes. Click to display detailed progress in a dialog.")
+        self.total_process_ctrl = StatusCtrl(
+            self,
+            wx.ID_ANY,
+            wx.EmptyString,
+            wx.DefaultPosition,
+            wx.Size(20, -1),
+            wx.TE_READONLY | wx.BORDER_NONE | wx.WANTS_CHARS,
+        )
+        self.total_process_ctrl.SetBackgroundColour(
+            wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT)
+        )
+        self.total_process_ctrl.SetToolTip(
+            "This is the approximate total number of processes. Click to display detailed progress in a dialog."
+        )
         self.total_process_ctrl.Bind(wx.EVT_LEFT_DOWN, self.show_process_dialog)
         status_sizer.Add(self.total_process_ctrl, 0, wx.ALIGN_LEFT, 5)
 
-        self.after_bracket_ctrl = wx.TextCtrl(self, wx.ID_ANY, ")", wx.DefaultPosition, wx.Size(5, -1), wx.TE_READONLY | wx.BORDER_NONE | wx.WANTS_CHARS)
-        self.after_bracket_ctrl.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT))
+        self.after_bracket_ctrl = wx.TextCtrl(
+            self,
+            wx.ID_ANY,
+            ")",
+            wx.DefaultPosition,
+            wx.Size(5, -1),
+            wx.TE_READONLY | wx.BORDER_NONE | wx.WANTS_CHARS,
+        )
+        self.after_bracket_ctrl.SetBackgroundColour(
+            wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT)
+        )
         status_sizer.Add(self.after_bracket_ctrl, 0, wx.ALIGN_LEFT, 5)
 
         # ゲージ
-        self.gauge_ctrl = wx.Gauge(self, wx.ID_ANY, 100, wx.DefaultPosition, wx.Size(550, -1), wx.GA_HORIZONTAL)
+        self.gauge_ctrl = wx.Gauge(
+            self, wx.ID_ANY, 100, wx.DefaultPosition, wx.Size(550, -1), wx.GA_HORIZONTAL
+        )
         self.gauge_ctrl.SetValue(0)
         status_sizer.Add(self.gauge_ctrl, 0, wx.ALL | wx.EXPAND, 5)
 
         self.sizer.Add(status_sizer, 0, wx.ALL, 0)
 
         self.fit()
-    
+
     def show_process_dialog(self, event: wx.Event):
         if self.process_dialog:
             # 既にある場合、一旦破棄
@@ -119,13 +199,13 @@ class FilePanel(BasePanel):
         self.file_set.enable()
         self.check_btn_ctrl.Enable()
         self.exec_btn_ctrl.Enable()
-    
+
     def on_doubleclick(self, event: wx.Event):
         self.timer.Stop()
         logger.warning("Double-clicked.", decoration=MLogger.DECORATION_BOX)
         event.Skip(False)
         return False
-    
+
     def on_check_click(self, event: wx.Event):
         self.timer = wx.Timer(self, TIMER_ID)
         self.timer.Start(200)
@@ -138,7 +218,10 @@ class FilePanel(BasePanel):
         # 出力先をファイルパネルのコンソールに変更
         sys.stdout = self.console_ctrl
 
-        if self.check_btn_ctrl.GetLabel() == "Stop Loading Process" and self.frame.load_worker:
+        if (
+            self.check_btn_ctrl.GetLabel() == "Stop Loading Process"
+            and self.frame.load_worker
+        ):
             # フォーム無効化
             self.disable()
             # 停止状態でボタン押下時、停止
@@ -153,8 +236,10 @@ class FilePanel(BasePanel):
             # プログレス非表示
             self.gauge_ctrl.SetValue(0)
 
-            logger.warning("Aborted loading process.", decoration=MLogger.DECORATION_BOX)
-            
+            logger.warning(
+                "Aborted loading process.", decoration=MLogger.DECORATION_BOX
+            )
+
             event.Skip(False)
         elif not self.frame.load_worker:
             # フォーム無効化
@@ -169,10 +254,13 @@ class FilePanel(BasePanel):
 
             # 一旦読み込み(そのままチェック)
             self.frame.load(event, target_idx=0)
-            
+
             event.Skip()
         else:
-            logger.error("Loading still in progress. Please finish it before running again.", decoration=MLogger.DECORATION_BOX)
+            logger.error(
+                "Loading still in progress. Please finish it before running again.",
+                decoration=MLogger.DECORATION_BOX,
+            )
             event.Skip(False)
 
     def on_exec_click(self, event: wx.Event):
@@ -185,7 +273,7 @@ class FilePanel(BasePanel):
         if self.timer:
             self.timer.Stop()
             self.Unbind(wx.EVT_TIMER, id=TIMER_ID)
-            
+
         # 出力先をファイルパネルのコンソールに変更
         sys.stdout = self.console_ctrl
 
@@ -205,7 +293,7 @@ class FilePanel(BasePanel):
             self.gauge_ctrl.SetValue(0)
 
             logger.warning("Aborted VMD sizing.", decoration=MLogger.DECORATION_BOX)
-            
+
             event.Skip(False)
         elif not self.frame.worker:
             # フォーム無効化
@@ -220,10 +308,13 @@ class FilePanel(BasePanel):
 
             # サイジング可否チェックの後に実行
             self.frame.load(event, is_exec=True, target_idx=0)
-            
+
             event.Skip()
         else:
-            logger.error("Sizing still in progress. Please finish it before running again.", decoration=MLogger.DECORATION_BOX)
+            logger.error(
+                "Sizing still in progress. Please finish it before running again.",
+                decoration=MLogger.DECORATION_BOX,
+            )
             event.Skip(False)
 
     def set_output_vmd_path(self, event, is_force=False):
@@ -232,7 +323,6 @@ class FilePanel(BasePanel):
         self.frame.camera_panel_ctrl.header_panel.set_output_vmd_path(event, is_force)
 
     def save(self):
-
         # 履歴保持
         self.frame.file_panel_ctrl.file_set.save()
 
@@ -252,9 +342,15 @@ class FilePanel(BasePanel):
 
 
 class ProcessDialog(wx.Dialog):
-
     def __init__(self, frame: wx.Frame, panel: wx.Panel):
-        super().__init__(frame, id=wx.ID_ANY, title="Progress Dialog", pos=(-1, -1), size=(700, 450), style=wx.DEFAULT_DIALOG_STYLE | wx.STAY_ON_TOP)
+        super().__init__(
+            frame,
+            id=wx.ID_ANY,
+            title="Progress Dialog",
+            pos=(-1, -1),
+            size=(700, 450),
+            style=wx.DEFAULT_DIALOG_STYLE | wx.STAY_ON_TOP,
+        )
 
         self.frame = frame
         self.panel = panel
@@ -262,7 +358,9 @@ class ProcessDialog(wx.Dialog):
         self.sizer = wx.BoxSizer(wx.VERTICAL)
 
         # データツリー
-        self.tree_ctrl = wx.TreeCtrl(self, id=wx.ID_ANY, pos=(-1, -1), size=(650, 400), style=wx.TR_ROW_LINES)
+        self.tree_ctrl = wx.TreeCtrl(
+            self, id=wx.ID_ANY, pos=(-1, -1), size=(650, 400), style=wx.TR_ROW_LINES
+        )
         # 初期化
         self.initialize(self.panel.tree_process_dict)
 
@@ -270,10 +368,10 @@ class ProcessDialog(wx.Dialog):
 
         self.SetSizer(self.sizer)
         self.sizer.Layout()
-        
+
         # 画面中央に表示
         self.CentreOnScreen()
-        
+
         # 最初は隠しておく
         self.Hide()
 
@@ -290,11 +388,15 @@ class ProcessDialog(wx.Dialog):
         for tk, tv in item_dict.items():
             if isinstance(tv, bool) and tv:
                 # 処理が終了している場合、アイコン追加
-                display_ctrl = self.tree_ctrl.AppendItem(parent=parent_ctrl, text=("○ {0}".format(tk)))
+                display_ctrl = self.tree_ctrl.AppendItem(
+                    parent=parent_ctrl, text=("○ {0}".format(tk))
+                )
                 self.tree_ctrl.SetItemTextColour(display_ctrl, "BLUE")
             elif isinstance(tv, bool) and not tv:
                 # 終了していない場合
-                display_ctrl = self.tree_ctrl.AppendItem(parent=parent_ctrl, text=("－ {0}".format(tk)))
+                display_ctrl = self.tree_ctrl.AppendItem(
+                    parent=parent_ctrl, text=("－ {0}".format(tk))
+                )
                 self.tree_ctrl.SetItemTextColour(display_ctrl, "GREY")
             else:
                 display_ctrl = self.tree_ctrl.AppendItem(parent=parent_ctrl, text=tk)
@@ -302,6 +404,5 @@ class ProcessDialog(wx.Dialog):
             if isinstance(tv, dict):
                 # 下位が辞書の場合、ループ再帰
                 self.append_tree(tv, display_ctrl)
-            
-        self.tree_ctrl.ExpandAllChildren(parent_ctrl)
 
+        self.tree_ctrl.ExpandAllChildren(parent_ctrl)

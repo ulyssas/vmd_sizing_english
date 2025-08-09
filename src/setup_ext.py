@@ -1,18 +1,32 @@
 from setuptools import Extension
-from numpy import get_include   # cimport numpy を使うため
+from numpy import get_include  # cimport numpy を使うため
 
-bezier_path = 'C:/Development/Anaconda3/envs/vmdsizing_cython/Lib/site-packages/bezier/include'
+bezier_path = (
+    "C:/Development/Anaconda3/envs/vmdsizing_cython/Lib/site-packages/bezier/include"
+)
 
 kwargs = {"output_dir": "./build/output", "build_dir": "./build/"}
 
 
 def get_ext():
     ext = []
-    sources = ["module\\MMath.pyx", "module\\MOptions.pyx", "module\\MParams.pyx", \
-               "utils\\MLogger.py", "utils\\MBezierUtils.pyx", "utils\\MServiceUtils.pyx", \
-               "mmd\\VmdData.pyx", "mmd\\VmdReader.py", "mmd\\PmxData.pyx", "mmd\\PmxReader.py", \
-               "service\\parts\\StanceService.pyx", "service\\parts\\ArmAvoidanceService.pyx", "service\\parts\\ArmAlignmentService.pyx", \
-               "service\\parts\\CameraService.py", "service\\parts\\MoveService.py"]
+    sources = [
+        "module\\MMath.pyx",
+        "module\\MOptions.pyx",
+        "module\\MParams.pyx",
+        "utils\\MLogger.py",
+        "utils\\MBezierUtils.pyx",
+        "utils\\MServiceUtils.pyx",
+        "mmd\\VmdData.pyx",
+        "mmd\\VmdReader.py",
+        "mmd\\PmxData.pyx",
+        "mmd\\PmxReader.py",
+        "service\\parts\\StanceService.pyx",
+        "service\\parts\\ArmAvoidanceService.pyx",
+        "service\\parts\\ArmAlignmentService.pyx",
+        "service\\parts\\CameraService.py",
+        "service\\parts\\MoveService.py",
+    ]
     # for path in glob.glob("*/**/*.pyx", recursive=True):
     #     if os.path.isfile(path):
     #         print(path)
@@ -24,9 +38,17 @@ def get_ext():
     for source in sources:
         path = source.replace("\\", ".").replace(".pyx", "").replace(".py", "")
         print("%s -> %s" % (source, path))
-        ext.append(Extension(path, sources=[source], include_dirs=['.', bezier_path, get_include()], define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]))
-    
+        ext.append(
+            Extension(
+                path,
+                sources=[source],
+                include_dirs=[".", bezier_path, get_include()],
+                define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
+            )
+        )
+
     return ext
+
 
 # ext = [Extension("module.MMath", sources=["module/MMath.py"], include_dirs=['.', bezier_path, get_include()]), \
 #        # Extension("module.MMath", sources=["module/MMath.py"], include_dirs=['.', bezier_path, get_include()], define_macros=[('CYTHON_TRACE', '1')]), \
@@ -53,5 +75,3 @@ def get_ext():
 #        Extension("service.SizingService", sources=["service/SizingService.py"], include_dirs=['.', bezier_path, get_include()]), \
 #        # Extension("service.ConvertSmoothService", sources=["service/ConvertSmoothService.py"], include_dirs=['.', bezier_path, get_include()]), \
 #        ]
-
-

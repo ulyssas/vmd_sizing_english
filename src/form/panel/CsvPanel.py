@@ -8,9 +8,9 @@ from form.panel.BasePanel import BasePanel
 from form.parts.BaseFilePickerCtrl import BaseFilePickerCtrl
 from form.parts.ConsoleCtrl import ConsoleCtrl
 from form.worker.CsvWorkerThread import CsvWorkerThread
-from module.MMath import MRect, MVector3D, MVector4D, MQuaternion, MMatrix4x4 # noqa
-from utils import MFormUtils, MFileUtils # noqa
-from utils.MLogger import MLogger # noqa
+from module.MMath import MRect, MVector3D, MVector4D, MQuaternion, MMatrix4x4  # noqa
+from utils import MFormUtils, MFileUtils  # noqa
+from utils.MLogger import MLogger  # noqa
 
 logger = MLogger(__name__)
 
@@ -19,42 +19,85 @@ logger = MLogger(__name__)
 
 
 class CsvPanel(BasePanel):
-    
     def __init__(self, frame: wx.Frame, parent: wx.Notebook, tab_idx: int):
         super().__init__(frame, parent, tab_idx)
         self.convert_csv_worker = None
 
-        self.description_txt = wx.StaticText(self, wx.ID_ANY, "Outputs the analysis results of the specified VMD file as CSV files separated into Bone/Morph/Camera.", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.description_txt = wx.StaticText(
+            self,
+            wx.ID_ANY,
+            "Outputs the analysis results of the specified VMD file as CSV files separated into Bone/Morph/Camera.",
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            0,
+        )
         self.sizer.Add(self.description_txt, 0, wx.ALL, 5)
 
-        self.static_line = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL)
+        self.static_line = wx.StaticLine(
+            self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL
+        )
         self.sizer.Add(self.static_line, 0, wx.EXPAND | wx.ALL, 5)
 
         # CSVファイルコントロール
-        self.vmd_file_ctrl = BaseFilePickerCtrl(frame, self, u"VMD File", u"Open VMD File", ("vmd"), wx.FLP_DEFAULT_STYLE, \
-                                                u"Specify the file path of the VMD you want to convert to CSV.", \
-                                                is_aster=False, is_save=False, set_no=0)
+        self.vmd_file_ctrl = BaseFilePickerCtrl(
+            frame,
+            self,
+            "VMD File",
+            "Open VMD File",
+            ("vmd"),
+            wx.FLP_DEFAULT_STYLE,
+            "Specify the file path of the VMD you want to convert to CSV.",
+            is_aster=False,
+            is_save=False,
+            set_no=0,
+        )
         self.sizer.Add(self.vmd_file_ctrl.sizer, 0, wx.EXPAND | wx.ALL, 0)
 
         btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # CSV変換実行ボタン
-        self.csv_btn_ctrl = wx.Button(self, wx.ID_ANY, u"Start CSV Conversion", wx.DefaultPosition, wx.Size(200, 50), 0)
-        self.csv_btn_ctrl.SetToolTip(u"Convert VMD to CSV.")
+        self.csv_btn_ctrl = wx.Button(
+            self,
+            wx.ID_ANY,
+            "Start CSV Conversion",
+            wx.DefaultPosition,
+            wx.Size(200, 50),
+            0,
+        )
+        self.csv_btn_ctrl.SetToolTip("Convert VMD to CSV.")
         self.csv_btn_ctrl.Bind(wx.EVT_BUTTON, self.on_convert_csv)
         btn_sizer.Add(self.csv_btn_ctrl, 0, wx.ALL, 5)
 
         self.sizer.Add(btn_sizer, 0, wx.ALIGN_CENTER | wx.SHAPED, 5)
 
         # コンソール
-        self.console_ctrl = ConsoleCtrl(self, self.frame.logging_level, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size(-1, 420), \
-                                        wx.TE_MULTILINE | wx.TE_READONLY | wx.BORDER_NONE | wx.HSCROLL | wx.VSCROLL | wx.WANTS_CHARS)
-        self.console_ctrl.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT))
-        self.console_ctrl.Bind(wx.EVT_CHAR, lambda event: MFormUtils.on_select_all(event, self.console_ctrl))
+        self.console_ctrl = ConsoleCtrl(
+            self,
+            self.frame.logging_level,
+            wx.ID_ANY,
+            wx.EmptyString,
+            wx.DefaultPosition,
+            wx.Size(-1, 420),
+            wx.TE_MULTILINE
+            | wx.TE_READONLY
+            | wx.BORDER_NONE
+            | wx.HSCROLL
+            | wx.VSCROLL
+            | wx.WANTS_CHARS,
+        )
+        self.console_ctrl.SetBackgroundColour(
+            wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT)
+        )
+        self.console_ctrl.Bind(
+            wx.EVT_CHAR,
+            lambda event: MFormUtils.on_select_all(event, self.console_ctrl),
+        )
         self.sizer.Add(self.console_ctrl, 1, wx.ALL | wx.EXPAND, 5)
 
         # ゲージ
-        self.gauge_ctrl = wx.Gauge(self, wx.ID_ANY, 100, wx.DefaultPosition, wx.DefaultSize, wx.GA_HORIZONTAL)
+        self.gauge_ctrl = wx.Gauge(
+            self, wx.ID_ANY, 100, wx.DefaultPosition, wx.DefaultSize, wx.GA_HORIZONTAL
+        )
         self.gauge_ctrl.SetValue(0)
         self.sizer.Add(self.gauge_ctrl, 0, wx.ALL | wx.EXPAND, 5)
 
@@ -105,7 +148,10 @@ class CsvPanel(BasePanel):
 
         # CSV変換開始
         if self.convert_csv_worker:
-            logger.error("Conversion still in progress. Please finish it before running again.", decoration=MLogger.DECORATION_BOX)
+            logger.error(
+                "Conversion still in progress. Please finish it before running again.",
+                decoration=MLogger.DECORATION_BOX,
+            )
         else:
             # 別スレッドで実行
             self.convert_csv_worker = CsvWorkerThread(self.frame, CsvThreadEvent)
@@ -133,13 +179,14 @@ class CsvPanel(BasePanel):
 
         if not event.result:
             logger.error("CSV conversion failed.", decoration=MLogger.DECORATION_BOX)
-            
+
             event.Skip()
             return False
 
-        logger.info("CSV conversion completed.", decoration=MLogger.DECORATION_BOX, title="OK")
+        logger.info(
+            "CSV conversion completed.", decoration=MLogger.DECORATION_BOX, title="OK"
+        )
 
         # 出力先をデフォルトに戻す
         if sys.stdout != self.frame.file_panel_ctrl.console_ctrl:
             sys.stdout = self.frame.file_panel_ctrl.console_ctrl
-

@@ -95,7 +95,9 @@ class VmdReader:
                     # 回転X,Y,Z,scalar
                     frame.rotation = self.read_Quaternion()
                     logger.test("frame.rotation %s", frame.rotation)
-                    logger.test("frame.rotation.euler %s", frame.rotation.toEulerAngles())
+                    logger.test(
+                        "frame.rotation.euler %s", frame.rotation.toEulerAngles()
+                    )
                     # オリジナルを保持
                     frame.org_rotation = frame.rotation.copy()
 
@@ -323,13 +325,19 @@ class VmdReader:
             # 終了命令
             raise ke
         except SizingException as se:
-            logger.error("VMD読み込み処理が処理できないデータで終了しました。\n\n%s", se.message, decoration=MLogger.DECORATION_BOX)
+            logger.error(
+                "VMD読み込み処理が処理できないデータで終了しました。\n\n%s",
+                se.message,
+                decoration=MLogger.DECORATION_BOX,
+            )
             return se
         except Exception as e:
             import traceback
 
             logger.critical(
-                "VMD読み込み処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc(), decoration=MLogger.DECORATION_BOX
+                "VMD読み込み処理が意図せぬエラーで終了しました。\n\n%s",
+                traceback.format_exc(),
+                decoration=MLogger.DECORATION_BOX,
             )
             raise e
 
@@ -366,7 +374,9 @@ class VmdReader:
 
         for encoding in codelst:
             try:
-                fstr = self.decode_text(fbytes, encoding, False)  # bytes文字列から指定文字コードの文字列に変換
+                fstr = self.decode_text(
+                    fbytes, encoding, False
+                )  # bytes文字列から指定文字コードの文字列に変換
                 fstr = fstr.encode("utf-8")  # uft-8文字列に変換
                 # 問題なく変換できたらエンコードを返す
                 logger.test("%s: encoding: %s", fstr, encoding)
@@ -456,7 +466,9 @@ class VmdReader:
         elif format_size == 8:
             format_type = "d"
         else:
-            raise MParseException("read_float format_sizeエラー {0}".format(format_size))
+            raise MParseException(
+                "read_float format_sizeエラー {0}".format(format_size)
+            )
 
         return self.unpack(format_size, format_type)
 

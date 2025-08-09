@@ -37,9 +37,16 @@ logger = MLogger(__name__)
 # except:
 #     pass
 
+
 class MainFrame(wx.Frame):
     def __init__(
-        self, parent, mydir_path: str, version_name: str, logging_level: int, is_saving: bool, is_out_log: bool
+        self,
+        parent,
+        mydir_path: str,
+        version_name: str,
+        logging_level: int,
+        is_saving: bool,
+        is_out_log: bool,
     ):
         self.version_name = version_name
         self.logging_level = logging_level
@@ -71,8 +78,13 @@ class MainFrame(wx.Frame):
 
         bSizer1 = wx.BoxSizer(wx.VERTICAL)
 
-        self.note_ctrl = wx.Notebook(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
-        if self.logging_level == MLogger.FULL or self.logging_level == MLogger.DEBUG_FULL:
+        self.note_ctrl = wx.Notebook(
+            self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0
+        )
+        if (
+            self.logging_level == MLogger.FULL
+            or self.logging_level == MLogger.DEBUG_FULL
+        ):
             # フルデータの場合
             self.note_ctrl.SetBackgroundColour("RED")
         elif self.logging_level == MLogger.DEBUG:
@@ -88,7 +100,9 @@ class MainFrame(wx.Frame):
             # ログありの場合、色変え
             self.note_ctrl.SetBackgroundColour("AQUAMARINE")
         else:
-            self.note_ctrl.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_BTNSHADOW))
+            self.note_ctrl.SetBackgroundColour(
+                wx.SystemSettings.GetColour(wx.SYS_COLOUR_BTNSHADOW)
+            )
 
         # ---------------------------------------------
 
@@ -206,7 +220,10 @@ class MainFrame(wx.Frame):
             self.note_ctrl.SetSelection(self.file_panel_ctrl.tab_idx)
             self.morph_panel_ctrl.fix_tab()
 
-            logger.info("Preparing to display Morph tab\nExecuting file loading process. Please wait a moment....", decoration=MLogger.DECORATION_BOX)
+            logger.info(
+                "Preparing to display Morph tab\nExecuting file loading process. Please wait a moment....",
+                decoration=MLogger.DECORATION_BOX,
+            )
 
             # 読み込み処理実行
             self.load(event, target_idx=0, is_morph=True)
@@ -220,7 +237,10 @@ class MainFrame(wx.Frame):
             self.note_ctrl.SetSelection(self.file_panel_ctrl.tab_idx)
             self.arm_panel_ctrl.fix_tab()
 
-            logger.info("Preparing to display Arm tab\nExecuting file loading process. Please wait a moment....", decoration=MLogger.DECORATION_BOX)
+            logger.info(
+                "Preparing to display Arm tab\nExecuting file loading process. Please wait a moment....",
+                decoration=MLogger.DECORATION_BOX,
+            )
 
             # 読み込み処理実行
             self.load(event, target_idx=0, is_arm=True)
@@ -234,7 +254,10 @@ class MainFrame(wx.Frame):
             self.note_ctrl.SetSelection(self.file_panel_ctrl.tab_idx)
             self.leg_panel_ctrl.fix_tab()
 
-            logger.info("Preparing to display Leg tab\nExecuting file loading process. Please wait a moment....", decoration=MLogger.DECORATION_BOX)
+            logger.info(
+                "Preparing to display Leg tab\nExecuting file loading process. Please wait a moment....",
+                decoration=MLogger.DECORATION_BOX,
+            )
 
             # 読み込み処理実行
             self.load(event, target_idx=0, is_leg=True)
@@ -280,16 +303,23 @@ class MainFrame(wx.Frame):
         # カメラサイジングのみチェックが入ってる場合、カメラファイルパスとサイジング済みデータがある事を確認する
         if self.camera_panel_ctrl.camera_only_flg_ctrl.GetValue():
             if not self.camera_panel_ctrl.camera_vmd_file_ctrl.data:
-                logger.error("If executing camera sizing only,\nplease specify the camera VMD data.", decoration=MLogger.DECORATION_BOX)
+                logger.error(
+                    "If executing camera sizing only,\nplease specify the camera VMD data.",
+                    decoration=MLogger.DECORATION_BOX,
+                )
                 result = False
 
             if not (
-                os.path.exists(self.file_panel_ctrl.file_set.output_vmd_file_ctrl.path())
-                and os.path.isfile(self.file_panel_ctrl.file_set.output_vmd_file_ctrl.path())
+                os.path.exists(
+                    self.file_panel_ctrl.file_set.output_vmd_file_ctrl.path()
+                )
+                and os.path.isfile(
+                    self.file_panel_ctrl.file_set.output_vmd_file_ctrl.path()
+                )
             ):
                 logger.error(
                     "If executing camera sizing only,\nplease specify an existing sized VMD file path for the output VMD of the first file set."
-                    "\n(If you specify the output VMD from \"Open\", you will see a warning about overwriting, but no overwrite will actually occur.)",
+                    '\n(If you specify the output VMD from "Open", you will see a warning about overwriting, but no overwrite will actually occur.)',
                     decoration=MLogger.DECORATION_BOX,
                 )
                 result = False
@@ -300,8 +330,8 @@ class MainFrame(wx.Frame):
                     and os.path.isfile(file_set.output_vmd_file_ctrl.path())
                 ):
                     logger.error(
-                        f"If executing camera sizing only,\nplease specify an existing sized VMD file path for the output VMD of file set {fidx+1}."
-                        "\n(If you specify the output VMD from \"Open\", you will see a warning about overwriting, but no overwrite will actually occur.)",
+                        f"If executing camera sizing only,\nplease specify an existing sized VMD file path for the output VMD of file set {fidx + 1}."
+                        '\n(If you specify the output VMD from "Open", you will see a warning about overwriting, but no overwrite will actually occur.)',
                         decoration=MLogger.DECORATION_BOX,
                     )
                     result = False
@@ -322,15 +352,28 @@ class MainFrame(wx.Frame):
     # ファイルタブの処理対象VMD/VPDパス
     def get_target_vmd_path(self, target_idx):
         if self.file_panel_ctrl.file_set.motion_vmd_file_ctrl.astr_path:
-            if len(self.file_panel_ctrl.file_set.motion_vmd_file_ctrl.target_paths) > target_idx:
-                return self.file_panel_ctrl.file_set.motion_vmd_file_ctrl.target_paths[target_idx]
+            if (
+                len(self.file_panel_ctrl.file_set.motion_vmd_file_ctrl.target_paths)
+                > target_idx
+            ):
+                return self.file_panel_ctrl.file_set.motion_vmd_file_ctrl.target_paths[
+                    target_idx
+                ]
             else:
                 return None
 
         return self.file_panel_ctrl.file_set.motion_vmd_file_ctrl.file_ctrl.GetPath()
 
     # 読み込み
-    def load(self, event, target_idx, is_exec=False, is_morph=False, is_arm=False, is_leg=False):
+    def load(
+        self,
+        event,
+        target_idx,
+        is_exec=False,
+        is_morph=False,
+        is_arm=False,
+        is_leg=False,
+    ):
         # フォーム無効化
         self.file_panel_ctrl.disable()
         # タブ固定
@@ -345,14 +388,18 @@ class MainFrame(wx.Frame):
                 tab_name = "Morph" if is_morph else "Arm" if is_arm else "Leg"
                 # 読み込み出来なかったらエラー
                 logger.error(
-                    "Cannot open the \"{tab_name}\" tab because one or more file paths are not specified in the \"File\" tab.".format(tab_name=tab_name)
+                    'Cannot open the "{tab_name}" tab because one or more file paths are not specified in the "File" tab.'.format(
+                        tab_name=tab_name
+                    )
                     + "\n- Target VMD file"
                     + "\n- Source model PMX file"
                     + "\n- Target model PMX file"
                     + "\nIf already specified, it may currently be loading."
                     + "\nEspecially for long VMDs, loading may take time."
                     + "\nPlease specify all three required files for adjustment,"
-                    + "\nand open the \"{tab_name}\" tab after the \"■Load Successful\" log appears.".format(tab_name=tab_name),
+                    + '\nand open the "{tab_name}" tab after the "■Load Successful" log appears.'.format(
+                        tab_name=tab_name
+                    ),
                     decoration=MLogger.DECORATION_BOX,
                 )
 
@@ -365,14 +412,24 @@ class MainFrame(wx.Frame):
 
         # 読み込み開始
         if self.load_worker:
-            logger.error("Loading still in progress. Please finish it before running again.", decoration=MLogger.DECORATION_BOX)
+            logger.error(
+                "Loading still in progress. Please finish it before running again.",
+                decoration=MLogger.DECORATION_BOX,
+            )
         else:
             # ファイルタブの処理対象VMD/VPDの実値設定
             target_path = self.get_target_vmd_path(target_idx)
-            self.file_panel_ctrl.file_set.motion_vmd_file_ctrl.file_ctrl.SetPath(target_path)
-            self.file_panel_ctrl.file_set.motion_vmd_file_ctrl.file_model_ctrl.set_model(target_path)
+            self.file_panel_ctrl.file_set.motion_vmd_file_ctrl.file_ctrl.SetPath(
+                target_path
+            )
+            self.file_panel_ctrl.file_set.motion_vmd_file_ctrl.file_model_ctrl.set_model(
+                target_path
+            )
             # 出力パス変更
-            if not self.file_panel_ctrl.file_set.output_vmd_file_ctrl.file_ctrl.GetPath() or target_idx > 0:
+            if (
+                not self.file_panel_ctrl.file_set.output_vmd_file_ctrl.file_ctrl.GetPath()
+                or target_idx > 0
+            ):
                 self.file_panel_ctrl.file_set.output_vmd_file_ctrl.file_ctrl.SetPath("")
                 self.file_panel_ctrl.file_set.set_output_vmd_path(event)
 
@@ -381,7 +438,9 @@ class MainFrame(wx.Frame):
             self.file_panel_ctrl.check_btn_ctrl.Enable()
 
             # 別スレッドで実行
-            self.load_worker = LoadWorkerThread(self, LoadThreadEvent, target_idx, is_exec, is_morph, is_arm, is_leg)
+            self.load_worker = LoadWorkerThread(
+                self, LoadThreadEvent, target_idx, is_exec, is_morph, is_arm, is_leg
+            )
             self.load_worker.start()
 
         return result
@@ -423,7 +482,9 @@ class MainFrame(wx.Frame):
             event.Skip()
             return False
 
-        logger.info("File data loading completed", decoration=MLogger.DECORATION_BOX, title="OK")
+        logger.info(
+            "File data loading completed", decoration=MLogger.DECORATION_BOX, title="OK"
+        )
 
         if event.is_exec:
             # そのまま実行する場合、サイジング実行処理に遷移
@@ -443,7 +504,10 @@ class MainFrame(wx.Frame):
             self.file_panel_ctrl.fix_tab()
 
             if self.worker:
-                logger.error("Sizing still in progress. Please finish it before running again.", decoration=MLogger.DECORATION_BOX)
+                logger.error(
+                    "Sizing still in progress. Please finish it before running again.",
+                    decoration=MLogger.DECORATION_BOX,
+                )
             else:
                 # 停止ボタンに切り替え
                 self.file_panel_ctrl.exec_btn_ctrl.SetLabel("Stop VMD Sizing")
@@ -451,7 +515,11 @@ class MainFrame(wx.Frame):
 
                 # 別スレッドで実行
                 self.worker = SizingWorkerThread(
-                    self, SizingThreadEvent, event.target_idx, self.is_saving, self.is_out_log
+                    self,
+                    SizingThreadEvent,
+                    event.target_idx,
+                    self.is_saving,
+                    self.is_out_log,
                 )
                 self.worker.start()
 
@@ -489,7 +557,11 @@ class MainFrame(wx.Frame):
         worked_time = "\nProcessing time: {0}".format(self.show_worked_time())
         logger.info(worked_time)
 
-        if self.is_out_log and event.output_log_path and os.path.exists(event.output_log_path):
+        if (
+            self.is_out_log
+            and event.output_log_path
+            and os.path.exists(event.output_log_path)
+        ):
             # ログ出力対象である場合、追記
             with open(event.output_log_path, mode="a", encoding="utf-8") as f:
                 f.write(worked_time)

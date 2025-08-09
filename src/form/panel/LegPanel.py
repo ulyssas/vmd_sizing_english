@@ -7,13 +7,12 @@ import numpy as np
 from form.panel.BasePanel import BasePanel
 from form.parts.FloatSliderCtrl import FloatSliderCtrl
 from form.parts.SizingFileSet import SizingFileSet
-from utils.MLogger import MLogger # noqa
+from utils.MLogger import MLogger  # noqa
 
 logger = MLogger(__name__)
 
 
 class LegPanel(BasePanel):
-    
     def __init__(self, frame: wx.Frame, parent: wx.Notebook, tab_idx: int):
         super().__init__(frame, parent, tab_idx)
 
@@ -23,37 +22,87 @@ class LegPanel(BasePanel):
         self.move_correction_title_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # 全体移動量補正タイトル
-        self.move_correction_title_txt = wx.StaticText(self, wx.ID_ANY, u"Move Correction", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.move_correction_title_txt = wx.StaticText(
+            self, wx.ID_ANY, "Move Correction", wx.DefaultPosition, wx.DefaultSize, 0
+        )
         self.move_correction_title_txt.SetToolTip(move_correction_tooltip)
         self.move_correction_title_txt.Wrap(-1)
-        self.move_correction_title_txt.SetFont(wx.Font(wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString))
-        self.move_correction_title_sizer.Add(self.move_correction_title_txt, 0, wx.ALL, 5)
+        self.move_correction_title_txt.SetFont(
+            wx.Font(
+                wx.NORMAL_FONT.GetPointSize(),
+                wx.FONTFAMILY_DEFAULT,
+                wx.FONTSTYLE_NORMAL,
+                wx.FONTWEIGHT_BOLD,
+                False,
+                wx.EmptyString,
+            )
+        )
+        self.move_correction_title_sizer.Add(
+            self.move_correction_title_txt, 0, wx.ALL, 5
+        )
         self.sizer.Add(self.move_correction_title_sizer, 0, wx.ALL, 5)
 
         # 全体移動量補正説明文
-        self.move_correction_description_txt = wx.StaticText(self, wx.ID_ANY, move_correction_tooltip, wx.DefaultPosition, wx.DefaultSize, 0)
+        self.move_correction_description_txt = wx.StaticText(
+            self,
+            wx.ID_ANY,
+            move_correction_tooltip,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            0,
+        )
         self.sizer.Add(self.move_correction_description_txt, 0, wx.ALL, 5)
 
         # 全体移動量補正スライダー
         self.move_correction_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.move_correction_txt = wx.StaticText(self, wx.ID_ANY, u"Move Correction Value", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.move_correction_txt.SetToolTip(u"This is a correction value multiplied by the height ratio. The default is 1 for one person, and for multiple people, the head-to-body ratio is set.")
+        self.move_correction_txt = wx.StaticText(
+            self,
+            wx.ID_ANY,
+            "Move Correction Value",
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            0,
+        )
+        self.move_correction_txt.SetToolTip(
+            "This is a correction value multiplied by the height ratio. The default is 1 for one person, and for multiple people, the head-to-body ratio is set."
+        )
         self.move_correction_txt.Wrap(-1)
         self.move_correction_sizer.Add(self.move_correction_txt, 0, wx.ALL, 5)
 
-        self.move_correction_label = wx.StaticText(self, wx.ID_ANY, u"(1)", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.move_correction_label.SetToolTip(u"The currently specified move correction value.")
+        self.move_correction_label = wx.StaticText(
+            self, wx.ID_ANY, "(1)", wx.DefaultPosition, wx.DefaultSize, 0
+        )
+        self.move_correction_label.SetToolTip(
+            "The currently specified move correction value."
+        )
         self.move_correction_label.Wrap(-1)
         self.move_correction_sizer.Add(self.move_correction_label, 0, wx.ALL, 5)
 
-        self.move_correction_slider = FloatSliderCtrl(self, wx.ID_ANY, 1, 0.5, 1.5, 0.05, self.move_correction_label, wx.DefaultPosition, wx.DefaultSize, wx.SL_HORIZONTAL)
-        self.move_correction_slider.Bind(wx.EVT_SCROLL_CHANGED, self.on_check_move_correction)
-        self.move_correction_sizer.Add(self.move_correction_slider, 1, wx.ALL | wx.EXPAND, 5)
+        self.move_correction_slider = FloatSliderCtrl(
+            self,
+            wx.ID_ANY,
+            1,
+            0.5,
+            1.5,
+            0.05,
+            self.move_correction_label,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.SL_HORIZONTAL,
+        )
+        self.move_correction_slider.Bind(
+            wx.EVT_SCROLL_CHANGED, self.on_check_move_correction
+        )
+        self.move_correction_sizer.Add(
+            self.move_correction_slider, 1, wx.ALL | wx.EXPAND, 5
+        )
 
         self.sizer.Add(self.move_correction_sizer, 0, wx.ALL | wx.EXPAND, 5)
 
-        self.static_line01 = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL)
+        self.static_line01 = wx.StaticLine(
+            self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL
+        )
         self.sizer.Add(self.static_line01, 0, wx.EXPAND | wx.ALL, 5)
 
         # オフセット値
@@ -72,67 +121,123 @@ class LegPanel(BasePanel):
         self.leg_offset_title_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # 足ＩＫオフセットタイトル
-        self.leg_offset_title_txt = wx.StaticText(self, wx.ID_ANY, u"Leg IK Offset", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.leg_offset_title_txt = wx.StaticText(
+            self, wx.ID_ANY, "Leg IK Offset", wx.DefaultPosition, wx.DefaultSize, 0
+        )
         self.leg_offset_title_txt.SetToolTip(leg_offset_tooltip)
         self.leg_offset_title_txt.Wrap(-1)
-        self.leg_offset_title_txt.SetFont(wx.Font(wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString))
+        self.leg_offset_title_txt.SetFont(
+            wx.Font(
+                wx.NORMAL_FONT.GetPointSize(),
+                wx.FONTFAMILY_DEFAULT,
+                wx.FONTSTYLE_NORMAL,
+                wx.FONTWEIGHT_BOLD,
+                False,
+                wx.EmptyString,
+            )
+        )
         self.leg_offset_title_sizer.Add(self.leg_offset_title_txt, 0, wx.ALL, 5)
         self.sizer.Add(self.leg_offset_title_sizer, 0, wx.ALL, 5)
 
         # 足ＩＫオフセット説明文
-        self.leg_offset_description_txt = wx.StaticText(self, wx.ID_ANY, leg_offset_tooltip, wx.DefaultPosition, wx.DefaultSize, 0)
+        self.leg_offset_description_txt = wx.StaticText(
+            self, wx.ID_ANY, leg_offset_tooltip, wx.DefaultPosition, wx.DefaultSize, 0
+        )
         self.sizer.Add(self.leg_offset_description_txt, 0, wx.ALL, 5)
 
         self.leg_offset_target_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # オフセット値指定
-        self.leg_offset_target_txt_ctrl = wx.TextCtrl(self, wx.ID_ANY, "", wx.DefaultPosition, (450, 80), wx.HSCROLL | wx.VSCROLL | wx.TE_MULTILINE | wx.TE_READONLY)
-        self.leg_offset_target_txt_ctrl.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT))
-        self.leg_offset_target_sizer.Add(self.leg_offset_target_txt_ctrl, 1, wx.EXPAND | wx.ALL, 5)
+        self.leg_offset_target_txt_ctrl = wx.TextCtrl(
+            self,
+            wx.ID_ANY,
+            "",
+            wx.DefaultPosition,
+            (450, 80),
+            wx.HSCROLL | wx.VSCROLL | wx.TE_MULTILINE | wx.TE_READONLY,
+        )
+        self.leg_offset_target_txt_ctrl.SetBackgroundColour(
+            wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT)
+        )
+        self.leg_offset_target_sizer.Add(
+            self.leg_offset_target_txt_ctrl, 1, wx.EXPAND | wx.ALL, 5
+        )
 
-        self.leg_offset_target_btn_ctrl = wx.Button(self, wx.ID_ANY, u"Specify Offset", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.leg_offset_target_btn_ctrl.SetToolTip(u"You can specify the Leg IK offset value of the target model")
-        self.leg_offset_target_btn_ctrl.Bind(wx.EVT_BUTTON, self.on_click_leg_offset_target)
-        self.leg_offset_target_sizer.Add(self.leg_offset_target_btn_ctrl, 0, wx.ALIGN_BOTTOM | wx.ALL, 5)
+        self.leg_offset_target_btn_ctrl = wx.Button(
+            self, wx.ID_ANY, "Specify Offset", wx.DefaultPosition, wx.DefaultSize, 0
+        )
+        self.leg_offset_target_btn_ctrl.SetToolTip(
+            "You can specify the Leg IK offset value of the target model"
+        )
+        self.leg_offset_target_btn_ctrl.Bind(
+            wx.EVT_BUTTON, self.on_click_leg_offset_target
+        )
+        self.leg_offset_target_sizer.Add(
+            self.leg_offset_target_btn_ctrl, 0, wx.ALIGN_BOTTOM | wx.ALL, 5
+        )
 
         self.sizer.Add(self.leg_offset_target_sizer, 0, wx.ALL, 0)
 
-        self.static_line03 = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL)
+        self.static_line03 = wx.StaticLine(
+            self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL
+        )
         self.sizer.Add(self.static_line03, 0, wx.EXPAND | wx.ALL, 5)
 
         self.fit()
-        
+
     def get_leg_offsets(self):
         if len(self.bulk_leg_offset_set_dict.keys()) > 0:
             # Bulk用データがある場合、優先返還
             return self.bulk_leg_offset_set_dict
 
         target = {}
-        
+
         # 選択されたオフセット値を入力欄に設定(ハッシュが同じ場合のみ)
-        if 1 in self.leg_offset_set_dict and self.leg_offset_set_dict[1].leg_offset_slider:
-            if self.leg_offset_set_dict[1].equal_hashdigest(self.frame.file_panel_ctrl.file_set):
+        if (
+            1 in self.leg_offset_set_dict
+            and self.leg_offset_set_dict[1].leg_offset_slider
+        ):
+            if self.leg_offset_set_dict[1].equal_hashdigest(
+                self.frame.file_panel_ctrl.file_set
+            ):
                 target[0] = self.leg_offset_set_dict[1].leg_offset_slider.GetValue()
             else:
-                logger.warning("No.%s: Leg IK offset settings cleared because the file set was changed after setting Leg IK offset.", 1, decoration=MLogger.DECORATION_BOX)
+                logger.warning(
+                    "No.%s: Leg IK offset settings cleared because the file set was changed after setting Leg IK offset.",
+                    1,
+                    decoration=MLogger.DECORATION_BOX,
+                )
 
         for set_no in list(self.leg_offset_set_dict.keys())[1:]:
-            if set_no in self.leg_offset_set_dict and self.leg_offset_set_dict[set_no].leg_offset_slider:
-                if len(self.frame.multi_panel_ctrl.file_set_list) >= set_no - 1 and self.leg_offset_set_dict[set_no].equal_hashdigest(self.frame.multi_panel_ctrl.file_set_list[set_no - 2]):
-                    target[set_no - 1] = self.leg_offset_set_dict[set_no].leg_offset_slider.GetValue()
+            if (
+                set_no in self.leg_offset_set_dict
+                and self.leg_offset_set_dict[set_no].leg_offset_slider
+            ):
+                if len(
+                    self.frame.multi_panel_ctrl.file_set_list
+                ) >= set_no - 1 and self.leg_offset_set_dict[set_no].equal_hashdigest(
+                    self.frame.multi_panel_ctrl.file_set_list[set_no - 2]
+                ):
+                    target[set_no - 1] = self.leg_offset_set_dict[
+                        set_no
+                    ].leg_offset_slider.GetValue()
                 else:
-                    logger.warning("No.%s: Leg IK offset settings cleared because the file set was changed after setting Leg IK offset.", set_no, decoration=MLogger.DECORATION_BOX)
+                    logger.warning(
+                        "No.%s: Leg IK offset settings cleared because the file set was changed after setting Leg IK offset.",
+                        set_no,
+                        decoration=MLogger.DECORATION_BOX,
+                    )
 
         return target
-    
+
     def on_click_leg_offset_target(self, event: wx.Event):
         if self.leg_offset_dialog.ShowModal() == wx.ID_CANCEL:
-            return     # the user changed their mind
+            return  # the user changed their mind
 
         self.show_leg_offset()
 
         self.leg_offset_dialog.Hide()
-    
+
     def show_leg_offset(self):
         # 一旦クリア
         self.leg_offset_target_txt_ctrl.SetValue("")
@@ -141,17 +246,20 @@ class LegPanel(BasePanel):
         texts = []
         for set_no, set_data in self.leg_offset_set_dict.items():
             # 選択肢ごとの表示文言
-            texts.append("No.{0}: {1}".format(set_no, set_data.leg_offset_slider.GetValue()))
+            texts.append(
+                "No.{0}: {1}".format(set_no, set_data.leg_offset_slider.GetValue())
+            )
 
         self.leg_offset_target_txt_ctrl.WriteText(" / ".join(texts))
 
     def initialize(self, event: wx.Event):
-
         if 1 in self.leg_offset_set_dict:
             # ファイルタブ用足ＩＫオフセットのファイルセットがある場合
             if self.frame.file_panel_ctrl.file_set.is_loaded():
                 # 既にある場合、ハッシュチェック
-                if self.leg_offset_set_dict[1].equal_hashdigest(self.frame.file_panel_ctrl.file_set):
+                if self.leg_offset_set_dict[1].equal_hashdigest(
+                    self.frame.file_panel_ctrl.file_set
+                ):
                     # 同じである場合、スルー
                     pass
                 else:
@@ -163,15 +271,19 @@ class LegPanel(BasePanel):
         else:
             # 空から作る場合、ファイルタブのファイルセット参照
             self.add_set(1, self.frame.file_panel_ctrl.file_set, replace=False)
-        
+
         # multiはあるだけ調べる
-        for multi_file_set_idx, multi_file_set in enumerate(self.frame.multi_panel_ctrl.file_set_list):
+        for multi_file_set_idx, multi_file_set in enumerate(
+            self.frame.multi_panel_ctrl.file_set_list
+        ):
             set_no = multi_file_set_idx + 2
             if set_no in self.leg_offset_set_dict:
                 # 複数タブ用足ＩＫオフセットのファイルセットがある場合
                 if multi_file_set.is_loaded():
                     # 既にある場合、ハッシュチェック
-                    if self.leg_offset_set_dict[set_no].equal_hashdigest(multi_file_set):
+                    if self.leg_offset_set_dict[set_no].equal_hashdigest(
+                        multi_file_set
+                    ):
                         # 同じである場合、スルー
                         pass
                     else:
@@ -196,7 +308,7 @@ class LegPanel(BasePanel):
         # multiのも出力ファイルパス自動生成（空の場合設定）
         for file_set in self.frame.multi_panel_ctrl.file_set_list:
             file_set.set_output_vmd_path(event)
-    
+
     def on_check_move_correction(self, event: wx.Event):
         # パス再生成
         self.set_output_vmd_path(event)
@@ -204,43 +316,89 @@ class LegPanel(BasePanel):
         event.Skip()
 
     def add_set(self, set_idx: int, file_set: SizingFileSet, replace: bool):
-        new_leg_offset_set = LegOffsetSet(self.frame, self, self.leg_offset_dialog.scrolled_window, set_idx, file_set)
+        new_leg_offset_set = LegOffsetSet(
+            self.frame, self, self.leg_offset_dialog.scrolled_window, set_idx, file_set
+        )
         if replace:
             # 置き換え
-            self.leg_offset_dialog.set_list_sizer.Hide(self.leg_offset_set_dict[set_idx].set_sizer, recursive=True)
-            self.leg_offset_dialog.set_list_sizer.Replace(self.leg_offset_set_dict[set_idx].set_sizer, new_leg_offset_set.set_sizer, recursive=True)
+            self.leg_offset_dialog.set_list_sizer.Hide(
+                self.leg_offset_set_dict[set_idx].set_sizer, recursive=True
+            )
+            self.leg_offset_dialog.set_list_sizer.Replace(
+                self.leg_offset_set_dict[set_idx].set_sizer,
+                new_leg_offset_set.set_sizer,
+                recursive=True,
+            )
 
             # 置き換えの場合、オフセット値クリア
             self.leg_offset_target_txt_ctrl.SetValue("")
         else:
             # 新規追加
-            self.leg_offset_dialog.set_list_sizer.Add(new_leg_offset_set.set_sizer, 0, wx.EXPAND | wx.ALL, 5)
+            self.leg_offset_dialog.set_list_sizer.Add(
+                new_leg_offset_set.set_sizer, 0, wx.EXPAND | wx.ALL, 5
+            )
         self.leg_offset_set_dict[set_idx] = new_leg_offset_set
 
         # スクロールバーの表示のためにサイズ調整
         self.leg_offset_dialog.set_list_sizer.Layout()
-        self.leg_offset_dialog.set_list_sizer.FitInside(self.leg_offset_dialog.scrolled_window)
+        self.leg_offset_dialog.set_list_sizer.FitInside(
+            self.leg_offset_dialog.scrolled_window
+        )
 
 
-class LegOffsetSet():
-
-    def __init__(self, frame: wx.Frame, panel: wx.Panel, window: wx.Window, set_idx: int, file_set: SizingFileSet):
+class LegOffsetSet:
+    def __init__(
+        self,
+        frame: wx.Frame,
+        panel: wx.Panel,
+        window: wx.Window,
+        set_idx: int,
+        file_set: SizingFileSet,
+    ):
         self.frame = frame
         self.panel = panel
         self.window = window
         self.set_idx = set_idx
         self.file_set = file_set
-        self.rep_model_digest = 0 if not file_set.rep_model_file_ctrl.data else file_set.rep_model_file_ctrl.data.digest
+        self.rep_model_digest = (
+            0
+            if not file_set.rep_model_file_ctrl.data
+            else file_set.rep_model_file_ctrl.data.digest
+        )
 
-        self.set_sizer = wx.StaticBoxSizer(wx.StaticBox(self.window, wx.ID_ANY, "No.{0} {1}".format(set_idx, file_set.rep_model_file_ctrl.data.name[:20])), orient=wx.VERTICAL)
-        
+        self.set_sizer = wx.StaticBoxSizer(
+            wx.StaticBox(
+                self.window,
+                wx.ID_ANY,
+                "No.{0} {1}".format(
+                    set_idx, file_set.rep_model_file_ctrl.data.name[:20]
+                ),
+            ),
+            orient=wx.VERTICAL,
+        )
+
         # 足ＩＫオフセット値
-        self.leg_offset_label = wx.StaticText(self.window, wx.ID_ANY, "(0)", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.leg_offset_label.SetToolTip(u"The currently specified Leg IK offset value. This value is actually added to Leg IK (considering direction).")
+        self.leg_offset_label = wx.StaticText(
+            self.window, wx.ID_ANY, "(0)", wx.DefaultPosition, wx.DefaultSize, 0
+        )
+        self.leg_offset_label.SetToolTip(
+            "The currently specified Leg IK offset value. This value is actually added to Leg IK (considering direction)."
+        )
         self.leg_offset_label.Wrap(-1)
         self.set_sizer.Add(self.leg_offset_label, 0, wx.ALL, 5)
 
-        self.leg_offset_slider = FloatSliderCtrl(self.window, wx.ID_ANY, 0, -2, 2, 0.05, self.leg_offset_label, wx.DefaultPosition, wx.DefaultSize, wx.SL_HORIZONTAL)
+        self.leg_offset_slider = FloatSliderCtrl(
+            self.window,
+            wx.ID_ANY,
+            0,
+            -2,
+            2,
+            0.05,
+            self.leg_offset_label,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.SL_HORIZONTAL,
+        )
         self.set_sizer.Add(self.leg_offset_slider, 1, wx.ALL | wx.EXPAND, 5)
 
     # 現在のファイルセットのハッシュと同じであるかチェック
@@ -249,15 +407,29 @@ class LegOffsetSet():
 
 
 class LegOffsetDialog(wx.Dialog):
-
     def __init__(self, parent):
-        super().__init__(parent, id=wx.ID_ANY, title="Specify Leg IK Offset", pos=(-1, -1), size=(800, 500), style=wx.DEFAULT_DIALOG_STYLE, name="LegOffsetDialog")
+        super().__init__(
+            parent,
+            id=wx.ID_ANY,
+            title="Specify Leg IK Offset",
+            pos=(-1, -1),
+            size=(800, 500),
+            style=wx.DEFAULT_DIALOG_STYLE,
+            name="LegOffsetDialog",
+        )
 
         self.sizer = wx.BoxSizer(wx.VERTICAL)
 
         # 説明文
-        self.description_txt = wx.StaticText(self, wx.ID_ANY, u"You can set the movement offset for Leg IK. This value is actually added to Leg IK (considering direction).\n" \
-                                             + u"For multi-person motions, specifying a large offset may break the formation.\n" , wx.DefaultPosition, wx.DefaultSize, 0)
+        self.description_txt = wx.StaticText(
+            self,
+            wx.ID_ANY,
+            "You can set the movement offset for Leg IK. This value is actually added to Leg IK (considering direction).\n"
+            + "For multi-person motions, specifying a large offset may break the formation.\n",
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            0,
+        )
         self.sizer.Add(self.description_txt, 0, wx.ALL, 5)
 
         # ボタン
@@ -269,11 +441,18 @@ class LegOffsetDialog(wx.Dialog):
         self.btn_sizer.Add(self.calcel_btn, 0, wx.ALL, 5)
         self.sizer.Add(self.btn_sizer, 0, wx.ALL, 5)
 
-        self.static_line01 = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL)
+        self.static_line01 = wx.StaticLine(
+            self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL
+        )
         self.sizer.Add(self.static_line01, 0, wx.EXPAND | wx.ALL, 5)
 
-        self.scrolled_window = wx.ScrolledWindow(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, \
-                                                 wx.FULL_REPAINT_ON_RESIZE | wx.VSCROLL | wx.ALWAYS_SHOW_SB)
+        self.scrolled_window = wx.ScrolledWindow(
+            self,
+            wx.ID_ANY,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.FULL_REPAINT_ON_RESIZE | wx.VSCROLL | wx.ALWAYS_SHOW_SB,
+        )
         self.scrolled_window.SetScrollRate(5, 5)
 
         # 足ＩＫオフセットセット用基本Sizer
@@ -285,9 +464,9 @@ class LegOffsetDialog(wx.Dialog):
         self.sizer.Add(self.scrolled_window, 1, wx.ALL | wx.EXPAND, 5)
         self.SetSizer(self.sizer)
         self.sizer.Layout()
-        
+
         # 画面中央に表示
         self.CentreOnScreen()
-        
+
         # 最初は隠しておく
         self.Hide()

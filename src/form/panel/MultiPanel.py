@@ -5,38 +5,62 @@ import wx.lib.newevent
 
 from form.panel.BasePanel import BasePanel
 from form.parts.SizingFileSet import SizingFileSet
-from module.MMath import MRect, MVector3D, MVector4D, MQuaternion, MMatrix4x4 # noqa
-from utils import MFileUtils # noqa
-from utils.MLogger import MLogger # noqa
+from module.MMath import MRect, MVector3D, MVector4D, MQuaternion, MMatrix4x4  # noqa
+from utils import MFileUtils  # noqa
+from utils.MLogger import MLogger  # noqa
 
 logger = MLogger(__name__)
 
 
 class MultiPanel(BasePanel):
-    
-    def __init__(self, frame: wx.Frame, parent: wx.Notebook, tab_idx: int, file_hitories: dict):
+    def __init__(
+        self, frame: wx.Frame, parent: wx.Notebook, tab_idx: int, file_hitories: dict
+    ):
         super().__init__(frame, parent, tab_idx)
         self.file_hitories = file_hitories
 
-        self.header_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
+        self.header_panel = wx.Panel(
+            self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL
+        )
         self.header_sizer = wx.BoxSizer(wx.VERTICAL)
 
-        self.description_txt = wx.StaticText(self.header_panel, wx.ID_ANY, "You can size multi-person motions by matching ratios. Specify from the second person onward." \
-                                             + "\nSince the scale is forcibly changed, legs and other parts may deviate from the original motion." \
-                                             + "\nIf you accidentally add a file set, please clear all four file fields.", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.description_txt = wx.StaticText(
+            self.header_panel,
+            wx.ID_ANY,
+            "You can size multi-person motions by matching ratios. Specify from the second person onward."
+            + "\nSince the scale is forcibly changed, legs and other parts may deviate from the original motion."
+            + "\nIf you accidentally add a file set, please clear all four file fields.",
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            0,
+        )
         self.header_sizer.Add(self.description_txt, 0, wx.ALL, 5)
 
         self.btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # ファイルセットクリアボタン
-        self.clear_btn_ctrl = wx.Button(self.header_panel, wx.ID_ANY, u"Clear File Set", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.clear_btn_ctrl.SetToolTip(u"Clears all entered data.")
+        self.clear_btn_ctrl = wx.Button(
+            self.header_panel,
+            wx.ID_ANY,
+            "Clear File Set",
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            0,
+        )
+        self.clear_btn_ctrl.SetToolTip("Clears all entered data.")
         self.clear_btn_ctrl.Bind(wx.EVT_BUTTON, self.on_clear_set)
         self.btn_sizer.Add(self.clear_btn_ctrl, 0, wx.ALL, 5)
 
         # ファイルセット追加ボタン
-        self.add_btn_ctrl = wx.Button(self.header_panel, wx.ID_ANY, u"Add File Set", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.add_btn_ctrl.SetToolTip(u"Adds a file set panel required for sizing.")
+        self.add_btn_ctrl = wx.Button(
+            self.header_panel,
+            wx.ID_ANY,
+            "Add File Set",
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            0,
+        )
+        self.add_btn_ctrl.SetToolTip("Adds a file set panel required for sizing.")
         self.add_btn_ctrl.Bind(wx.EVT_BUTTON, self.on_add_set)
         self.btn_sizer.Add(self.add_btn_ctrl, 0, wx.ALL, 5)
 
@@ -49,9 +73,14 @@ class MultiPanel(BasePanel):
         self.file_set_list = []
         # ファイルセット用基本Sizer
         self.set_base_sizer = wx.BoxSizer(wx.VERTICAL)
-        
-        self.scrolled_window = MultiFileSetScrolledWindow(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, \
-                                                          wx.FULL_REPAINT_ON_RESIZE | wx.VSCROLL | wx.ALWAYS_SHOW_SB)
+
+        self.scrolled_window = MultiFileSetScrolledWindow(
+            self,
+            wx.ID_ANY,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.FULL_REPAINT_ON_RESIZE | wx.VSCROLL | wx.ALWAYS_SHOW_SB,
+        )
         # self.scrolled_window.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT))
         # self.scrolled_window.SetBackgroundColour("BLUE")
         self.scrolled_window.SetScrollRate(5, 5)
@@ -59,19 +88,31 @@ class MultiPanel(BasePanel):
 
         self.scrolled_window.SetSizer(self.set_base_sizer)
         self.scrolled_window.Layout()
-        self.sizer.Add(self.scrolled_window, 1, wx.ALL | wx.EXPAND | wx.FIXED_MINSIZE, 5)
+        self.sizer.Add(
+            self.scrolled_window, 1, wx.ALL | wx.EXPAND | wx.FIXED_MINSIZE, 5
+        )
         self.fit()
 
     def on_add_set(self, event: wx.Event):
-        self.file_set_list.append(SizingFileSet(self.frame, self.scrolled_window, self.file_hitories, len(self.file_set_list) + 2))
+        self.file_set_list.append(
+            SizingFileSet(
+                self.frame,
+                self.scrolled_window,
+                self.file_hitories,
+                len(self.file_set_list) + 2,
+            )
+        )
         self.set_base_sizer.Add(self.file_set_list[-1].set_sizer, 0, wx.ALL, 5)
         self.set_base_sizer.Layout()
-        
+
         # スクロールバーの表示のためにサイズ調整
         self.sizer.Layout()
         # self.sizer.FitInside(self.scrolled_window)
 
-        if self.frame.arm_panel_ctrl.arm_alignment_finger_flg_ctrl.GetValue() and len(self.file_set_list) > 0:
+        if (
+            self.frame.arm_panel_ctrl.arm_alignment_finger_flg_ctrl.GetValue()
+            and len(self.file_set_list) > 0
+        ):
             self.frame.on_popup_finger_warning(event)
 
         event.Skip()
@@ -95,12 +136,10 @@ class MultiPanel(BasePanel):
 class MultiFileSetScrolledWindow(wx.ScrolledWindow):
     def __init__(self, *args, **kw):
         super().__init__(*args, **kw)
-    
+
     def set_file_set_list(self, file_set_list):
         self.file_set_list = file_set_list
 
     def set_output_vmd_path(self, event, is_force=False):
         for file_set in self.file_set_list:
             file_set.set_output_vmd_path(event, is_force)
-
-        

@@ -15,4 +15,3 @@ class MParseException(SizingException):
 class MKilledException(SizingException):
     def __init__(self):
         self.message = None
-

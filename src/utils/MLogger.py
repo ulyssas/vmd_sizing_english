@@ -11,8 +11,7 @@ import cython
 from utils.MException import MKilledException
 
 
-class MLogger():
-
+class MLogger:
     DECORATION_IN_BOX = "in_box"
     DECORATION_BOX = "box"
     DECORATION_LINE = "line"
@@ -24,16 +23,16 @@ class MLogger():
     FULL = 15
     DEBUG_INFO = 16
     INFO_DEBUG = 22
-    DEBUG = logging.DEBUG       # 10
-    INFO = logging.INFO         # 20
+    DEBUG = logging.DEBUG  # 10
+    INFO = logging.INFO  # 20
     WARNING = logging.WARNING
     ERROR = logging.ERROR
     CRITICAL = logging.CRITICAL
-    
+
     total_level = logging.INFO
     is_file = False
     outout_datetime = ""
-    
+
     logger = None
 
     def __init__(self, module_name, level=logging.INFO):
@@ -64,7 +63,7 @@ class MLogger():
     def time(self, msg, *args, **kwargs):
         if not kwargs:
             kwargs = {}
-            
+
         kwargs["level"] = self.TIMER
         kwargs["time"] = True
         self.print_logger(msg, *args, **kwargs)
@@ -72,7 +71,7 @@ class MLogger():
     def info_debug(self, msg, *args, **kwargs):
         if not kwargs:
             kwargs = {}
-            
+
         kwargs["level"] = self.INFO_DEBUG
         kwargs["time"] = True
         self.print_logger(msg, *args, **kwargs)
@@ -80,7 +79,7 @@ class MLogger():
     def debug_info(self, msg, *args, **kwargs):
         if not kwargs:
             kwargs = {}
-            
+
         kwargs["level"] = self.DEBUG_INFO
         kwargs["time"] = True
         self.print_logger(msg, *args, **kwargs)
@@ -92,19 +91,19 @@ class MLogger():
         kwargs["level"] = self.TEST
         kwargs["time"] = True
         self.print_logger(msg, *args, **kwargs)
-    
+
     def debug(self, msg, *args, **kwargs):
         if not kwargs:
             kwargs = {}
-            
+
         kwargs["level"] = logging.DEBUG
         kwargs["time"] = True
         self.print_logger(msg, *args, **kwargs)
-    
+
     def info(self, msg, *args, **kwargs):
         if not kwargs:
             kwargs = {}
-            
+
         kwargs["level"] = logging.INFO
         self.print_logger(msg, *args, **kwargs)
 
@@ -114,50 +113,53 @@ class MLogger():
 
         if fnos and len(fnos) > 0 and fnos[-1] > 0:
             last_fno = fnos[-1]
-        
+
         if not fnos and kwargs and "last_fno" in kwargs and kwargs["last_fno"] > 0:
             last_fno = kwargs["last_fno"]
 
         if last_fno > 0:
             if not kwargs:
                 kwargs = {}
-                
+
             kwargs["level"] = logging.INFO
-            log_msg = "-- {0}フレーム目:終了({1}％){2}".format(fno, round((fno / last_fno) * 100, 3), msg)
+            log_msg = "-- {0}フレーム目:終了({1}％){2}".format(
+                fno, round((fno / last_fno) * 100, 3), msg
+            )
             self.print_logger(log_msg, *args, **kwargs)
 
     def warning(self, msg, *args, **kwargs):
         if not kwargs:
             kwargs = {}
-            
+
         kwargs["level"] = logging.WARNING
         self.print_logger(msg, *args, **kwargs)
 
     def error(self, msg, *args, **kwargs):
         if not kwargs:
             kwargs = {}
-            
+
         kwargs["level"] = logging.ERROR
         self.print_logger(msg, *args, **kwargs)
 
     def critical(self, msg, *args, **kwargs):
         if not kwargs:
             kwargs = {}
-            
+
         kwargs["level"] = logging.CRITICAL
         self.print_logger(msg, *args, **kwargs)
 
     # 実際に出力する実態
     def print_logger(self, msg, *args, **kwargs):
-
-        if "is_killed" in threading.current_thread()._kwargs and threading.current_thread()._kwargs["is_killed"]:
+        if (
+            "is_killed" in threading.current_thread()._kwargs
+            and threading.current_thread()._kwargs["is_killed"]
+        ):
             # 停止命令が出ている場合、エラー
             raise MKilledException()
 
         target_level = kwargs.pop("level", logging.INFO)
         # if self.logger.isEnabledFor(target_level) and self.default_level <= target_level:
         if self.total_level <= target_level and self.default_level <= target_level:
-
             if self.is_file:
                 for f in self.logger.handlers:
                     if isinstance(f, logging.FileHandler):
@@ -166,7 +168,9 @@ class MLogger():
 
                 # ファイル出力ありの場合、ハンドラ紐付け
                 # ファイル出力ハンドラ
-                fh = logging.FileHandler("log/VmdSizing_{0}.log".format(self.outout_datetime))
+                fh = logging.FileHandler(
+                    "log/VmdSizing_{0}.log".format(self.outout_datetime)
+                )
                 fh.setLevel(self.default_level)
                 fh.setFormatter(logging.Formatter(self.DEFAULT_FORMAT))
                 self.logger.addHandler(fh)
@@ -176,38 +180,79 @@ class MLogger():
             extra_args["module_name"] = self.module_name
 
             # ログレコード生成
-            if args and isinstance(args[0], Exception) or (args and len(args) > 1 and isinstance(args[0], Exception)):
-                log_record = self.logger.makeRecord('name', target_level, "(unknown file)", 0, "{0}\n\n{1}".format(msg, traceback.format_exc()), None, None, self.module_name)
+            if (
+                args
+                and isinstance(args[0], Exception)
+                or (args and len(args) > 1 and isinstance(args[0], Exception))
+            ):
+                log_record = self.logger.makeRecord(
+                    "name",
+                    target_level,
+                    "(unknown file)",
+                    0,
+                    "{0}\n\n{1}".format(msg, traceback.format_exc()),
+                    None,
+                    None,
+                    self.module_name,
+                )
             else:
-                log_record = self.logger.makeRecord('name', target_level, "(unknown file)", 0, msg, args, None, self.module_name)
-            
+                log_record = self.logger.makeRecord(
+                    "name",
+                    target_level,
+                    "(unknown file)",
+                    0,
+                    msg,
+                    args,
+                    None,
+                    self.module_name,
+                )
+
             target_decoration = kwargs.pop("decoration", None)
             title = kwargs.pop("title", None)
             is_time = kwargs.pop("time", None)
 
             if is_time:
                 # 時間表記が必要な場合、表記追加
-                print_msg = "{message} [{funcName}]({now:%H:%M:%S.%f})".format(message=log_record.getMessage(), funcName=self.module_name, now=datetime.now())
+                print_msg = "{message} [{funcName}]({now:%H:%M:%S.%f})".format(
+                    message=log_record.getMessage(),
+                    funcName=self.module_name,
+                    now=datetime.now(),
+                )
             else:
                 print_msg = "{message}".format(message=log_record.getMessage())
-            
+
             if target_decoration:
                 if target_decoration == MLogger.DECORATION_BOX:
                     output_msg = self.create_box_message(print_msg, target_level, title)
                 elif target_decoration == MLogger.DECORATION_LINE:
-                    output_msg = self.create_line_message(print_msg, target_level, title)
+                    output_msg = self.create_line_message(
+                        print_msg, target_level, title
+                    )
                 elif target_decoration == MLogger.DECORATION_IN_BOX:
-                    output_msg = self.create_in_box_message(print_msg, target_level, title)
+                    output_msg = self.create_in_box_message(
+                        print_msg, target_level, title
+                    )
                 else:
-                    output_msg = self.create_simple_message(print_msg, target_level, title)
+                    output_msg = self.create_simple_message(
+                        print_msg, target_level, title
+                    )
             else:
                 output_msg = self.create_simple_message(print_msg, target_level, title)
-        
+
             # 出力
             try:
                 if self.child or self.is_file:
                     # 子スレッドの場合はレコードを再生成してでコンソールとGUI両方出力
-                    log_record = self.logger.makeRecord('name', target_level, "(unknown file)", 0, output_msg, None, None, self.module_name)
+                    log_record = self.logger.makeRecord(
+                        "name",
+                        target_level,
+                        "(unknown file)",
+                        0,
+                        output_msg,
+                        None,
+                        None,
+                        self.module_name,
+                    )
                     self.logger.handle(log_record)
                 else:
                     # サイジングスレッドは、printとloggerで分けて出力
@@ -215,7 +260,7 @@ class MLogger():
                     self.logger.handle(log_record)
             except Exception as e:
                 raise e
-            
+
     def create_box_message(self, msg, level, title=None):
         msg_block = []
         msg_block.append("■■■■■■■■■■■■■■■■■")
@@ -257,11 +302,11 @@ class MLogger():
 
     def create_simple_message(self, msg, level, title=None):
         msg_block = []
-        
+
         for msg_line in msg.split("\n"):
             # msg_block.append("[{0}] {1}".format(logging.getLevelName(level)[0], msg_line))
             msg_block.append(msg_line)
-        
+
         return "\n".join(msg_block)
 
     @classmethod
@@ -276,5 +321,3 @@ class MLogger():
 @cython.ccall
 def print_message(msg: str, target_level: int):
     sys.stdout.write(msg + "\n", (target_level < MLogger.INFO))
-
-

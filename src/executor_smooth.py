@@ -19,7 +19,7 @@ multiprocessing.freeze_support()
 
 if __name__ == "__main__":
     if os.name == "nt":
-        import winsound     # Windows版のみインポート
+        import winsound  # Windows版のみインポート
 
     # 引数指定がある場合、コマンドライン実行
     try:

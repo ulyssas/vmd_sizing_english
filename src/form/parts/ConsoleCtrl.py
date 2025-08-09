@@ -2,14 +2,24 @@
 #
 
 import wx
-from utils.MLogger import MLogger # noqa
+from utils.MLogger import MLogger  # noqa
 
 logger = MLogger(__name__)
 
 
 class ConsoleCtrl(wx.TextCtrl):
-
-    def __init__(self, parent, logging_level, id=wx.ID_ANY, value="", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0, validator=wx.DefaultValidator, name=wx.TextCtrlNameStr):
+    def __init__(
+        self,
+        parent,
+        logging_level,
+        id=wx.ID_ANY,
+        value="",
+        pos=wx.DefaultPosition,
+        size=wx.DefaultSize,
+        style=0,
+        validator=wx.DefaultValidator,
+        name=wx.TextCtrlNameStr,
+    ):
         super().__init__(parent, id, value, pos, size, style, validator, name)
         self.limit_cnt = 10
 
@@ -32,7 +42,7 @@ class ConsoleCtrl(wx.TextCtrl):
                 wx.CallAfter(self.AppendText, self.texts)
                 self.texts = ""
 
-        except: # noqa
+        except:  # noqa
             pass
 
     # def monitor(self, queue):
@@ -41,4 +51,3 @@ class ConsoleCtrl(wx.TextCtrl):
     #         wx.CallAfter(queue.get())
     #         # 0.1秒待機
     #         time.sleep(0.1)
-
