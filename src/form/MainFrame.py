@@ -30,6 +30,12 @@ logger = MLogger(__name__)
 (SizingThreadEvent, EVT_SIZING_THREAD) = wx.lib.newevent.NewEvent()
 (LoadThreadEvent, EVT_LOAD_THREAD) = wx.lib.newevent.NewEvent()
 
+# HIDPI対応 (may be removed)
+import ctypes
+try:
+    ctypes.windll.shcore.SetProcessDpiAwareness(True)
+except:
+    pass
 
 class MainFrame(wx.Frame):
     def __init__(
