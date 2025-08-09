@@ -2,18 +2,18 @@
 #
 
 import glob
+import logging
 import os
 import re
+
 import wx
-import logging
+
 from mmd.PmxReader import PmxReader
 from mmd.VmdReader import VmdReader
 from mmd.VpdReader import VpdReader
 from utils import MFileUtils
-from utils.MException import SizingException
+from utils.MException import MKilledException, SizingException
 from utils.MLogger import MLogger  # noqa
-from utils.MException import MKilledException
-
 
 logger = MLogger(__name__)
 
@@ -24,10 +24,10 @@ class BaseFilePickerCtrl:
         (
             "vmd",
             "vpd",
-        ): "VMD/VPDファイル (*.vmd, *.vpd)|*.vmd;*.vpd|すべてのファイル (*.*)|*.*",
-        ("pmx"): "PMXファイル (*.pmx)|*.pmx|すべてのファイル (*.*)|*.*",
-        ("vmd"): "VMDファイル (*.vmd)|*.vmd|すべてのファイル (*.*)|*.*",
-        ("csv"): "CSVファイル (*.csv)|*.csv|すべてのファイル (*.*)|*.*",
+        ): "VMD/VPD Files (*.vmd, *.vpd)|*.vmd;*.vpd|All Files (*.*)|*.*",
+        ("pmx"): "PMX Files (*.pmx)|*.pmx|All Files (*.*)|*.*",
+        ("vmd"): "VMD Files (*.vmd)|*.vmd|All Files (*.*)|*.*",
+        ("csv"): "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*",
     }
 
     def __init__(
@@ -117,7 +117,7 @@ class BaseFilePickerCtrl:
             wx.DefaultSize,
             style,
         )
-        self.file_ctrl.GetPickerCtrl().SetLabel("開く")
+        self.file_ctrl.GetPickerCtrl().SetLabel("Open")
         self.file_ctrl.SetToolTip(tooltip)
 
         self.file_sizer.Add(self.file_ctrl, 1, wx.ALL | wx.EXPAND, 5)
@@ -226,7 +226,7 @@ class BaseFilePickerCtrl:
 
             if len(file_path_list) == 0:
                 logger.error(
-                    "{0}{1}の条件に合致するファイルが見つかりませんでした。\n入力パス: {2}".format(
+                    "{0}{1} No files matching the conditions were found.\nInput path: {2}".format(
                         display_set_no, self.title, self.file_ctrl.GetPath()
                     ),
                     decoration=MLogger.DECORATION_BOX,
@@ -240,7 +240,7 @@ class BaseFilePickerCtrl:
         if not self.is_save and not os.path.exists(file_path):
             if self.required:
                 logger.error(
-                    "{0}{1}が見つかりませんでした。\n入力パス: {2}".format(
+                    "{0}{1} was not found.\nInput path: {2}".format(
                         display_set_no, self.title, self.file_ctrl.GetPath()
                     ),
                     decoration=MLogger.DECORATION_BOX,
@@ -252,7 +252,7 @@ class BaseFilePickerCtrl:
 
         if not self.is_save and not os.path.isfile(file_path):
             logger.error(
-                "{0}{1}が正常なファイルとして見つかりませんでした。\n入力パス: {2}".format(
+                "{0}{1} was not found as a valid file.\nInput path: {2}".format(
                     display_set_no, self.title, self.file_ctrl.GetPath()
                 ),
                 decoration=MLogger.DECORATION_BOX,
@@ -264,7 +264,7 @@ class BaseFilePickerCtrl:
 
         if ext[1:].lower() not in self.file_type:
             logger.error(
-                "{0}{1}の拡張子が正しくありません。\n入力パス: {2}\n設定可能拡張子: {3}".format(
+                "{0}{1} has an invalid extension.\nInput path: {2}\nAllowed extensions: {3}".format(
                     display_set_no, self.title, self.file_ctrl.GetPath(), self.file_type
                 ),
                 decoration=MLogger.DECORATION_BOX,
@@ -281,7 +281,7 @@ class BaseFilePickerCtrl:
 
         if not os.path.exists(dir_path):
             logger.error(
-                "{0}{1}の親フォルダが見つかりませんでした。\n入力パス: {2}".format(
+                "{0}{1} parent folder was not found.\nInput path: {2}".format(
                     display_set_no, self.title, dir_path
                 ),
                 decoration=MLogger.DECORATION_BOX,
@@ -290,7 +290,7 @@ class BaseFilePickerCtrl:
 
         if not os.path.isdir(dir_path):
             logger.error(
-                "{0}{1}の親フォルダが正常なフォルダとして見つかりませんでした。\n入力パス: {2}".format(
+                "{0}{1} parent folder was not found as a valid folder.\nInput path: {2}".format(
                     display_set_no, self.title, dir_path
                 ),
                 decoration=MLogger.DECORATION_BOX,
@@ -299,7 +299,7 @@ class BaseFilePickerCtrl:
 
         if not os.access(dir_path, os.W_OK):
             logger.error(
-                "{0}{1}の親フォルダに書き込み権限がありません。\n入力パス: {2}".format(
+                "{0}{1} parent folder does not have write permission.\nInput path: {2}".format(
                     display_set_no, self.title, dir_path
                 ),
                 decoration=MLogger.DECORATION_BOX,
@@ -313,7 +313,7 @@ class BaseFilePickerCtrl:
             and not os.access(self.file_ctrl.GetPath(), os.W_OK)
         ):
             logger.error(
-                "{0}{1}に書き込み権限がありません。\n入力パス: {2}".format(
+                "{0}{1} does not have write permission.\nInput path: {2}".format(
                     display_set_no, self.title, self.file_ctrl.GetPath()
                 ),
                 decoration=MLogger.DECORATION_BOX,
@@ -346,7 +346,7 @@ class BaseFilePickerCtrl:
                 # CSVとかのファイルは番号出力なし
                 display_set_no = ""
             else:
-                display_set_no = "【No.{0}】 ".format(self.set_no)
+                display_set_no = "No.{0} ".format(self.set_no)
 
             if self.is_aster and self.set_no == 1:
                 base_file_path = self.file_ctrl.GetPath()
@@ -378,7 +378,7 @@ class BaseFilePickerCtrl:
                 reader = PmxReader(file_path, is_check=is_check)
             else:
                 logger.error(
-                    "%s%s 読み込み失敗(拡張子不正): %s",
+                    "%s%s Loading failed (invalid extension): %s",
                     display_set_no,
                     self.title,
                     os.path.basename(file_path),
@@ -400,7 +400,7 @@ class BaseFilePickerCtrl:
                 self.data = reader.read_data()
 
                 logger.info(
-                    "%s%s 読み込み成功: %s",
+                    "%s%s Loading successful: %s",
                     display_set_no,
                     self.title,
                     os.path.basename(file_path),
@@ -409,7 +409,7 @@ class BaseFilePickerCtrl:
             elif new_data_digest and self.data and self.data.digest == new_data_digest:
                 # ハッシュが同じ場合、そのままスルー
                 logger.info(
-                    "%s%s 読み込み成功: %s",
+                    "%s%s Loading successful: %s",
                     display_set_no,
                     self.title,
                     os.path.basename(file_path),
@@ -417,17 +417,17 @@ class BaseFilePickerCtrl:
                 return True
         except MKilledException:
             logger.warning(
-                "読み込み処理を中断します。", decoration=MLogger.DECORATION_BOX
+                "Loading process interrupted.", decoration=MLogger.DECORATION_BOX
             )
         except SizingException as se:
             logger.error(
-                "サイジング処理が処理できないデータで終了しました。\n\n%s",
+                "Sizing process terminated due to invalid data.\n\n%s",
                 se.message,
                 decoration=MLogger.DECORATION_BOX,
             )
         except Exception as e:
             logger.critical(
-                "サイジング処理が意図せぬエラーで終了しました。",
+                "Sizing process terminated due to an unexpected error.",
                 e,
                 decoration=MLogger.DECORATION_BOX,
             )
@@ -435,7 +435,7 @@ class BaseFilePickerCtrl:
             logging.shutdown()
 
         logger.error(
-            "%s%s 読み込み失敗: %s",
+            "%s%s Loading failed: %s",
             display_set_no,
             self.title,
             os.path.basename(file_path),
@@ -461,7 +461,7 @@ class FileModelCtrl:
         self.txt_ctrl = wx.TextCtrl(
             parent,
             wx.ID_ANY,
-            "（未設定）",
+            "(Not set)",
             wx.DefaultPosition,
             (width, -1),
             wx.TE_READONLY | wx.BORDER_NONE | wx.WANTS_CHARS,
@@ -470,13 +470,13 @@ class FileModelCtrl:
             wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT)
         )
         self.txt_ctrl.SetToolTip(
-            "{0}に記録されているモデル名です。\n文字列は選択＆コピー可能です。".format(
+            "This is the model name recorded in {0}.\nYou can select and copy the string.".format(
                 title
             )
         )
 
     def set_model(self, target_path):
-        self.txt_ctrl.SetValue("（{0}）".format(self.get_model_name()))
+        self.txt_ctrl.SetValue("({0})".format(self.get_model_name()))
 
     # VMDのモデル名取得
     def get_model_name(self):
@@ -492,7 +492,7 @@ class FileModelCtrl:
                     ]
 
                 if len(file_path_list) == 0:
-                    return "取得失敗"
+                    return "Unknown"
 
                 file_path = file_path_list[0]
             else:
@@ -500,7 +500,7 @@ class FileModelCtrl:
 
             file_name, input_ext = os.path.splitext(os.path.basename(file_path))
 
-            model_name = "未設定"
+            model_name = "Not set"
             if input_ext.lower() == ".vmd":
                 reader = VmdReader(file_path)
             elif input_ext.lower() == ".vpd":
@@ -508,20 +508,20 @@ class FileModelCtrl:
             elif input_ext.lower() == ".pmx":
                 reader = PmxReader(file_path)
             else:
-                return "対象外拡張子"
+                return "Not applicable extension"
 
             try:
                 model_name = reader.read_model_name()
             except Exception:
-                model_name = "取得失敗"
+                model_name = "Unknown"
 
             logger.test("model_name: %s, ", model_name)
 
             return model_name
         except Exception as e:
-            logger.test("get_model_name 失敗", e)
+            logger.test("get_model_name Failed", e)
 
-            return "取得失敗"
+            return "Unknown"
 
 
 class MFileDropTarget(wx.FileDropTarget):
@@ -578,7 +578,7 @@ class MFileDropTarget(wx.FileDropTarget):
             display_file_type = ",".join(self.parent.file_type)
 
         logger.error(
-            "{0}の拡張子が正しくありません。\n入力ファイル拡張子: {1}\n設定可能拡張子: {2}".format(
+            "{0} has an invalid extension.\nInput file extension: {1}\nAllowed extensions: {2}".format(
                 self.parent.title, input_ext, display_file_type
             ),
             decoration=MLogger.DECORATION_BOX,

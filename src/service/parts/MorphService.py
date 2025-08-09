@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 #
-import os
 import copy
+import os
 
 from mmd.VmdData import VmdMorphFrame
-from module.MMath import MRect, MVector3D, MVector4D, MQuaternion, MMatrix4x4  # noqa
+from module.MMath import MMatrix4x4, MQuaternion, MRect, MVector3D, MVector4D  # noqa
 from module.MOptions import MOptions, MOptionsDataSet
-from utils import MServiceUtils, MBezierUtils  # noqa
+from utils import MBezierUtils, MServiceUtils  # noqa
+from utils.MException import MKilledException, SizingException
 from utils.MLogger import MLogger  # noqa
-from utils.MException import SizingException, MKilledException
-
 
 logger = MLogger(__name__)
 
@@ -135,14 +134,14 @@ class MorphService:
             raise ke
         except SizingException as se:
             logger.error(
-                "サイジング処理が処理できないデータで終了しました。\n\n%s", se.message
+                "Sizing process terminated due to invalid data.\n\n%s", se.message
             )
             return se
         except Exception as e:
             import traceback
 
             logger.error(
-                "サイジング処理が意図せぬエラーで終了しました。\n\n%s",
+                "Sizing process terminated due to an unexpected error.\n\n%s",
                 traceback.format_exc(),
             )
             raise e

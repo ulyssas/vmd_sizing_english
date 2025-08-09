@@ -268,9 +268,9 @@ cdef c_parse(str version_name):
 
         return options
     except SizingException as se:
-        logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message, decoration=MLogger.DECORATION_BOX)
+        logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message, decoration=MLogger.DECORATION_BOX)
     except Exception as e:
-        logger.critical("サイジング処理が意図せぬエラーで終了しました。", e, decoration=MLogger.DECORATION_BOX)
+        logger.critical("Sizing process terminated due to an unexpected error.", e, decoration=MLogger.DECORATION_BOX)
 
 
 cdef class MOptionsDataSet():

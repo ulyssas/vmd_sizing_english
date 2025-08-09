@@ -6,17 +6,17 @@ import os
 from pathlib import Path
 
 from mmd.PmxData import PmxModel
-from mmd.VmdWriter import VmdWriter
 from mmd.VmdReader import VmdReader
+from mmd.VmdWriter import VmdWriter
 from module.MOptions import MOptions, MOptionsDataSet
-from service.parts.MoveService import MoveService
-from service.parts.StanceService import StanceService
 from service.parts.ArmAlignmentService import ArmAlignmentService
 from service.parts.ArmAvoidanceService import ArmAvoidanceService
-from service.parts.MorphService import MorphService
 from service.parts.CameraService import CameraService
+from service.parts.MorphService import MorphService
+from service.parts.MoveService import MoveService
+from service.parts.StanceService import StanceService
 from utils import MServiceUtils
-from utils.MException import SizingException, MKilledException
+from utils.MException import MKilledException, SizingException
 from utils.MLogger import MLogger  # noqa
 
 logger = MLogger(__name__)
@@ -298,14 +298,14 @@ class SizingService:
             return False
         except SizingException as se:
             logger.error(
-                "サイジング処理が処理できないデータで終了しました。\n\n%s",
+                "Sizing process terminated due to invalid data.\n\n%s",
                 se,
                 decoration=MLogger.DECORATION_BOX,
             )
             return False
         except Exception as e:
             logger.critical(
-                "サイジング処理が意図せぬエラーで終了しました。",
+                "Sizing process terminated due to an unexpected error.",
                 e,
                 decoration=MLogger.DECORATION_BOX,
             )

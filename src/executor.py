@@ -37,10 +37,10 @@ if __name__ == "__main__":
             SizingService(MOptions.parse(VERSION_NAME)).execute()
         except SizingException as se:
             print(
-                "サイジング処理が処理できないデータで終了しました。\n\n%s", se.message
+                "Sizing process terminated due to invalid data.\n\n%s", se.message
             )
         except Exception:
-            print("サイジング処理が意図せぬエラーで終了しました。")
+            print("Sizing process terminated due to an unexpected error.")
             print(traceback.format_exc())
         finally:
             logging.shutdown()

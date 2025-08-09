@@ -60,3 +60,15 @@ It should look like this:
 5. D&D `vmd_sizing_english\src\setup_install.bat` and hit enter
 
 6. D&D `vmd_sizing_english\run_gui.bat` and hit enter
+
+### PyInstaller
+
+```
+pip install jaraco.text
+pip uninstall setuptools
+pip install "setuptools<60"
+```
+
+- copy dll in bezier/extra-dll to bezier
+
+- D&D `vmd_sizing_english\pyinstaller64.bat` and hit enter

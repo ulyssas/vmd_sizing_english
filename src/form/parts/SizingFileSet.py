@@ -42,19 +42,19 @@ class SizingFileSet:
             )
 
         able_aster_toottip = (
-            "ファイル名にアスタリスク（*）を使用すると複数件のデータを一度にサイジングできます。"
+            "You can size multiple data at once by using an asterisk (*) in the file name."
             if self.set_no == 1
-            else "一括指定はできません。"
+            else "Batch specification is not available."
         )
         # VMD/VPDファイルコントロール
         self.motion_vmd_file_ctrl = HistoryFilePickerCtrl(
             frame,
             panel,
-            "調整対象モーションVMD/VPD",
-            "調整対象モーションVMD/VPDファイルを開く",
+            "Target Motion VMD/VPD",
+            "Open target motion VMD/VPD file",
             ("vmd", "vpd"),
             wx.FLP_DEFAULT_STYLE,
-            "調整したいモーションのVMD/VPDパスを指定してください。\nD&Dでの指定、開くボタンからの指定、履歴からの選択ができます。\n{0}".format(
+            "Specify the VMD/VPD path of the motion you want to adjust.\nYou can specify by D&D, open button, or select from history.\n{0}".format(
                 able_aster_toottip
             ),
             file_model_spacer=46,
@@ -70,19 +70,19 @@ class SizingFileSet:
 
         # 作成元のスタンス詳細再現FLG
         detail_stance_flg_ctrl = wx.CheckBox(
-            panel, wx.ID_ANY, "スタンス追加補正", wx.DefaultPosition, wx.DefaultSize, 0
+            panel, wx.ID_ANY, "Add Stance Correction", wx.DefaultPosition, wx.DefaultSize, 0
         )
         detail_stance_flg_ctrl.SetToolTip(
-            "チェックを入れると、細かいスタンス補正を追加で行う事ができます。\n補正内容の詳細は隣の「＊」ボタンを押してみてください。"
+            "If checked, you can add detailed stance corrections.\nFor details, press the '*' button next to it."
         )
         detail_stance_flg_ctrl.Bind(wx.EVT_CHECKBOX, self.set_output_vmd_path)
 
         # スタンス補正
         detail_btn_ctrl = wx.Button(
-            panel, wx.ID_ANY, "＊", wx.DefaultPosition, (20, 20), 0
+            panel, wx.ID_ANY, "*", wx.DefaultPosition, (20, 20), 0
         )
         detail_btn_ctrl.SetToolTip(
-            "スタンス追加補正の内訳確認、および取捨選択を行う事が出来ます。"
+            "You can check the breakdown of additional stance corrections and select/deselect them."
         )
         detail_btn_ctrl.Bind(wx.EVT_BUTTON, self.select_detail)
 
@@ -90,11 +90,11 @@ class SizingFileSet:
         self.org_model_file_ctrl = HistoryFilePickerCtrl(
             frame,
             panel,
-            "モーション作成元モデルPMX",
-            "モーション作成元モデルPMXファイルを開く",
+            "Source Model PMX",
+            "Open source model PMX file",
             ("pmx"),
             wx.FLP_DEFAULT_STYLE,
-            "モーション作成に使用されたモデルのPMXパスを指定してください。\n精度は落ちますが、類似したサイズ・ボーン構造のモデルでも代用できます。\nD&Dでの指定、開くボタンからの指定、履歴からの選択ができます。",
+            "Specify the PMX path of the model used for motion creation.\nAccuracy will decrease, but similar size/bone structure models can be substituted.\nYou can specify by D&D, open button, or select from history.",
             file_model_spacer=1,
             title_parts_ctrl=detail_stance_flg_ctrl,
             title_parts2_ctrl=detail_btn_ctrl,
@@ -108,10 +108,10 @@ class SizingFileSet:
 
         # 捩り分散追加FLG
         twist_flg_ctrl = wx.CheckBox(
-            panel, wx.ID_ANY, "捩り分散あり", wx.DefaultPosition, wx.DefaultSize, 0
+            panel, wx.ID_ANY, "With Twist Distribution", wx.DefaultPosition, wx.DefaultSize, 0
         )
         twist_flg_ctrl.SetToolTip(
-            "チェックを入れると、腕捻り等への分散処理を追加できます。\n時間がかかります。"
+            "If checked, you can add distribution processing for arm twisting, etc.\nIt takes time."
         )
         twist_flg_ctrl.Bind(wx.EVT_CHECKBOX, self.set_output_vmd_path)
 
@@ -119,11 +119,11 @@ class SizingFileSet:
         self.rep_model_file_ctrl = HistoryFilePickerCtrl(
             frame,
             panel,
-            "モーション変換先モデルPMX",
-            "モーション変換先モデルPMXファイルを開く",
+            "Target Model PMX",
+            "Open target model PMX file",
             ("pmx"),
             wx.FLP_DEFAULT_STYLE,
-            "実際にモーションを読み込ませたいモデルのPMXパスを指定してください。\nD&Dでの指定、開くボタンからの指定、履歴からの選択ができます。",
+            "Specify the PMX path of the model you actually want to load the motion into.\nYou can specify by D&D, open button, or select from history.",
             file_model_spacer=18,
             title_parts_ctrl=twist_flg_ctrl,
             title_parts2_ctrl=None,
@@ -139,11 +139,11 @@ class SizingFileSet:
         self.output_vmd_file_ctrl = BaseFilePickerCtrl(
             frame,
             panel,
-            "出力VMD",
-            "出力VMDファイルを開く",
+            "Output VMD",
+            "Open output VMD file",
             ("vmd"),
             wx.FLP_OVERWRITE_PROMPT | wx.FLP_SAVE | wx.FLP_USE_TEXTCTRL,
-            "調整結果のVMD出力パスを指定してください。\nVMDファイルと変換先PMXのファイル名に基づいて自動生成されますが、任意のパスに変更することも可能です。",
+            "Specify the output path for the adjusted VMD.\nFile path is automatically generated based on the VMD file and target PMX file names, but you can also change it to any path.",
             is_aster=False,
             is_save=True,
             set_no=set_no,
@@ -157,8 +157,8 @@ class SizingFileSet:
     def select_detail(self, event: wx.Event):
         with wx.MultiChoiceDialog(
             self.panel,
-            "スタンス追加補正のうち、チェックが入っている補正のみ実施します",
-            caption="スタンス追加補正選択",
+            "Only the corrections that are checked will be applied among the additional stance corrections.",
+            caption="Select Additional Stance Corrections",
             choices=self.STANCE_DETAIL_CHOICES,
             style=wx.CHOICEDLG_STYLE,
         ) as choiceDialog:
@@ -244,7 +244,7 @@ class SizingFileSet:
 
         if motion.motion_cnt == 0:
             logger.warning(
-                "%sボーンモーションデータにキーフレームが登録されていません。",
+                "%sNo keyframes are registered in the bone motion data.",
                 display_set_no,
                 decoration=MLogger.DECORATION_BOX,
             )
@@ -288,30 +288,30 @@ class SizingFileSet:
                             org_pmx.bones[k].getRotatable()
                             != rep_pmx.bones[k].getRotatable()
                         ):
-                            mismatch_types.append("性能:回転")
+                            mismatch_types.append("Capability: Rotation")
                         if (
                             org_pmx.bones[k].getTranslatable()
                             != rep_pmx.bones[k].getTranslatable()
                         ):
-                            mismatch_types.append("性能:移動")
+                            mismatch_types.append("Capability: Movement")
                         if org_pmx.bones[k].getIkFlag() != rep_pmx.bones[k].getIkFlag():
-                            mismatch_types.append("性能:IK")
+                            mismatch_types.append("Capability: IK")
                         if (
                             org_pmx.bones[k].getVisibleFlag()
                             != rep_pmx.bones[k].getVisibleFlag()
                         ):
-                            mismatch_types.append("性能:表示")
+                            mismatch_types.append("Capability: Visible")
                         if (
                             org_pmx.bones[k].getManipulatable()
                             != rep_pmx.bones[k].getManipulatable()
                         ):
-                            mismatch_types.append("性能:操作")
+                            mismatch_types.append("Capability: Enabled")
                         if org_pmx.bones[k].display != rep_pmx.bones[k].display:
-                            mismatch_types.append("表示枠")
+                            mismatch_types.append("Display Frame")
 
                         if len(mismatch_types) > 0:
                             mismatch_bones.append(
-                                f"{k} 　【差異】{', '.join(mismatch_types)}）"
+                                f"{k}   [Difference] {', '.join(mismatch_types)})"
                             )
 
                     # 1件あればOK
@@ -338,7 +338,7 @@ class SizingFileSet:
             or len(not_org_morphs) > 0
         ):
             logger.warning(
-                "%s%sに、モーションで使用されているボーン・モーフが不足しています。\nモデル: %s\n不足ボーン（準標準まで）: %s\n不足ボーン（その他）: %s\n不足モーフ: %s",
+                "%s%s is missing bones/morphs used in the motion.\nModel: %s\nMissing bones (up to semi-standard): %s\nMissing bones (others): %s\nMissing morphs: %s",
                 display_set_no,
                 self.org_model_file_ctrl.title,
                 org_pmx.name,
@@ -355,7 +355,7 @@ class SizingFileSet:
             or len(not_rep_morphs) > 0
         ):
             logger.warning(
-                "%s%sに、モーションで使用されているボーン・モーフが不足しています。\nモデル: %s\n不足ボーン（準標準まで）: %s\n不足ボーン（その他）: %s\n不足モーフ: %s",
+                "%s%s is missing bones/morphs used in the motion.\nModel: %s\nMissing bones (up to semi-standard): %s\nMissing bones (others): %s\nMissing morphs: %s",
                 display_set_no,
                 self.rep_model_file_ctrl.title,
                 rep_pmx.name,
@@ -368,7 +368,7 @@ class SizingFileSet:
 
         if len(mismatch_bones) > 0:
             logger.warning(
-                "%s%sで、モーションで使用されているボーンの性能等が異なっています。\nモデル: %s\n差異ボーン:\n　%s",
+                "%s%s has differences in the capabilities etc. of bones used in the motion.\nModel: %s\nDifferent bones:\n　%s",
                 display_set_no,
                 self.rep_model_file_ctrl.title,
                 rep_pmx.name,
@@ -379,7 +379,7 @@ class SizingFileSet:
 
         if not is_warning:
             logger.info(
-                "モーションで使用されているボーン・モーフが揃っています。",
+                "All bones/morphs used in the motion are present.",
                 decoration=MLogger.DECORATION_BOX,
                 title="OK",
             )
@@ -437,7 +437,7 @@ class SizingFileSet:
 
         if len(output_vmd_path) >= 255 and os.name == "nt":
             logger.error(
-                "生成予定のファイルパスがWindowsの制限を超えています。\n生成予定パス: {0}".format(
+                "File path exceeds Windows limit.\nFile path: {0}".format(
                     output_vmd_path
                 ),
                 decoration=MLogger.DECORATION_BOX,

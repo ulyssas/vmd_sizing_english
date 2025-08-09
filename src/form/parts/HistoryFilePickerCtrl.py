@@ -34,10 +34,10 @@ class HistoryFilePickerCtrl(BaseFilePickerCtrl):
         # logger.test(self.frame.file_hitories)
 
         self.histroy_btn_ctrl = wx.Button(
-            parent, wx.ID_ANY, "履歴", wx.DefaultPosition, wx.DefaultSize, 0
+            parent, wx.ID_ANY, "History", wx.DefaultPosition, wx.DefaultSize, 0
         )
         self.histroy_btn_ctrl.SetToolTip(
-            "これまで指定された{0}を再指定できます。".format(title)
+            "You can reselect previously specified {0}.".format(title)
         )
 
         super().__init__(
@@ -112,8 +112,8 @@ class HistoryFilePickerCtrl(BaseFilePickerCtrl):
 
         with wx.SingleChoiceDialog(
             self.parent,
-            "ファイルを選んでダブルクリック、またはOKボタンをクリックしてください。",
-            caption="ファイル履歴選択",
+            "Select a file and double-click, or click the OK button.",
+            caption="Select File History",
             choices=hs[: (self.frame.file_hitories["max"] + 1)],
             style=wx.CAPTION
             | wx.CLOSE_BOX

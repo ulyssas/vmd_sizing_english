@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
 #
 
-import os
-import time
-import wx
-import re
 import gc
+import os
+import re
+import time
+
+import wx
 
 from form.worker.BaseWorkerThread import BaseWorkerThread, task_takes_time
 from module.MOptions import (
-    MOptions,
-    MOptionsDataSet,
     MArmProcessOptions,
     MLegProcessOptions,
+    MOptions,
+    MOptionsDataSet,
 )
 from service.SizingService import SizingService
 from utils import MFileUtils  # noqa
@@ -315,7 +316,7 @@ class SizingWorkerThread(BaseWorkerThread):
             self.elapsed_time = time.time() - start
         except Exception as e:
             logger.critical(
-                "VMDサイジング処理が意図せぬエラーで終了しました。",
+                "VMDSizing process terminated due to an unexpected error.",
                 e,
                 decoration=MLogger.DECORATION_BOX,
             )

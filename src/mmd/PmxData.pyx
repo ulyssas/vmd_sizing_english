@@ -458,15 +458,15 @@ class Morph:
     # パネルの名称取得
     def get_panel_name(self):
         if self.panel == 1:
-            return "眉"
+            return "Brow"
         elif self.panel == 2:
-            return "目"
+            return "Eye"
         elif self.panel == 3:
-            return "口"
+            return "Lip"
         elif self.panel == 4:
-            return "他"
+            return "Other"
         else:
-            return "？"
+            return "?"
 
 
 # 表示枠構造-----------------------

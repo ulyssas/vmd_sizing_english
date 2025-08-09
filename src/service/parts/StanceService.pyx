@@ -144,11 +144,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
 
     # 捩り分散
@@ -438,11 +438,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
     
     cdef bint remove_unnecessary_bf_pool_parts(self, int data_set_idx, str bone_name, int offset):
@@ -458,11 +458,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
 
     cdef bint regist_twist_bf(self, int data_set_idx, str bone_name, list fnos, str parent_bone_name):
@@ -509,11 +509,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
         
     cdef bint smooth_twist(self, int data_set_idx, str bone_name):
@@ -530,11 +530,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
         
     cdef bint smooth_filter_twist(self, int data_set_idx, str bone_name, dict config):
@@ -551,11 +551,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
 
     # 分散後のフリップチェック        
@@ -671,11 +671,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
 
     # 捩り分散のPool内処理
@@ -782,11 +782,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
 
     # 腕～腕捩り～ひじを求める        
@@ -1662,11 +1662,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
 
     # つま先ＩＫ補正
@@ -1885,11 +1885,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
 
     # つま先補正
@@ -2029,11 +2029,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
 
     # つま先実体のグローバル位置を取得する
@@ -3214,11 +3214,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
     
     # 肩補正左右
@@ -3281,11 +3281,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
     
     # 肩の傾きが離れている場合のスタンス補正
@@ -3848,11 +3848,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
 
     # 腕スタンス補正左右
@@ -3881,11 +3881,11 @@ cdef class StanceService():
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
         
     # 腕スタンス補正用傾き計算

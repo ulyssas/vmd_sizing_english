@@ -137,11 +137,11 @@ cdef class ArmAvoidanceService:
         except MKilledException as ke:
             raise ke
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
 
     # 接触回避処理
@@ -168,11 +168,11 @@ cdef class ArmAvoidanceService:
 
             return True
         except SizingException as se:
-            logger.error("サイジング処理が処理できないデータで終了しました。\n\n%s", se.message)
+            logger.error("Sizing process terminated due to invalid data.\n\n%s", se.message)
             return se
         except Exception as e:
             import traceback
-            logger.error("サイジング処理が意図せぬエラーで終了しました。\n\n%s", traceback.format_exc())
+            logger.error("Sizing process terminated due to an unexpected error.\n\n%s", traceback.format_exc())
             raise e
 
     # 接触回避処理

@@ -1,25 +1,33 @@
 # -*- coding: utf-8 -*-
 #
-import numpy as np
 import math
 
-from mmd.PmxData import PmxModel, Bone  # noqa
+import numpy as np
+
+from mmd.PmxData import Bone, PmxModel  # noqa
 from mmd.VmdData import (
-    VmdMotion,
     VmdBoneFrame,
     VmdCameraFrame,
     VmdInfoIk,
     VmdLightFrame,
     VmdMorphFrame,
+    VmdMotion,
     VmdShadowFrame,
     VmdShowIkFrame,
 )  # noqa
-from module.MMath import MRect, MVector2D, MVector3D, MVector4D, MQuaternion, MMatrix4x4  # noqa
+from module.MMath import (  # noqa
+    MMatrix4x4,
+    MQuaternion,
+    MRect,
+    MVector2D,
+    MVector3D,
+    MVector4D,
+)
 from module.MOptions import MOptions, MOptionsDataSet  # noqa
 from module.MParams import BoneLinks  # noqa
-from utils import MServiceUtils, MBezierUtils  # noqa
+from utils import MBezierUtils, MServiceUtils  # noqa
+from utils.MException import MKilledException, SizingException
 from utils.MLogger import MLogger  # noqa
-from utils.MException import SizingException, MKilledException
 
 logger = MLogger(__name__, level=1)
 
@@ -122,14 +130,14 @@ class CameraService:
             raise ke
         except SizingException as se:
             logger.error(
-                "サイジング処理が処理できないデータで終了しました。\n\n%s", se.message
+                "Sizing process terminated due to invalid data.\n\n%s", se.message
             )
             return se
         except Exception as e:
             import traceback
 
             logger.error(
-                "サイジング処理が意図せぬエラーで終了しました。\n\n%s",
+                "Sizing process terminated due to an unexpected error.\n\n%s",
                 traceback.format_exc(),
             )
             raise e
