@@ -38,6 +38,8 @@ git clone https://github.com/ulyssas/vmd_sizing_english -b localization
 2. open `Anaconda Prompt` from Start Menu and type
 ```
 conda create -n vmdsizing_cython python=3.8
+
+conda activate vmdsizing_cython
 ```
 
 3. install these packages
@@ -50,7 +52,7 @@ pip install pyinstaller==4.5.1
 pip install wxPython==4.1.0
 ```
 
-4. put bezier include folder into conda env include
+4. put bezier include folder (bezier-2020.2.3\bezier-2020.2.3\src\fortran\include\bezier) into conda env include
 
 It should look like this:
 ![preview](include.png)
