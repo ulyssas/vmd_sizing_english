@@ -23,7 +23,7 @@ a = Analysis(['src\\executor.py'],
              noarchive=False)
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
-a.datas += [('.\\src\\vmdsizing.ico','.\\src\\vmdsizing.ico', 'Data')]
+a.datas += [('.\\src\\vmdsizing.ico','.\\src\\vmdsizing.ico', 'DATA')]
 exe = EXE(pyz,
           a.scripts,
           a.binaries,
