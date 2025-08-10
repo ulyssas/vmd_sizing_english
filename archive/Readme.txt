@@ -1,577 +1,549 @@
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 
-@uVMDƒTƒCƒWƒ“ƒO@ƒ[ƒJƒ‹”Åv
+    VMDSizing Local Edition
 
-@@ver5.01.08
+    ver5.01.08 EN
 
-@@@@@@@@@@@@@@@@@miu200521358
-
-----------------------------------------------------------------
-----------------------------------------------------------------
-
-
-@‚±‚Ì“x‚ÍÙì‚ğDL‚µ‚Ä‚¢‚½‚¾‚«A‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚·B
-@‚¨è”‚Å‚·‚ªˆÈ‰º‚ğ‚²Šm”F‚Ì‚¤‚¦A‚²—˜—p‚­‚¾‚³‚¢B
+                                    miu200521358
+                            translated by Ulyssa
 
 ----------------------------------------------------------------
-
-
-----------------------------------------------------------------
-¡@ŠT—v
 ----------------------------------------------------------------
 
-@VMD(MMDƒ‚[ƒVƒ‡ƒ“ƒf[ƒ^)‚ğAw’è‚³‚ê‚½ƒ‚ƒfƒ‹‚É“KØ‚È“ªg‚ÅÄ¶¬‚·‚éƒc[ƒ‹‚Å‚·B
+Thank you for downloading my tool.
+Please check the following before use.
+
+----------------------------------------------------------------
 
 
 ----------------------------------------------------------------
-¡@”z•z“®‰æ
+â–  Overview
 ----------------------------------------------------------------
 
-¡@VMDƒTƒCƒWƒ“ƒO‚É•¡”l”ƒ‚[ƒVƒ‡ƒ“‘Î‰‚ÆƒXƒ^ƒ“ƒX’Ç‰Á•â³‚ğ“ü‚ê‚Ä‚İ‚½yver5.00z
+This tool resynthesizes VMD (MMD motion data) to fit the specified model's proportions.
+
+----------------------------------------------------------------
+â–  Distribution Videos
+----------------------------------------------------------------
+
+â–  Added support for multi-person motions and stance correction to VMD Sizing [ver5.00]
 https://www.nicovideo.jp/watch/sm37143852
 
-¡@VMDƒTƒCƒWƒ“ƒO‚ğ‘¬‚¢EŠm‚©EˆÀS‚É‚µ‚Ä‚İ‚½yver5.01z
+â–  Made VMD Sizing faster, more reliable, and safer [ver5.01]
 https://www.nicovideo.jp/watch/sm37848503
 
-¡@ƒRƒ“ƒeƒ“ƒcƒcƒŠ[—pÃ‰æ
+â–  Content Tree Illustration
 https://seiga.nicovideo.jp/seiga/im9755721
 
 ----------------------------------------------------------------
-¡@“¯«ƒtƒ@ƒCƒ‹
+â–  Included Files
 ----------------------------------------------------------------
 
-@EVMDSizing_5.01.07_64bit.exe@ c@ƒc[ƒ‹–{‘Ìiver5.00‚æ‚è64bit”Å‚Ì‚İ‚Å‚·j
-@EReadme.txt@@@@@@@@@@c@ƒŠƒhƒ~
-@EVMDƒTƒCƒWƒ“ƒOWiki@@@@@@ c@Wiki‚Ö‚ÌƒŠƒ“ƒN
-@EƒRƒ“ƒeƒ“ƒcƒcƒŠ[—pÃ‰æ@@@@c@ƒRƒ“ƒeƒ“ƒcƒcƒŠ[—pÃ‰æ‚Ö‚ÌƒŠƒ“ƒN
-@EˆêŠ‡ƒTƒCƒWƒ“ƒOƒTƒ“ƒvƒ‹.csv@@c@ˆêŠ‡ƒTƒCƒWƒ“ƒO‚ÌƒTƒ“ƒvƒ‹CSV
-@Eƒ‚[ƒt’uŠ·ƒTƒ“ƒvƒ‹@@@@@@c@ƒ‚[ƒt’uŠ·‚ÌƒTƒ“ƒvƒ‹WiÚ×‚Í’†QÆj
+ãƒ»VMDSizing_5.01.08_64bit.exe ... Main tool (only 64bit version since ver5.00)
+ãƒ»Readme.txt                  ... This readme
+ãƒ»VMD Sizing Wiki             ... Link to Wiki
+ãƒ»Content Tree Illustration   ... Link to content tree illustration
+ãƒ»Bulk Sizing Sample.csv      ... Sample CSV for bulk sizing
+ãƒ»Morph Replacement Sample    ... Sample collection for morph replacement (see inside for details)
 
 ----------------------------------------------------------------
-¡@“®ìŠÂ‹«
+â–  System Requirements
 ----------------------------------------------------------------
 
-@Windows8.1/10/11 64bitiŠm”F‚ÍWindows10‚Ì‚İj
-
-
-----------------------------------------------------------------
-¡@‹N“®
-----------------------------------------------------------------
-
-EŠî–{“I‚É‚Íexe‚ğ‚»‚Ì‚Ü‚Ü‹N“®‚µ‚Ä‚¢‚½‚¾‚¯‚ê‚Î‘åä•v‚Å‚·B
-
-EƒnƒCƒXƒyƒbƒN”Å‚ÍA“à•”‚Å•À—ñˆ—‚ğs‚¤‚Ì‚ÅA’Êí”Å‚Ì1.3”{‚­‚ç‚¢‘¬‚­ˆ—‚ªs‚í‚ê‚Ü‚·B
-@‚½‚¾‚µA‚»‚Ì•ª•‰‰×‚à‘å‚«‚­‚È‚é‚Ì‚ÅAPC‚Ì«”\‚ª‘åä•v‚Á‚Ä•û‚¾‚¯‚Ì•û‚ª‚æ‚³‚°‚Å‚·B
-
-EƒƒO‚ ‚è”Å‚ÍAv4‚Ì ‚Ì‚æ‚¤‚ÉAo—ÍVMDƒtƒ@ƒCƒ‹ƒpƒX‚Æ“¯‚¶‚Æ‚±‚ë‚ÉƒƒOƒtƒ@ƒCƒ‹‚ğo—Í‚µ‚Ü‚·B
-
-Eƒtƒ@ƒCƒ‹—š—ğ‚ÍAuhistory.jsonv‚ğexe‚Æ“¯‚¶ŠK‘w‚É”z’u‚·‚é–‚ÅƒRƒs[‰Â”\‚Å‚·B
+Windows8.1/10/11 64bit (tested only on Windows 11)
 
 ----------------------------------------------------------------
-¡@ƒTƒCƒWƒ“ƒO‹@”\
+â–  Startup
 ----------------------------------------------------------------
 
-1) Šî–{‹@”\
+ãƒ»Basically, just run the exe directly.
 
-‰½‚àƒIƒvƒVƒ‡ƒ“‚ğ•t‚¯‚¸‚ÉƒTƒCƒWƒ“ƒO‚µ‚½ê‡‚És‚í‚ê‚éˆ—‚Å‚·B
+ãƒ»High-spec version performs parallel processing internally, making it about 1.3 times faster than the normal version.
+However, it also increases the load, so it's recommended only for those with capable PCs.
 
-EkÚ•â³
-@c@Œ³ƒ‚ƒfƒ‹‚ğæƒ‚ƒfƒ‹‚ÌkÚ‚É‡‚í‚¹‚ÄAˆÚ“®Œnƒ{[ƒ“‚ÌˆÊ’u‚ğ’²®‚µ‚Ü‚·B
-@@@i‘S‚Ä‚ÌeAƒZƒ“ƒ^[AƒOƒ‹[ƒuA‘«IKeA‘«‚h‚jA‚Â‚Üæ‚h‚jj
+ãƒ»Log version outputs a log file in the same location as the output VMD file, as in v4.
 
-@@@¦ •¡”l”ƒ‚[ƒVƒ‡ƒ“‘Î‰
+ãƒ»File history can be copied by placing "history.json" in the same directory as the exe.
 
-@@@Eu•¡”vƒ^ƒu‚Åƒtƒ@ƒCƒ‹ƒZƒbƒgiVMDEŒ³ƒ‚ƒfƒ‹Eæƒ‚ƒfƒ‹‚ÌƒZƒbƒgj‚ğ’Ç‰Á‚·‚é–‚ÅA•¡”l”ƒ‚[ƒVƒ‡ƒ“‚ğˆêŠ‡‚ÅƒTƒCƒWƒ“ƒO‰Â”\‚Å‚·B
-@@@@•¡”l”ƒ‚[ƒVƒ‡ƒ“‚ğˆêŠ‡‚ÅƒTƒCƒWƒ“ƒO‚µ‚½ê‡A‘Sˆõ‚ÌˆÚ“®ŒnkÚ”ä—¦‚ª“ˆê‚³‚êAƒtƒH[ƒ[ƒVƒ‡ƒ“‚ğ•ö‚µ‚Ü‚¹‚ñB
-@@@@‚Ü‚½AˆÊ’u‡‚í‚¹‚âƒJƒƒ‰‚È‚Ç‚à•¡”l”‚É‘Î‰‚µ‚Ä‚¢‚Ü‚·B
+----------------------------------------------------------------
+â–  Sizing Features
+----------------------------------------------------------------
 
-E˜rƒXƒ^ƒ“ƒX•â³
-@c@Œ³ƒ‚ƒfƒ‹‚Ì˜r‚ÌŠp“x‚Ææƒ‚ƒfƒ‹‚Ì˜r‚ÌŠp“x‚ğ‡‚í‚¹‚Ü‚·B
-@@@‚½‚¾‚µAŒ³‚©æ‚É˜rIK‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡Au˜rvƒ^ƒu‚Ìƒ`ƒFƒbƒNƒXƒLƒbƒvƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚ªOFF‚Ì‚Ü‚Ü‚¾‚Æ•â³‚µ‚Ü‚¹‚ñB
-@@@iƒXƒLƒbƒvƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚ªON‚¾‚Æ‹­§•â³‰Âj
+1) Basic Features
 
-@@@¦˜rIK‚Ìˆµ‚¢
-@@@@E˜rIK‚ÍA˜r‚ÌŒü‚«‚ğ•â•‚µ‚½‚èA•‚ğ•â•‚·‚é‚È‚ÇAƒ‚ƒfƒ‹‚É‚æ‚Á‚Ä—p“r‚â\‘¢‚ªˆÙ‚È‚éˆ×A‹@ŠB“I‚È”»’f‚ªo—ˆ‚Ü‚¹‚ñB
-@@@@@‚»‚Ì‚½‚ßAu˜rIKE‚¤‚ÅIKE˜r‚h‚jE‚¤‚Å‚h‚jv‚ğŠÜ‚Şƒ‚ƒfƒ‹‚ÍƒTƒCƒWƒ“ƒO‚Æ‚µ‚Ä‚Í˜rŒnˆ—‘ÎÛŠO‚Æ‚µ‚Ä‚¢‚Ü‚·B
-@@@@@ƒ‚ƒfƒ‹‚É‚æ‚Á‚Ä‚ÍA‚»‚Ì‚Ü‚ÜƒTƒCƒWƒ“ƒO‚µ‚Ä‚à–â‘è‚È‚¢ê‡‚à‘½‚¢‚Ì‚ÅA
-@@@@@‚Ğ‚Æ‚Ü‚¸ƒ`ƒFƒbƒNƒXƒLƒbƒv‚µ‚ÄŠî–{‹@”\‚¾‚¯‚ÅƒTƒCƒWƒ“ƒO‚µ‚Ä‚İ‚ÄAƒ_ƒ‚¾‚Á‚½‚ç’ú‚ß‚é‚­‚ç‚¢‚Å‚à—Ç‚¢‚Æv‚¢‚Ü‚·B
+Processing performed when sizing without any options.
 
+ãƒ»Scale Correction
+  ... Adjusts the positions of movement-related bones to match the scale of the source model to the target model.
+      (Master, Center, Groove, Leg IK Parent, Leg IK, Toe IK)
+
+      * Supports multi-person motions
+
+      ãƒ»By adding file sets (VMD, source model, target model) in the "Multi" tab, you can bulk size multi-person motions.
+        When bulk sizing multi-person motions, the movement scale ratios are unified for all, preserving formations.
+        Position alignment and camera are also supported for multiple people.
+
+ãƒ»Arm Stance Correction
+  ... Aligns the arm angles of the source and target models.
+      However, if either model includes Arm IK, correction is not performed unless the "Skip Check" checkbox in the "Arm" tab is ON.
+      (If the skip checkbox is ON, forced correction is possible)
+
+      * Handling of Arm IK
+        ãƒ»Arm IK is used for various purposes depending on the model, such as assisting arm direction or clothing, so mechanical judgment is not possible.
+          Therefore, models containing è…•IK/ã†ã§IK/è…•ï¼©ï¼«/ã†ã§ï¼©ï¼«, etc. are excluded from arm processing in sizing.
+          In many cases, sizing may work fine as is, so try basic sizing first and if it doesn't work, you may give up.
 
 ----------------
-3) Œ³ƒ‚[ƒVƒ‡ƒ“‚Ì‘ÎÛŠg’£q
+3) Supported File Extensions for Source Motion
 
-EVMDƒtƒ@ƒCƒ‹iƒ‚[ƒVƒ‡ƒ“j
-EVPDƒtƒ@ƒCƒ‹iƒ|[ƒYj
+ãƒ»VMD files (motion)
+ãƒ»VPD files (pose)
 
-‚Ü‚½Aƒtƒ@ƒCƒ‹–¼‚Ì•”•ª‚ğƒAƒXƒ^ƒŠƒXƒNi*j‚É’u‚«Š·‚¦‚é‚ÆAw’è‚µ‚½ƒtƒHƒ‹ƒ_“à‚Ì‡’v‚·‚é‘Sƒtƒ@ƒCƒ‹‚ğˆêŠ‡‚Åˆ—‰Â”\‚Å‚·B
-EƒAƒXƒ^ƒŠƒXƒN‰Â‚È‚Ì‚ÍAuƒtƒ@ƒCƒ‹vƒ^ƒu‚Ì’²®‘ÎÛƒ‚[ƒVƒ‡ƒ“VMD/VPD—“‚Ì‚İ‚Å‚·B
-EŒ³ƒ‚ƒfƒ‹Aæƒ‚ƒfƒ‹‚Íˆê‘Ì‚¸‚Â‚µ‚©w’è‚Å‚«‚Ü‚¹‚ñBi‘S•”“¯‚¶‘g‚İ‡‚í‚¹‚Åƒ‚[ƒVƒ‡ƒ“‚¾‚¯Ø‚è‘Ö‚¦‚éŠ´‚¶j
-Eo—Íƒtƒ@ƒCƒ‹‚ÍVMDƒIƒ“ƒŠ[‚Å‚·B
-
-
-----------------
-4) ƒXƒ^ƒ“ƒX’Ç‰Á•â³
-
-uƒtƒ@ƒCƒ‹vƒ^ƒu‚à‚µ‚­‚Íu•¡”vƒ^ƒu‚ÌuƒXƒ^ƒ“ƒX’Ç‰Á•â³vƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚ğON‚É‚·‚é–‚Ås‚í‚ê‚éˆ—‚Å‚·B
-uƒXƒ^ƒ“ƒX’Ç‰Á•â³vƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚Ì‰¡‚Ìu–vƒ{ƒ^ƒ“‚ÅAƒXƒ^ƒ“ƒX’Ç‰Á•â³‚ğæÌ‘I‘ğ‚·‚é‚±‚Æ‚ª‰Â”\‚Å‚·B
-
-EƒZƒ“ƒ^[XZƒXƒ^ƒ“ƒX•â³
-@c@dSiƒZƒ“ƒ^[ˆÊ’uj‚ğŒ³ƒ‚ƒfƒ‹‚É‡‚í‚¹‚Ä’²®‚µ‚Ü‚·B
-@@@“Á‚ÉƒoƒŒƒG‚Ìƒ^[ƒ““™A‘ÌŠ²‚ªL‚Ñ‚Ä‚éó‘Ô‚Å‚Ì‰ñ“]‚ÅŒø‰Ê‚ª•ª‚©‚è‚â‚·‚¢‚Å‚·B
-
-Eã”¼g•â³
-@c@“ª‚ÌˆÊ’u‚ªŒ³ƒ‚ƒfƒ‹‚Æ“¯‚¶ˆÊ’u‚É‚È‚é‚æ‚¤Aã”¼g‚Æã”¼g2i‚ ‚ê‚Îj‚ğ’²®‚µ‚Ü‚·B
-@@@g‘Ì‚ğ”½‚ç‚µ‚½‚èA‹ü‚ñ‚¾‚è‚·‚éƒ‚[ƒVƒ‡ƒ“‚ÅŒø‰Ê‚ª•ª‚©‚è‚â‚·‚¢‚Å‚·B
-@@@€•W€‚Ü‚Å‚Ìƒ{[ƒ“‚Å\¬‚³‚ê‚½l‚Â‘«ƒ‚ƒfƒ‹‚È‚Ç‚Í’¼—§‚µ‚Ü‚·B
-
-E‰º”¼g•â³
-@c@‘«‚Ì’†ŠÔ‚ÌˆÊ’u‚ªŒ³ƒ‚ƒfƒ‹‚Æ“¯‚¶ˆÊ’u‚É‚È‚é‚æ‚¤A‰º”¼g‚ğ’²®‚µ‚Ü‚·B
-@@@€•W€‚Ü‚Å‚Ìƒ{[ƒ“‚Å\¬‚³‚ê‚½l‚Â‘«ƒ‚ƒfƒ‹‚È‚Ç‚Í’¼—§‚µ‚Ü‚·B
-
-E‚Â‚Üæ‚h‚j•â³
-@c@‚Â‚Üæ‚h‚j‚ÌˆÚ“®—Ê‚ğA‘«‚h‚j‚Ì‰ñ“]—Ê‚É•ÏŠ·‚µ‚Ü‚·Bi‚Â‚Üæ‚h‚j‚Ì’l‚Í‰Šú’l‚É‚È‚è‚Ü‚·j
-@@@‚Â‚Üæ‚h‚j‚ğg‚Á‚½ƒ‚[ƒVƒ‡ƒ“‚ÅŒø‰Ê‚ª•ª‚©‚è‚â‚·‚¢‚Å‚·B
-
-E‘«‚h‚j•â³
-@c@‘«ƒ{[ƒ“‚©‚çŒ©‚½‘«‚h‚j‚ÌˆÊ’u‚ªŒ³ƒ‚ƒfƒ‹‚Æ“¯‚¶ˆÊ’u‚É‚È‚é‚æ‚¤A‘«‚h‚j‚ğ’²®‚µ‚Ü‚·B
-@@@‚Ë‚ñ‚Ç‚ë‘ÌŒ^“™A¬‚³‚¢ƒ‚ƒfƒ‹‚ÅŒø‰Ê‚ª•ª‚©‚è‚â‚·‚¢‚Å‚·B
-@@@ver5.01.02‚æ‚èAƒfƒtƒHƒ‹ƒg‚Å‚Íƒ`ƒFƒbƒNOFF‚É‚È‚Á‚Ä‚¢‚Ü‚·Bi‘«‚ªáŠ±ŠŠ‚éê‡‚ª‚ ‚é‚½‚ßj
-
-E‚Â‚Üæ•â³
-@c@°‚©‚ç‚Ì‚Â‚Üæ‚Ì‹——£‚ğAŒ³ƒ‚ƒfƒ‹‚Æ“¯‚¶‚æ‚¤‚ÈˆÊ’u‚É‡‚í‚¹‚Ü‚·B
-@@@‘«æEX‚àl—¶Ï‚İi‚Â‚Üæ‚h‚j‚Í‚¿‚å‚Á‚Æ‹êècj‚Å‚·B
-
-EŒ¨•â³
-@c@‰ŠúƒXƒ^ƒ“ƒX‚ÌŒ¨‚ÌŒX‚«‚Ìˆá‚¢‚ğl—¶‚µ‚ÄAŒ³ƒ‚ƒfƒ‹‚Æ“¯‚¶‚­‚ç‚¢‚É“®‚©‚·‚æ‚¤AŒ¨‚ÆŒ¨Pi‚ ‚ê‚Îj‚ğ’²®‚µ‚Ü‚·B
-@@@Œ¨‚ª‘å‚«‚­“®‚­ƒ‚[ƒVƒ‡ƒ“‚ªƒ_ƒCƒiƒ~ƒbƒN‚É‚È‚è‚Ü‚·B
-@@@¦Œ¨P‚Ì’l‚ÍŒ¨‚É•ÏŠ·‚µ‚ÄˆÚA‚µ‚Ü‚·BiŒ¨P‚Ì’l‚Í‰Šú’l‚É‚È‚è‚Ü‚·j
-
-EƒZƒ“ƒ^[Y•â³
-@c@°‚©‚ç‚Ì˜r‚Ì‹——£‚ğAŒ³ƒ‚ƒfƒ‹‚Æ“¯‚¶‚æ‚¤‚ÈˆÊ’u‚É‡‚í‚¹‚é‚æ‚¤AƒZƒ“ƒ^[‚ğ’²®‚µ‚Ü‚·B
-@@@v4‚Ü‚Å‚Ì°ˆÊ’u‡‚í‚¹‚Ìˆê•”‚Å‚·B
-
+You can bulk process all matching files in a folder by replacing part of the file name with an asterisk (*).
+* Only the "Target Motion VMD/VPD" field in the "File" tab supports asterisks.
+* Source and target models can only be specified one at a time (motion is switched for the same combination).
+* Output files are VMD only.
 
 ----------------
-5) €‚è•ªU•â³
+4) Additional Stance Corrections
 
-uƒtƒ@ƒCƒ‹vƒ^ƒu‚à‚µ‚­‚Íu•¡”vƒ^ƒu‚Ìu€‚è•ªU‚ ‚èvƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚ğON‚É‚·‚é–‚Ås‚í‚ê‚éˆ—‚Å‚·B
+Processing performed by turning ON the "Add Stance Correction" checkbox in the "File" or "Multi" tab.
+You can select/deselect stance corrections using the "*" button next to the checkbox.
 
-@E˜r€‚è@c@˜rXA‚Ğ‚¶XA‚Ğ‚¶Z‚Ì€‚è•ª‚ğ“K—p
-@@è€‚è@c@èñX‚Ì€‚è•ª‚ğ“K—p
-@E‚Ğ‚¶@@c@‚Ğ‚¶ƒ[ƒJƒ‹Y‰ñ“]¬•ª‚Ì‚İ‚ğ“K—pi‚Ğ‚¶‚Ì•ÏŒ`‚ªãY—í‚É‚È‚è‚Ü‚·j
+ãƒ»ã‚»ãƒ³ã‚¿ãƒ¼XZã‚¹ã‚¿ãƒ³ã‚¹è£œæ­£/Center XZ Stance Correction
+  ... Adjusts the center of gravity (center position) to match the source model.
+      Especially effective for ballet turns and rotations with extended core.
 
-EŠù‚É€‚è‚ª“ü‚Á‚Ä‚¢‚Ä‚àA‚»‚ê‚ğl—¶‚µ‚½ã‚Å•ªUˆ—‚ğs‚¢‚Ü‚·B
-@‚½‚¾‚µA€‚è‚Ì«¿ãA•ÏˆÊ“_‚ğŒ©‚Â‚¯‚ÄA•ÏˆÊ“_ƒL[ƒtƒŒ’PˆÊ‚Åˆ—‚µ‚Ä‚éA‚Æ‚¢‚¤ˆ—‚ğs‚Á‚Ä‚é‚Ì‚ÅAŠÔ‚ª‚©‚©‚è‚Ü‚·B
+ãƒ»ä¸ŠåŠèº«è£œæ­£/Upper Body Correction
+  ... Adjusts the upper body and upper body 2 (if present) so the head position matches the source model.
+      Effective for motions involving bending or stretching.
+      Quadruped models composed of semi-standard bones will stand upright.
 
+ãƒ»ä¸‹åŠèº«è£œæ­£/Lower Body Correction
+  ... Adjusts the lower body so the midpoint of the legs matches the source model.
+      Quadruped models composed of semi-standard bones will stand upright.
 
-----------------
-6) ƒ‚[ƒt’uŠ·
+ãƒ»ã¤ã¾å…ˆï¼©ï¼«è£œæ­£/Toe IK Correction
+  ... Converts toe IK movement to leg IK rotation (toe IK values are reset).
+      Effective for motions using toe IK.
 
-Œ³ƒ‚[ƒVƒ‡ƒ“‚Ì”CˆÓ‚Ìƒ‚[ƒt‚ğA•ÏŠ·æƒ‚ƒfƒ‹‚É‚ ‚é”CˆÓ‚Ìƒ‚[ƒt‚Ö‚Æ’uŠ·‚Å‚«‚Ü‚·B
-ƒ‚[ƒt‚Ì‘å‚«‚³‚à•â³‚Å‚«‚Ü‚·B
-ƒtƒ@ƒCƒ‹ƒZƒbƒg’PˆÊ‚Éƒ‚[ƒt‚ğw’è‚Å‚«‚Ü‚·B
-A¨BAB¨C‚ğˆê‹C‚Éw’è‚³‚ê‚½ê‡AB‚É‚ÍA+B‚Ì•â³’l‚ªAC‚É‚ÍB‚Ì•â³’l‚ª“ü‚è‚Ü‚·B
+ãƒ»è¶³ï¼©ï¼«è£œæ­£/Leg IK Correction
+  ... Adjusts leg IK so its position relative to the leg bone matches the source model.
+      Effective for small models like Nendoroid.
+      Since ver5.01.02, this is OFF by default (legs may slip slightly).
 
+ãƒ»ã¤ã¾å…ˆè£œæ­£/Toe Correction
+  ... Adjusts the toe position from the floor to match the source model.
+      Considers Toe EX (toe IK is a bit tricky).
 
-----------------
-7) ˜rŒnˆ—
+ãƒ»è‚©è£œæ­£/Shoulder Correction
+  ... Adjusts shoulder and shoulder P (if present) to match the initial stance tilt of the source model.
+      Makes dynamic motions with large shoulder movements.
+      * shoulder P values are converted to shoulder (shoulder P values are reset).
 
-ÚG‰ñ”ğ‚ÆˆÊ’u‡‚í‚¹‚Ì—¼•û‚ğˆ—‰Â”\iÚG‰ñ”ğ¨ˆÊ’u‡‚í‚¹‚Ì‡‚Éˆ—j‚Å‚·B
-˜rƒXƒ^ƒ“ƒX•â³‚Æ“¯‚¶‚­A˜rIK‚ª“ü‚Á‚Ä‚é‚Æˆ—‚ªs‚í‚ê‚È‚¢‚Ì‚ÅAˆ—‚³‚¹‚½‚¢ê‡‚É‚Íƒ`ƒFƒbƒNƒXƒLƒbƒvƒIƒvƒVƒ‡ƒ“‚ğON‚É‚µ‚Ä‚­‚¾‚³‚¢B
-ÚG‰ñ”ğ‚Å„‘Ì‘I‘ğˆ—‚ğ“ü‚ê‚é‚½‚ßAƒ^ƒuˆÚ“®Aƒ‚ƒfƒ‹“Ç‚İ‚İˆ—‚ªÀs‚³‚ê‚Ü‚·B
-
-EÚG‰ñ”ğ
-@c@w’è‚³‚ê‚½ƒ{[ƒ“’Ç]„‘Ì‚Æè‚ªÕ“Ë‚µ‚Ä‚éê‡A‰ñ”ğ‚µ‚Ü‚·B
-@@@•K—v‚É‰‚¶‚ÄAPMXƒGƒfƒBƒ^‚ÅD‚«‚È‰ÓŠ‚Éƒ{[ƒ“’Ç]„‘Ì‚ğ•t‚¯‚é‚ÆŠÈ’P‚Å‚·BiPmxView„•ÒW„‘I‘ğƒ{[ƒ“„Šî‘b„‘Ì‚Ìì¬ - ƒ{[ƒ“’Ç]„‘Ìj
-@@@è‚Ì”»’èæ‚ÍAlwæAèñAèñ‚Æ‚Ğ‚¶‚Ì’†ŠÔA‚Ğ‚¶A˜r‚Æ‚Ğ‚¶‚Ì’†ŠÔA‚Ì5ƒ–Š‚Å‚·B
-
-EˆÊ’u‡‚í‚¹
-@c@èñi‚à‚µ‚­‚Íwj‚ÌˆÊ’u‚ğAŒ³ƒ‚ƒfƒ‹‚ÌˆÊ’u‚É‡‚í‚¹‚Ü‚·B
-@@@•¡”l”ƒ‚[ƒVƒ‡ƒ“‚Ìê‡A‘¼l‚Æ‚ÌˆÊ’u‡‚í‚¹‚às‚¢‚Ü‚·Bg’··‚Í“K“–‚É•âŠÔ‚µ‚Ä‚¢‚Ü‚·B
-
-@@@EwˆÊ’u‡‚í‚¹@c@èñ‚¾‚¯‚Å‚È‚­wˆÊ’u‚Å‚àˆÊ’u‡‚í‚¹‚ğs‚¢‚Ü‚·B
-@@@@@@@@@@@@@•¡”l”ƒ‚[ƒVƒ‡ƒ“‚Ìê‡AŠÔ‚ª‚©‚©‚éŠ„‚ÉãY—í‚É‚È‚ç‚È‚¢‚Ì‚ÅŒx‚ªo‚Ü‚·B
-
-@@@E°ˆÊ’u‡‚í‚¹@c@èñ“¯m‚¾‚¯‚Å‚È‚­A°ˆÊ’u‚Æ‚ÌˆÊ’u‡‚í‚¹‚às‚¢‚Ü‚·B
-
+ãƒ»ã‚»ãƒ³ã‚¿ãƒ¼Yè£œæ­£/Center Y Correction
+  ... Adjusts the center so the arm's distance from the floor matches the source model.
+      Part of the floor position alignment up to v4.
 
 ----------------
-8) ‘«Œnˆ—i¦ver5.01.06ˆÈ~j
+5) Twist Distribution Correction
 
-E‘S‘ÌˆÚ“®—Ê•â³
-@c@•¡”lƒ‚[ƒVƒ‡ƒ“‚Ì‘S‘Ì“I‚ÉL‚°‚½‚¢A­‚µ“®‚«‚ğƒ_ƒCƒiƒ~ƒbƒN‚É‚µ‚½‚¢A—}‚¦‚½‚¢‚È‚Ç‚Ég‚¦‚Ü‚·B
-@@@”ä—¦‚Ì‘å‚«‚³‚È‚Ì‚ÅAƒfƒtƒHƒ‹ƒg‚Íu1v‚É‚È‚è‚Ü‚·Bu1.1v‚Íu1.1”{vˆµ‚¢‚Å‚·B
+Processing performed by turning ON the "With Twist Distribution" checkbox in the "File" or "Multi" tab.
 
-E‘«‚h‚jƒIƒtƒZƒbƒg
-@c@i“÷Œú‚Æ‚©‚Åj‘«‚ğ•Â‚¶‚½‚Éd‚È‚Á‚Ä‚µ‚Ü‚Á‚½‚èA‘S‘Ì‚ÌˆÚ“®—Ê‚Í•Ï‚¦‚¸‚ÉŒÂ•Ê‚Ì‘«‚h‚j‚ÌˆÚ“®—Ê‚¾‚¯‚¿‚å‚Á‚Æ’²®‚µ‚½‚¢‚È‚Ç‚Ég‚¦‚Ü‚·B
-@@@‚±‚¿‚ç‚ÍÀ•WŒn‚Ì‘å‚«‚³‚»‚Ì‚à‚Ì‚È‚Ì‚Åu+0.1v‚¾‚Æ¶‰E‚Ì‘«‚ğX•ûŒü‚Éu0.1v•ªL‚°‚Ü‚·Biu-0.1v‚Í‹·‚ß‚Ü‚·j
+  ãƒ»Arm twist:  Applies twist for arm X, elbow X, elbow Z
+  ãƒ»Hand twist: Applies twist for wrist X
+  ãƒ»Elbow:      Applies only local Y rotation for elbow (makes elbow deformation cleaner)
 
-
-----------------
-9) ƒJƒƒ‰ˆ—
-
-Œ³ƒ‚ƒfƒ‹‚Æ“¯‚¶‰f‚è‹ï‡‚É‚È‚é‚æ‚¤AƒJƒƒ‰‚ğ“¯‚É’²®‚µ‚Ü‚·B
-•¡”l”ƒ‚[ƒVƒ‡ƒ“‚Ìê‡Aƒsƒ“‚Å‰f‚Á‚Ä‚éê‡‚Íg’··‚à•âŠÔ‚µ‚Ü‚·B
-‚½‚¾‚µAg’··‚ª‘å‚«‚­‚ÄA‚©‚ÂA‘½l”‚ª‰f‚Á‚Ä‚éê‡AáŠ±ƒYƒŒ‚Ü‚·B‚»‚Ìê‡A‹–ìŠp‚ğ­‚µ’²®‚·‚é‚Æ‡‚¤ê‡‚ª‘½‚¢‚Å‚·B
-ƒtƒ@ƒCƒ‹ƒZƒbƒg’PˆÊ‚ÅAƒJƒƒ‰Œ³ƒ‚ƒfƒ‹‚ğw’è‰Â”\‚Å‚·B
-ver5.01.05‚æ‚èŒ³ƒ‚ƒfƒ‹‚ªƒ{[ƒ“‚Ì‚İ‚Å‚ ‚Á‚½ê‡‚É‚à•ÏŠ·‚ÌƒYƒŒ‚ª¬‚³‚­‚È‚é‚æ‚¤‚É’²®‚µ‚Ü‚µ‚½B
-
-
-
-----------------------------------------------------------------
-¡@ˆêŠ‡ƒTƒCƒWƒ“ƒO‹@”\
-----------------------------------------------------------------
-
-uˆêŠ‡vƒ^ƒu‚ÅACSV‚ğw’è‚·‚é–‚ÅA•¡”‚ÌƒTƒCƒWƒ“ƒO‚ğˆêŠ‡‚Ås‚¤–‚ª‚Å‚«‚Ü‚·B
-‹ï‘Ì“I‚È’l‚ÍuˆêŠ‡ƒTƒCƒWƒ“ƒOƒTƒ“ƒvƒ‹.csvv‚ğ‚²Šm”F‚­‚¾‚³‚¢B
-ƒwƒbƒ_‚Ìˆês–Ú‚Í“Ç‚İ”ò‚Î‚µ‚Ü‚·B
-
-¦ƒf[ƒ^‚Éu,(ƒJƒ“ƒ})v‚ğg‚í‚È‚¢‚Å‰º‚³‚¢
-¦o—Íƒf[ƒ^‚ÍAGUIƒfƒtƒHƒ‹ƒg‚Æ“¯‚¶‚­AŒ³‚ÌVMDƒtƒ@ƒCƒ‹‚Æ“¯‚¶êŠ‚Éo—Í‚µ‚Ü‚·B
-¦LibreOffice‚ÅŠJ‚­Û‚Ì’ˆÓ“_
-@EƒeƒLƒXƒg‚ÌƒCƒ“ƒ|[ƒgƒ_ƒCƒAƒƒO‚ÅA‹æØ‚è‚ÌƒIƒvƒVƒ‡ƒ“‚©‚çuƒZƒ~ƒRƒƒ“v‚ğŠO‚µ‚Ä‚­‚¾‚³‚¢
-
-
-01—ñ–Ú c ƒOƒ‹[ƒvNo
-          ƒTƒCƒWƒ“ƒO‚ğÀs‚µ‚½‚¢ƒOƒ‹[ƒv’PˆÊ‚Å˜A”Ô‚ğ‚Â‚¯‚Ä‚­‚¾‚³‚¢B
-02—ñ–Ú c ’²®‘ÎÛƒ‚[ƒVƒ‡ƒ“VMD/VPD(ƒtƒ‹ƒpƒX)
-          uƒtƒ@ƒCƒ‹vu•¡”vƒ^ƒu‚Ìu’²®‘ÎÛƒ‚[ƒVƒ‡ƒ“VMD/VPDvƒtƒ@ƒCƒ‹ƒpƒXBƒAƒXƒ^ƒŠƒXƒN‚Íg‚¦‚Ü‚¹‚ñB
-03—ñ–Ú c ƒ‚[ƒVƒ‡ƒ“ì¬Œ³ƒ‚ƒfƒ‹PMX
-          uƒtƒ@ƒCƒ‹vu•¡”vƒ^ƒu‚Ìuƒ‚[ƒVƒ‡ƒ“ì¬Œ³ƒ‚ƒfƒ‹PMXvƒtƒ@ƒCƒ‹ƒpƒXB
-04—ñ–Ú c ƒ‚[ƒVƒ‡ƒ“•ÏŠ·æƒ‚ƒfƒ‹PMX
-          uƒtƒ@ƒCƒ‹vu•¡”vƒ^ƒu‚Ìuƒ‚[ƒVƒ‡ƒ“•ÏŠ·æƒ‚ƒfƒ‹PMXvƒtƒ@ƒCƒ‹ƒpƒXB
-05—ñ–Ú c ƒZƒ“ƒ^[XZ•â³
-          uƒtƒ@ƒCƒ‹vu•¡”vƒ^ƒu‚ÌuƒXƒ^ƒ“ƒX’Ç‰Á•â³„ƒZƒ“ƒ^[XZ•â³vƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-06—ñ–Ú c ã”¼g•â³
-          uƒtƒ@ƒCƒ‹vu•¡”vƒ^ƒu‚ÌuƒXƒ^ƒ“ƒX’Ç‰Á•â³„ã”¼g•â³vƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-07—ñ–Ú c ‰º”¼g•â³
-          uƒtƒ@ƒCƒ‹vu•¡”vƒ^ƒu‚ÌuƒXƒ^ƒ“ƒX’Ç‰Á•â³„‰º”¼g•â³vƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-08—ñ–Ú c ‘«‚h‚j•â³
-          uƒtƒ@ƒCƒ‹vu•¡”vƒ^ƒu‚ÌuƒXƒ^ƒ“ƒX’Ç‰Á•â³„‘«‚h‚j•â³vƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-09—ñ–Ú c ‚Â‚Üæ•â³
-          uƒtƒ@ƒCƒ‹vu•¡”vƒ^ƒu‚ÌuƒXƒ^ƒ“ƒX’Ç‰Á•â³„‚Â‚Üæ•â³vƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-10—ñ–Ú c ‚Â‚Üæ‚h‚j•â³
-          uƒtƒ@ƒCƒ‹vu•¡”vƒ^ƒu‚ÌuƒXƒ^ƒ“ƒX’Ç‰Á•â³„‚Â‚Üæ‚h‚j•â³vƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-11—ñ–Ú c Œ¨•â³
-          uƒtƒ@ƒCƒ‹vu•¡”vƒ^ƒu‚ÌuƒXƒ^ƒ“ƒX’Ç‰Á•â³„Œ¨•â³vƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-12—ñ–Ú c ƒZƒ“ƒ^[Y•â³
-          uƒtƒ@ƒCƒ‹vu•¡”vƒ^ƒu‚ÌuƒXƒ^ƒ“ƒX’Ç‰Á•â³„ƒZƒ“ƒ^[Y•â³vƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-13—ñ–Ú c €‚è•ªU
-          uƒtƒ@ƒCƒ‹vu•¡”vƒ^ƒu‚Ìu€‚è•ªUvƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-14—ñ–Ú c ƒ‚[ƒt’uŠ·
-          uƒ‚[ƒtvƒ^ƒu‚Ìuƒ‚[ƒt’uŠ·v‚ÌƒZƒbƒgBu’uŠ·Œ³ƒ‚[ƒt:’uŠ·æƒ‚[ƒt:‘å‚«‚³;v‚ğ1‚Â‚ÌƒZƒbƒg‚Æ‚µ‚Ä‚­‚¾‚³‚¢B
-          iƒ‚[ƒt–¼‚ÉƒZƒ~ƒRƒƒ“‚ª“ü‚Á‚Ä‚¢‚é‚Æg‚¦‚Ü‚¹‚ñBÅŒã‚ÌƒZƒ~ƒRƒƒ“‚Í•K{‚Å‚·j
-15—ñ–Ú c ÚG‰ñ”ğ
-          u˜rvƒ^ƒu‚ÌuÚG‰ñ”ğvƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-16—ñ–Ú c ÚG‰ñ”ğ„‘Ì
-          u˜rvƒ^ƒu‚ÌuÚG‰ñ”ğv‚Ì‘ÎÛ„‘Ì–¼ƒŠƒXƒgBu„‘Ì–¼;v‚Ì‚æ‚¤‚É”¼ŠpƒZƒ~ƒRƒƒ“‚ÅŒq‚¢‚Å‚­‚¾‚³‚¢B
-          i„‘Ì–¼‚ÉƒZƒ~ƒRƒƒ“‚ª“ü‚Á‚Ä‚¢‚é‚Æg‚¦‚Ü‚¹‚ñBÅŒã‚ÌƒZƒ~ƒRƒƒ“‚Í•K{‚Å‚·j
-17—ñ–Ú c ˆÊ’u‡‚í‚¹
-          u˜rvƒ^ƒu‚ÌuˆÊ’u‡‚í‚¹vƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-18—ñ–Ú c wˆÊ’u‡‚í‚¹
-          u˜rvƒ^ƒu‚Ìuw‚ÌˆÊ’u‚ÅˆÊ’u‡‚í‚¹‚ğs‚¤vƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-          •¡”lƒ‚[ƒVƒ‡ƒ“‚Ìê‡A‹­§“I‚É0‚É‚È‚è‚Ü‚·B
-19—ñ–Ú c °ˆÊ’u‡‚í‚¹
-          u˜rvƒ^ƒu‚Ìu°‚Æ‚ÌˆÊ’u‡‚í‚¹‚àˆê‚És‚¤vƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-20—ñ–Ú c èñ‚Ì‹——£
-          u˜rvƒ^ƒu‚ÌuèñŠÔ‚Ì‹——£vƒXƒ‰ƒCƒ_[B0ˆÈã‚Ì’l‚ª•K{‚Å‚·BGUIƒfƒtƒHƒ‹ƒg’l‚ÍA1l‚Ìê‡u1.7vA•¡”l‚Ìê‡u2.5v‚Å‚·B
-21—ñ–Ú c w‚Ì‹——£
-          u˜rvƒ^ƒu‚ÌuwŠÔ‚Ì‹——£vƒXƒ‰ƒCƒ_[B0ˆÈã‚Ì’l‚ª•K{‚Å‚·BGUIƒfƒtƒHƒ‹ƒg‚Íu1.4v‚Å‚·B
-22—ñ–Ú c °‚Æ‚Ì‹——£
-          u˜rvƒ^ƒu‚Ìuèñ‚Æ°‚Æ‚Ì‹——£vƒXƒ‰ƒCƒ_[B0ˆÈã‚Ì’l‚ª•K{‚Å‚·BGUIƒfƒtƒHƒ‹ƒg‚Íu1.2v‚Å‚·B
-23—ñ–Ú c ˜rƒ`ƒFƒbƒNƒXƒLƒbƒv
-          u˜rvƒ^ƒu‚Ìu˜r`èñ‚ÌƒTƒCƒWƒ“ƒO‰Â”\ƒ`ƒFƒbƒN‚ğƒXƒLƒbƒv‚·‚évƒ`ƒFƒbƒNƒ{ƒbƒNƒXB0:–³ŒøA1:—LŒø‚Ì‚¢‚¸‚ê‚©•K{‚Å‚·B
-24—ñ–Ú c ‘SˆÚ“®—Ê•â³’l
-          u‘«vƒ^ƒu‚Ìu‘SˆÚ“®—Ê•â³vƒXƒ‰ƒCƒ_[BGUIƒfƒtƒHƒ‹ƒg‚Íu1v‚Å‚·B
-25—ñ–Ú c ‘«‚h‚jƒIƒtƒZƒbƒg
-          u‘«vƒ^ƒu‚Ìu‘«‚h‚jƒIƒtƒZƒbƒgvƒXƒ‰ƒCƒ_[BGUIƒfƒtƒHƒ‹ƒg‚Íu0v‚Å‚·B
-26—ñ–Ú c ƒJƒƒ‰ƒ‚[ƒVƒ‡ƒ“VMD
-          uƒJƒƒ‰vƒ^ƒu‚ÌuƒJƒƒ‰ƒ‚[ƒVƒ‡ƒ“VMDvƒtƒ@ƒCƒ‹ƒpƒXBƒOƒ‹[ƒv’PˆÊ‚Ì1s–Ú‚Ì’l‚Ì‚İQÆ‚µ‚Ü‚·B
-27—ñ–Ú c ‹——£‰Â“®”ÍˆÍ
-          uƒJƒƒ‰vƒ^ƒu‚Ìu‹——£‰Â“®”ÍˆÍvƒXƒ‰ƒCƒ_[B1ˆÈã‚Ì’l‚ª•K{‚Å‚·B
-28—ñ–Ú c ƒJƒƒ‰ì¬Œ³ƒ‚ƒfƒ‹PMX
-          uƒJƒƒ‰vƒ^ƒu‚ÌuƒJƒƒ‰ì¬Œ³ƒ‚ƒfƒ‹PMXvƒtƒ@ƒCƒ‹ƒpƒXB
-29—ñ–Ú c ‘S’·YƒIƒtƒZƒbƒg
-          uƒJƒƒ‰vƒ^ƒu‚Ìu‘S’·YƒIƒtƒZƒbƒgvB
-
-
-----------------------------------------------------------------
-¡@‚¨‚Ü‚¯‹@”\
-----------------------------------------------------------------
-
-1) CSVo—Í
-
-Ew’è‚³‚ê‚½VMDƒ‚[ƒVƒ‡ƒ“ƒf[ƒ^‚ğCSVŒ`®‚Åo—Í‚µ‚Ü‚·B
-Eƒ{[ƒ“Eƒ‚[ƒtEƒJƒƒ‰•ÊX‚ÌƒtƒH[ƒ}ƒbƒg‚Æ‚È‚Á‚Ä‚¢‚Ü‚·B
-E•âŠÔ‹Èü‚à‘S‚Äo—Í‚µ‚Ü‚·B
-
+ãƒ»Even if twist is already present, distribution processing is performed considering it.
+However, due to the nature of twist, processing is done per keyframe at change points, so it takes time.
 
 ----------------
-2) VMDo—Í
+6) Morph Replacement
 
-Ew’è‚³‚ê‚½CSVƒf[ƒ^iCSVo—Í‹@”\‚ÌƒtƒH[ƒ}ƒbƒg€‹’j‚ğVMDƒ‚[ƒVƒ‡ƒ“ƒf[ƒ^‚Æ‚µ‚Äo—Í‚µ‚Ü‚·B
-E•âŠÔ‹Èü‚à‘S‚Äo—Í‚µ‚Ü‚·B
+You can replace any morph in the source motion with any morph in the target model.
+Morph size can also be corrected.
+Morphs can be specified per file set.
+If Aâ†’B and Bâ†’C are specified at once, B will have A+B correction, and C will have B's correction.
 
-¦ƒXƒ€[ƒWƒ“ƒOEƒ‚[ƒtƒuƒŒƒ“ƒhE•âŠÔ‹Èüƒrƒ…[ƒ[‚ÍAƒ‚[ƒVƒ‡ƒ“ƒTƒ|[ƒ^[‚ÉˆÚA‚µ‚Ü‚µ‚½
+----------------
+7) Arm Processing
 
+Both collision avoidance and position alignment can be processed (collision avoidance â†’ position alignment in order).
+As with arm stance correction, if Arm IK is present, processing is not performed, so turn ON the skip option if you want processing.
+Collision avoidance includes rigid body selection, so model loading is performed when switching tabs.
 
-----------------------------------------------------------------
-¡@Ú‚µ‚¢g‚¢•û
-----------------------------------------------------------------
+ãƒ»Collision Avoidance
+  ... Avoids collision when the specified bone-following rigid body and hand collide.
+      You can easily add bone-following rigid bodies in PMX Editor (PmxView > Edit > Select Bone > Create Basic Rigid Body - Bone Following Rigid Body).
+      Hand detection points: fingertip, wrist, midpoint between wrist and elbow, elbow, midpoint between arm and elbow (5 points).
 
-@https://github.com/miu200521358/vmd_sizing/wiki/02.-%E4%BD%BF%E3%81%84%E6%96%B9
+ãƒ»Position Alignment
+  ... Aligns wrist (or finger) position to the source model.
+      For multi-person motions, aligns positions between people. Height differences are interpolated appropriately.
 
-@g‚¢•û‚â‰ğà‚Ì‘¼AFAQ‚âì¬Œ³ƒ‚ƒfƒ‹‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡‚Ì‘Î‰•û–@‚È‚ÇAWiki‚É‹LÚ‚µ‚Ä‚¢‚Ü‚·B
+      ãƒ»Finger Position Alignment: Aligns not only wrists but also finger positions.
+                            For multi-person motions, this takes time and may not look good, so a warning is shown.
 
+      ãƒ»Floor Position Alignment: Aligns not only wrists but also with the floor position.
 
-----------------------------------------------------------------
-¡@–â‘è‚ª‹N‚«‚½ê‡
-----------------------------------------------------------------
+----------------
+8) Leg Processing (since ver5.01.06)
 
-@E‰ğ“€ƒtƒ@ƒCƒ‹‚Ì•¶š‰»‚¯
-@Eƒ}ƒJƒtƒB[‚ÅƒEƒBƒ‹ƒX‚ª“ü‚Á‚Ä‚¢‚é‚ÆŒŸ’m‚³‚ê‚Ä‚µ‚Ü‚¤
-@‚Æ‚¢‚Á‚½–â‘è‚ª‹N‚«‚½ê‡A‰º‹Lƒy[ƒW‚ğQÆ‚µ‚ÄA‰ğŒˆ‚Å‚«‚é‚©‚²Šm”F‚­‚¾‚³‚¢B
+ãƒ»Movement Correction
+  ... Used when you want to expand overall movement in multi-person motions, make movements more dynamic, or suppress them.
+      It's a ratio, so the default is "1". "1.1" means "1.1 times".
 
-@https://github.com/miu200521358/vmd_sizing/wiki/03.-%E5%95%8F%E9%A1%8C%E3%81%8C%E8%B5%B7%E3%81%8D%E3%81%9F%E5%A0%B4%E5%90%88
+ãƒ»Leg IK Offset
+  ... Used when legs overlap when closed (due to thickness), or when you want to adjust only individual leg IK movement without changing overall movement.
+      This is the actual coordinate size, so "+0.1" widens the left/right legs by 0.1 in the X direction ("-0.1" narrows).
 
-@‚»‚ê‚Å‚à‰ğŒˆo—ˆ‚È‚¢ê‡AƒRƒ~ƒ…ƒjƒeƒB‚É‚Ä‚²•ñ‚­‚¾‚³‚¢B
+----------------
+9) Camera Processing
 
-
-----------------------------------------------------------------
-¡@ƒRƒ~ƒ…ƒjƒeƒB‚Ì‚²ˆÄ“à
-----------------------------------------------------------------
-
-@ƒjƒRƒjƒRƒ~ƒ…ƒjƒeƒBFhttps://com.nicovideo.jp/community/co5387214
-
-@@VMDƒTƒCƒWƒ“ƒO‚âƒ‚[ƒVƒ‡ƒ“ƒTƒ|[ƒ^[‚È‚ÇA©ìƒc[ƒ‹‚ÉŠÖ‚·‚é”XÀŒ±º
-@@ˆê‘«‘‚­ƒÀ”Å‚ğ‚µ‚Ä‚¢‚½‚¾‚­‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-@@ƒTƒCƒWƒ“ƒO‚ª‚¤‚Ü‚­‚¢‚©‚È‚¢ê‡‚ÌƒtƒHƒ[‚È‚Ç‚às‚¦‚½‚ç‚¢‚¢‚È[‚Æv‚Á‚Ä‚Ü‚·B
-@@ˆê‰ƒNƒ[ƒYƒh‚Å‚·‚ª©“®³”F‚È‚Ì‚Å‚¨‹CŒy‚É‚Ç‚¤‚¼
-
-
-----------------------------------------------------------------
-¡@g—pğŒ ‘¼
-----------------------------------------------------------------
-
-@s•K{–€t
-
-@@E•ÏŠ·‚µ‚½VMDƒ‚[ƒVƒ‡ƒ“‚ÌŒ‹‰Ê‚ğŒöŠJE”z•z‚·‚éê‡‚ÍAƒNƒŒƒWƒbƒg‚Ì–¾‹L‚Ì‚²‹¦—Í‚ğ‚¨Šè‚¢’v‚µ‚Ü‚·
-@@EƒjƒRƒjƒR“®‰æ‚Ìê‡AƒRƒ“ƒeƒ“ƒcƒcƒŠ[‚ÖƒcƒŠ[—pÃ‰æ(im9755721)‚ğ“o˜^‚µ‚Ä‚­‚¾‚³‚¢
-@@@¦ƒRƒ“ƒeƒ“ƒcƒcƒŠ[‚Ée“o˜^‚µ‚Ä‚¢‚½‚¾‚¯‚éê‡AƒNƒŒƒWƒbƒg‹LÚ‚Í”CˆÓ‚Å‚·
-
-@s”CˆÓ–€t
-
-@@–{ƒc[ƒ‹‚¨‚æ‚Ñ¶¬‚µ‚½ƒ‚[ƒVƒ‡ƒ“‚ÉŠÖ‚µ‚ÄAŒ³X‚Ìƒ‚[ƒVƒ‡ƒ“‚Ì‹K–ñ‚Ì”ÍˆÍ“à‚ÅAˆÈ‰º‚Ìsˆ×‚Í©—R‚És‚Á‚Ä‰º‚³‚¢
-
-@@Eƒ‚[ƒVƒ‡ƒ“‚Ì’²®E‰ü•Ï
-@@E“®‰æ“ŠeƒTƒCƒgASNS“™‚Ö‚Ìƒ‚[ƒVƒ‡ƒ“g—p“®‰æ“Še
-@@@Ei’»“™‚Å¶¬‚µ‚½ƒ‚[ƒVƒ‡ƒ“‚»‚Ì‚Ü‚Ü‚ğ“Še‚·‚é‚±‚Æ‚à–â‘è‚ ‚è‚Ü‚¹‚ñ
-@@@E‚½‚¾‚µAŒ³X‚Ìƒ‚[ƒVƒ‡ƒ“‚âƒ‚ƒfƒ‹‚Ì‹K–ñ‚Å“Šeæ‚â”N—î§ŒÀ“™‚ÌğŒ‚ª‹K’è‚³‚ê‚Ä‚¢‚éê‡A‚±‚Ìƒc[ƒ‹‚Å¶¬‚µ‚½ƒ‚[ƒVƒ‡ƒ“‚à‚»‚ê‚É€‚¶‚Ü‚·
-
-@s‹Ö~–€t
-
-@@–{ƒc[ƒ‹‚¨‚æ‚Ñ¶¬‚µ‚½ƒ‚[ƒVƒ‡ƒ“‚ÉŠÖ‚µ‚ÄAˆÈ‰º‚Ìsˆ×‚Í‚²‰“—¶Šè‚¢‚Ü‚·
-
-@@EŒ³X‚Ìƒ‚[ƒVƒ‡ƒ“‚âƒ‚ƒfƒ‹“™‚Ì‹K–ñ”ÍˆÍŠO‚Ìsˆ×
-@@Eƒ‚[ƒVƒ‡ƒ“‚ÌŠ®‘S©ì”­Œ¾
-@@EŠeŒ —˜Ò—l‚Ì‚²–À˜f‚É‚È‚é‚æ‚¤‚Èsˆ×
-@@E‘¼Ò‚Ì”îæ’†–Ú“I‚Ì—˜—pi“ñŸŒ³EOŸŒ³•s–âj
-
-@@¦@ver4.02‚æ‚èˆÈ‰º‚Ì–€‚ğ‹Ö~–€‚©‚çœŠO‚¢‚½‚µ‚Ü‚·B
-@@@w‰ß“x‚È–\—ÍEàÎåöE—öˆ¤E—ÂŠï“IE­¡“IE@‹³“I•\Œ»‚ğŠÜ‚ŞiR-15‘Š“–ˆÈãjì•i‚Ö‚Ì—˜—px
-
-@@@E•K‚¸Œ³X‚Ìƒ‚[ƒVƒ‡ƒ“‚âƒ‚ƒfƒ‹“™‚Ì‹K–ñ”ÍˆÍ‚ğ‚²Šm”F‚ÌãA‚²—˜—p‚­‚¾‚³‚¢B
-@@@E‚Ü‚½ì•i‚ğŒöŠJ‚³‚ê‚éÛ‚É‚ÍAŒŸõ”ğ‚¯“™‚Ì‚²”z—¶‚ğ‚æ‚ë‚µ‚­‚¨Šè‚¢‚¢‚½‚µ‚Ü‚·B
-
-@@¦@ver5.00‚æ‚èˆÈ‰º‚Ì–€‚ğ‹Ö~–€‚©‚çœŠO‚¢‚½‚µ‚Ü‚·B
-@@@w‰c—˜–Ú“I‚Ì—˜—px
-
-@s–ÆÓ–€t
-
-@@EŒ³ƒ‚[ƒVƒ‡ƒ“‚©‚ç“®‚«‚ª•Ï‚í‚éê‡‚ª‚ ‚è‚Ü‚·‚Ì‚ÅA©ŒÈÓ”C‚Å‚²—˜—p‚­‚¾‚³‚¢
-@@Eƒc[ƒ‹g—p‚É‚æ‚Á‚Ä¶‚¶‚½‚¢‚©‚È‚é–â‘è‚ÉŠÖ‚µ‚ÄAìÒ‚ÍˆêØ‚ÌÓ”C‚ğ•‰‚¢‚©‚Ë‚Ü‚·
-
+Adjusts the camera so it matches the appearance of the source model.
+For multi-person motions, height differences are interpolated when focusing on individuals.
+If there are large height differences and many people, there may be slight misalignment. Adjusting the field of view often helps.
+You can specify the camera source model per file set.
+Since ver5.01.05, adjustments are made to reduce conversion misalignment when the source model has only bones.
 
 ----------------------------------------------------------------
-¡@ƒ\[ƒXƒR[ƒhEƒ‰ƒCƒuƒ‰ƒŠ
+â–  Bulk Sizing Feature
 ----------------------------------------------------------------
 
-‚±‚Ìƒc[ƒ‹‚ÍApython‚Åì¬‚µ‚Ä‚¨‚èAˆÈ‰ºƒ‰ƒCƒuƒ‰ƒŠ‚ğg—pE“¯«‚µ‚Ä‚¢‚Ü‚·B
+You can bulk size multiple motions by specifying a CSV in the "Bulk" tab.
+See "Bulk Sizing Sample.csv" for details.
+The first header row is skipped.
 
-Enumpy (https://pypi.org/project/numpy/)
-Ebezier (https://pypi.org/project/bezier/)
-Enumpy-quaternion (https://pypi.org/project/numpy-quaternion/)
-EwxPython (https://pypi.org/project/wxPython/)
-Epyinstaller (https://pypi.org/project/PyInstaller/)
+* Do not use commas in data
+* Output data is saved in the same location as the original VMD file, same as GUI default.
+* Notes for opening in LibreOffice:
+  ãƒ»In the text import dialog, uncheck "semicolon" in the delimiter options.
 
-ƒ\[ƒXƒR[ƒh‚ÍAGithub‚ÅŒöŠJ‚µ‚Ä‚¢‚Ü‚·B(MITƒ‰ƒCƒZƒ“ƒX)
+01st column ... Group No
+          Assign consecutive numbers per group you want to size.
+02nd column ... Target Motion VMD/VPD (full path)
+          File path for "Target Motion VMD/VPD" in "File"/"Multi" tab. Asterisks not allowed.
+03rd column ... Source Model PMX
+          File path for "Source Model PMX" in "File"/"Multi" tab.
+04th column ... Destination Model PMX
+          File path for "Destination Model PMX" in "File"/"Multi" tab.
+05th column ... Center XZ Correction
+          Checkbox for "Add Stance Correction > Center XZ Correction" in "File"/"Multi" tab. Must be 0:Disabled or 1:Enabled.
+06th column ... Upper Body Correction
+          Checkbox for "Add Stance Correction > Upper Body Correction" in "File"/"Multi" tab. Must be 0:Disabled or 1:Enabled.
+07th column ... Lower Body Correction
+          Checkbox for "Add Stance Correction > Lower Body Correction" in "File"/"Multi" tab. Must be 0:Disabled or 1:Enabled.
+08th column ... Leg IK Correction
+          Checkbox for "Add Stance Correction > Leg IK Correction" in "File"/"Multi" tab. Must be 0:Disabled or 1:Enabled.
+09th column ... Toe Correction
+          Checkbox for "Add Stance Correction > Toe Correction" in "File"/"Multi" tab. Must be 0:Disabled or 1:Enabled.
+10th column ... Toe IK Correction
+          Checkbox for "Add Stance Correction > Toe IK Correction" in "File"/"Multi" tab. Must be 0:Disabled or 1:Enabled.
+11th column ... Shoulder Correction
+          Checkbox for "Add Stance Correction > Shoulder Correction" in "File"/"Multi" tab. Must be 0:Disabled or 1:Enabled.
+12th column ... Center Y Correction
+          Checkbox for "Add Stance Correction > Center Y Correction" in "File"/"Multi" tab. Must be 0:Disabled or 1:Enabled.
+13th column ... Twist Distribution
+          Checkbox for "Twist Distribution" in "File"/"Multi" tab. Must be 0:Disabled or 1:Enabled.
+14th column ... Morph Replacement
+          Set for "Morph Replacement" in "Morph" tab. Use "Source Morph:Target Morph:Size;" for each set.
+          (Cannot use semicolons in morph names. Final semicolon is required.)
+15th column ... Collision Avoidance
+          Checkbox for "Collision Avoidance" in "Arm" tab. Must be 0:Disabled or 1:Enabled.
+16th column ... Collision Avoidance Rigid Body
+          List of target rigid body names for "Collision Avoidance" in "Arm" tab. Connect with semicolons like "RigidBodyName;".
+          (Cannot use semicolons in rigid body names. Final semicolon is required.)
+17th column ... Position Alignment
+          Checkbox for "Position Alignment" in "Arm" tab. Must be 0:Disabled or 1:Enabled.
+18th column ... Finger Position Alignment
+          Checkbox for "Align by finger position" in "Arm" tab. Must be 0:Disabled or 1:Enabled.
+          Forced to 0 for multi-person motions.
+19th column ... Floor Position Alignment
+          Checkbox for "Also align with floor" in "Arm" tab. Must be 0:Disabled or 1:Enabled.
+20th column ... Wrist Distance
+          Slider for "Wrist Distance" in "Arm" tab. Must be 0 or greater. GUI default is "1.7" for single person, "2.5" for multiple.
+21st column ... Finger Distance
+          Slider for "Finger Distance" in "Arm" tab. Must be 0 or greater. GUI default is "1.4".
+22nd column ... Floor Distance
+          Slider for "Wrist to Floor Distance" in "Arm" tab. Must be 0 or greater. GUI default is "1.2".
+23rd column ... Arm Check Skip
+          Checkbox for "Skip arm-to-wrist sizing check" in "Arm" tab. Must be 0:Disabled or 1:Enabled.
+24th column ... Overall Movement Correction Value
+          Slider for "Overall Movement Correction" in "Leg" tab. GUI default is "1".
+25th column ... Leg IK Offset
+          Slider for "Leg IK Offset" in "Leg" tab. GUI default is "0".
+26th column ... Camera Motion VMD
+          File path for "Camera Motion VMD" in "Camera" tab. Only the first row per group is referenced.
+27th column ... Distance Movable Range
+          Slider for "Distance Movable Range" in "Camera" tab. Must be 1 or greater.
+28th column ... Camera Source Model PMX
+          File path for "Camera Source Model PMX" in "Camera" tab.
+29th column ... Overall Y Offset
+          "Overall Y Offset" in "Camera" tab.
+
+----------------------------------------------------------------
+â–  Extra Features
+----------------------------------------------------------------
+
+1) CSV Output
+
+ãƒ»Outputs specified VMD motion data in CSV format.
+ãƒ»Separate formats for bones, morphs, and camera.
+ãƒ»Outputs all interpolation curves as well.
+
+----------------
+2) VMD Output
+
+ãƒ»Outputs specified CSV data (following CSV output format) as VMD motion data.
+ãƒ»Outputs all interpolation curves as well.
+
+* Smoothing, morph blend, and interpolation curve viewer have been moved to MotionSupporter.
+
+----------------------------------------------------------------
+â–  Detailed Usage
+----------------------------------------------------------------
+
+https://github.com/miu200521358/vmd_sizing/wiki/02.-ä½¿ã„æ–¹
+
+Usage instructions, explanations, FAQ, and how to handle cases where the source model cannot be found are posted on the Wiki as needed.
+
+----------------------------------------------------------------
+â–  If Problems Occur
+----------------------------------------------------------------
+
+ãƒ»Garbled file name after extraction
+ãƒ»Detected as a virus by McAfee
+If you encounter such problems, please refer to the following page to see if you can resolve them.
+
+https://github.com/miu200521358/vmd_sizing/wiki/03.-å•é¡ŒãŒèµ·ããŸå ´åˆ
+
+If you still cannot resolve the issue, please report it in the community.
+
+----------------------------------------------------------------
+â–  Community Information
+----------------------------------------------------------------
+
+NicoNico Community: https://com.nicovideo.jp/community/co5387214
+
+  Lab for various experiments related to VMDSizing and MotionSupporter tools.
+  You can try beta versions early.
+  I hope to provide support if sizing doesn't work well.
+  It's closed, but auto-approved, so feel free to join.
+
+----------------------------------------------------------------
+â–  Terms of Use, etc.
+----------------------------------------------------------------
+
+[Required]
+
+ãƒ»If you publish/distribute converted VMD motion results, please credit.
+ãƒ»For NicoNico videos, please register the content tree illustration (im9755721) in the content tree.
+* If you register in the content tree, crediting is optional.
+
+[Optional]
+
+Within the scope of the original motion's terms, you are free to do the following with this tool and generated motions:
+
+ãƒ»Adjust/modify motions
+ãƒ»Post videos using motions to video sites, social media, etc.
+  ãƒ»You may post generated motions as-is for progress, etc.
+  ãƒ»However, if the original motion/model's terms specify conditions for posting or age restrictions, motions generated with this tool must also comply.
+
+[Prohibited]
+
+Please refrain from the following with this tool and generated motions:
+
+ãƒ»Actions outside the scope of the original motion/model's terms
+ãƒ»Claiming complete authorship of motions
+ãƒ»Actions that cause inconvenience to rights holders
+ãƒ»Use for slander or defamation of others (2D/3D not limited)
+
+* Since ver4.02, the following is no longer prohibited:
+  "Use in works containing excessive violence, obscenity, romance, grotesque, political, or religious expression (R-15 or higher)"
+
+  ãƒ»Please be sure to check the scope of the original motion/model's terms before use.
+  ãƒ»When publishing works, please consider measures to avoid search exposure, etc.
+
+* Since ver5.00, the following is no longer prohibited:
+  "Commercial use"
+
+[Disclaimer]
+
+ãƒ»Movements may change from the original motion, so use at your own risk.
+ãƒ»The author is not responsible for any problems caused by the use of the tool.
+
+----------------------------------------------------------------
+â–  Source Code & Libraries
+----------------------------------------------------------------
+
+This tool is created in Python and uses/includes the following libraries:
+
+ãƒ»numpy (https://pypi.org/project/numpy/)
+ãƒ»bezier (https://pypi.org/project/bezier/)
+ãƒ»numpy-quaternion (https://pypi.org/project/numpy-quaternion/)
+ãƒ»wxPython (https://pypi.org/project/wxPython/)
+ãƒ»pyinstaller (https://pypi.org/project/PyInstaller/)
+
+Source code is published on Github (MIT License):
 
 https://github.com/miu200521358/vmd_sizing
 
 
 ----------------------------------------------------------------
-¡@ƒNƒŒƒWƒbƒg
+â–  Credits
 ----------------------------------------------------------------
 
-@ƒc[ƒ‹–¼F@VMDƒTƒCƒWƒ“ƒO ‚à‚µ‚­‚Í VMDSizing
-@ìÒF@miu ‚à‚µ‚­‚Í miu200521358
+Tool name: VMDSizing
+Author: miu or miu200521358
 
-@http://www.nicovideo.jp/user/2776342
-@Twitter: @miu200521358
-@Mail: garnet200521358@gmail.com
-
+http://www.nicovideo.jp/user/2776342
+Twitter: @miu200521358
+Mail: garnet200521358@gmail.com
 
 ----------------------------------------------------------------
-¡@—š—ğ
+â–  History
 ----------------------------------------------------------------
 
-ver5.01.08@i2022/11/19j
-@@E•s‹ï‡C³F
-@@@@EƒNƒH[ƒ^ƒjƒIƒ“‚Ìƒm[ƒ}ƒ‰ƒCƒYˆ—iisnanƒ`ƒFƒbƒNj‚É‘S‚Ä‚ª0‚¾‚Á‚½ê‡‚É1‚ğ“ü‚ê‚È‚¢‚ÆAs—ñŒvZ‚Ånan‚ª“ü‚Á‚Ä‚µ‚Ü‚¤‚½‚ßğŒ’Ç‰Á
-@@@@EƒJƒƒ‰ƒTƒCƒWƒ“ƒO‚Ì‘OƒL[ƒtƒŒƒRƒs[”»’èˆ—‚ª³í‚É“®‚¢‚Ä‚È‚©‚Á‚½‚Ì‚ÅC³
+ver5.01.08 (2022/11/19)
+    ãƒ»Bugfix:
+        ãƒ»Added a condition to insert 1 when all values are 0 during quaternion normalization (isnan check), to prevent nan in matrix calculation
+        ãƒ»Fixed camera sizing previous keyframe copy judgment not working properly
 
+ver5.01.07 (2022/07/18)
+    ãƒ»Bugfix:
+        ãƒ»Removed default scalar=1 in quaternion normalization (isnan check)
+          * Only occurs when vpd has Y=180 (0.000000,1.000000,0.000000,-0.000000;)
 
-ver5.01.07@i2022/07/18j
-@@E•s‹ï‡C³F
-@@@@EƒNƒH[ƒ^ƒjƒIƒ“‚Ìƒm[ƒ}ƒ‰ƒCƒYˆ—iisnanƒ`ƒFƒbƒNj‚ÉAscalar‚ÉƒfƒtƒHƒ‹ƒg1‚ª“ü‚Á‚Ä‚½‚½‚ßœ‹
-@@@@@¦‚±‚ê‚ª”­Œ»‚·‚é‚Ì‚ÍAvpd‚ÅY=180i0.000000,1.000000,0.000000,-0.000000;j‚ª“ü‚Á‚Ä‚½‚¾‚¯
+ver5.01.06 (2022/04/19)
+    ãƒ»Feature: Added Leg tab
+        ãƒ»movement correction: For expanding overall movement in multi-person motions, making movements more dynamic, etc.
+        ãƒ»Leg IK offset: For adjusting only individual leg IK movement when legs overlap when closed, etc.
+    ãƒ»Feature: Added "Save Bulk Sizing" button to Bulk tab
+        ãƒ»Outputs current sizing settings to CSV
+        ãƒ»Loading the output CSV in the Bulk tab allows repeated use of sizing settings
+    ãƒ»Bugfix:
+        ãƒ»Fixed output VMD file name not converting properly during continuous sizing
+        ãƒ»Fixed camera VMD CSV output not outputting rotation info correctly
 
+ver5.01.05 (2022/02/11)
+    ãƒ»Feature: Added processing to display missing bones as semi-standard and others during pre-check
+    ãƒ»Feature: When source model has only bones, camera sizing now references estimated bone position instead of vertex position
+    ãƒ»Feature: Added error messages
 
-ver5.01.06@i2022/04/19j
-@@E‹@”\’Ç‰ÁF‘«ƒ^ƒu’Ç‰Á
-@@@@E‘S‘ÌˆÚ“®—Ê•â³F•¡”lƒ‚[ƒVƒ‡ƒ“‚Ì‘S‘Ì“I‚ÉL‚°‚½‚¢A­‚µ“®‚«‚ğƒ_ƒCƒiƒ~ƒbƒN‚É‚µ‚½‚¢‚È‚Ç‚Ì—p
-@@@@E‘«‚h‚jƒIƒtƒZƒbƒgFi“÷Œú‚Æ‚©‚Åj‘«‚ğ•Â‚¶‚½‚Éd‚È‚Á‚Ä‚µ‚Ü‚Á‚½‚èA‘S‘Ì‚ÌˆÚ“®—Ê‚Í•Ï‚¦‚¸‚ÉŒÂ•Ê‚Ì‘«‚h‚j‚ÌˆÚ“®—Ê‚¾‚¯‚¿‚å‚Á‚Æ’²®‚µ‚½‚¢—p
-@@E‹@”\’Ç‰ÁFˆêŠ‡ƒ^ƒu‚ÉuˆêŠ‡ƒTƒCƒWƒ“ƒO•Û‘¶vƒ{ƒ^ƒ“’Ç‰Á
-@@@@EŒ»İ“ü—Í‚µ‚Ä‚ ‚éƒTƒCƒWƒ“ƒOİ’è‚ğCSV‚Éo—Í
-@@@@Eo—Í‚³‚ê‚½ˆêŠ‡İ’è—pCSV‚ğˆêŠ‡ƒ^ƒu‚Å“Ç‚İ‚Ş‚ÆAƒTƒCƒWƒ“ƒOİ’è‚ğŒJ‚è•Ô‚µg—p‚·‚é–‚ª‰Â”\
-@@E•s‹ï‡C³F
-@@@@E˜A‘±ƒTƒCƒWƒ“ƒO‚Éo—ÍVMDƒtƒ@ƒCƒ‹–¼‚ª“KØ‚É•ÏŠ·‚³‚ê‚È‚©‚Á‚½‚Ì‚ğC³
-@@@@EƒJƒƒ‰VMD‚ÌCSVo—Í‚É‰ñ“]î•ñ‚ª³í‚Éo—Í‚³‚ê‚È‚©‚Á‚½‚Ì‚ğC³
+ver5.01.04 (2021/09/23)
+    ãƒ»Bugfix: Fixed error when reading VMD data without morph block
+    ãƒ»Feature: Added camera sizing only option
+    ãƒ»Feature: Changed background to pale blue-green when spin scroll is negative
+        ãƒ»Morph replacement: size correction field
+        ãƒ»Camera correction: Y offset
 
+ver5.01.03 (2021/06/30)
+    ãƒ»Feature: Added processing to check bone properties when checking for missing bones before conversion
+        â†’ Easier to see when D bones are present but disabled
+    ãƒ»Change: Position alignment
+        ãƒ»Excludes elbow from position alignment arm IK processing if elbow angle is less than 30 degrees
+          â†’ Should reduce possibility of elbow breaking backwards
+    ãƒ»Change: Arm stance correction
+        ãƒ»Adjusted processing to avoid wrist breaking for ISAO-style Miku
+          (For ISAO-style Miku, wrist and middle finger are separated, so adjustment is based on display destination)
 
-ver5.01.05@i2022/02/11j
-@@E‹@”\’Ç‰ÁF–‘Oƒ`ƒFƒbƒN‚Åƒ{[ƒ“‚ğ€•W€‚Ü‚Å‚Æ‚»‚êˆÈŠO‚É•ª‚¯‚Ä•\¦‚·‚é‚æ‚¤ˆ—’Ç‰Á
-@@E‹@”\’Ç‰ÁFŒ³ƒ‚ƒfƒ‹‚ªƒ{[ƒ“‚Ì‚İ‚Å‚ ‚Á‚½ê‡AƒJƒƒ‰ƒTƒCƒWƒ“ƒO‚Ì“ª’¸QÆ‚ğ’¸“_ˆÊ’u‚©‚çƒ{[ƒ“„’èˆÊ’u‚ÉØ‚è‘Ö‚¦‚é‚æ‚¤ˆ—’Ç‰Á
-@@E‹@”\’Ç‰ÁFƒGƒ‰[ƒƒbƒZ[ƒW’Ç‰Á
+ver5.01.02 (2021/05/04)
+    ãƒ»Spec change: Default OFF for "Leg IK Correction" in additional stance correction for normal body types (legs may slip)
+    ãƒ»Bugfix: Fixed quaternion multiplication order in IK calculation (improved accuracy for position alignment/collision avoidance)
+    ãƒ»Bugfix: Additional stance correction
+        ãƒ»Shoulder correction: adjusted calculation threshold
+        ãƒ»Center Y correction: fixed offset calculation
+    ãƒ»Bugfix: Collision avoidance
+        ãƒ»Made avoidance frame for midpoint between arm and elbow slightly smaller
+        ãƒ»Adjusted elbow cancel from 10 to 30 degrees (should reduce breaking)
+        ãƒ»Adjusted balance with position alignment
+    ãƒ»Bugfix: Camera correction
+        ãƒ»Fixed occasional calculation bug with zero-distance camera (now calculated with 0.00001 internally)
+        ãƒ»Cythonized (should be a few seconds faster)
 
+ver5.01.01 (2020/12/20)
+    ãƒ»Bugfix: Fixed failure to overwrite morph replacement in multi-person sizing
 
-ver5.01.04@i2021/09/23j
-@@EBugfixFƒ‚[ƒtƒuƒƒbƒN‚Ì‚È‚¢VMDƒf[ƒ^‚ª“Ç‚İ‚İƒGƒ‰[‚Æ‚È‚é‚Ì‚ğC³
-@@E‹@”\’Ç‰ÁFƒJƒƒ‰ƒTƒCƒWƒ“ƒO‚Ì‚İÀsƒIƒvƒVƒ‡ƒ“’Ç‰Á
-@@E‹@”\’Ç‰ÁFƒXƒsƒ“ƒXƒNƒ[ƒ‹‚ªƒ}ƒCƒiƒX’l‚É‚È‚Á‚½‚ÉA”wŒi‚ğ’W‚¢Â—Î‚É‚·‚é‚æ‚¤•ÏX
-@@@@@@@@@@Eƒ‚[ƒt’uŠ·F‘å‚«‚³•â³—“
-@@@@@@@@@@EƒJƒƒ‰•â³FYƒIƒtƒZƒbƒg
+ver5.01 (2020/11/21)
+    ãƒ»Processing speed up (about 30% faster)
+    ãƒ»Added progress status display
+    ãƒ»Added bulk sizing feature
+    ãƒ»Improved twist distribution accuracy
+    ãƒ»Added distance movable range limit option to camera sizing
+    ãƒ»Moved smoothing, morph blend, and interpolation curve viewer to MotionSupporter
+    ãƒ»Bugfix: Fixed occasional distance (scale ratio) bug in camera sizing
+    ãƒ»Bugfix: Fixed failure when aligning vpd
+    ãƒ»Bugfix: Fixed error when collision avoidance was specified for head bone with no weighted vertices
 
+ver5.00 (2020/07/05)
+    ãƒ»Rebuilt using numpy instead of PyQt5 for math library
+    ãƒ»Added support for multi-person motions
+    ãƒ»Added additional stance correction
+    ãƒ»Added twist distribution feature
+    ãƒ»Added smoothing feature
+    ãƒ»Added morph blend feature
 
-ver5.01.03@i2021/06/30j
-@@E‹@”\’Ç‰ÁF•ÏŠ·‘O‚È‚Ç‚Ì•s‘«ƒ{[ƒ“ƒ`ƒFƒbƒN‚ÉAƒ{[ƒ“‚Ì«¿“™‚Ìƒ`ƒFƒbƒN‚à‡‚í‚¹‚Äs‚¤‚æ‚¤ˆ—’Ç‰Á
-@@@@@@@@¨@Dƒ{[ƒ“‚È‚Ç‚ª“ü‚Á‚Ä‚¢‚é‚ª–³Œø‰»‚³‚ê‚Ä‚¢‚éê‡‚È‚Ç‚É•ª‚©‚è‚â‚·‚­‚È‚è‚Ü‚·B
-@@E‹@”\•ÏX: ˆÊ’u‡‚í‚¹
-@@@@@@@@E‚Ğ‚¶‚ÌŠp“x‚ª30“x–¢–‚Å‚ ‚éê‡AˆÊ’u‡‚í‚¹˜rIKˆ—‚©‚ç‚Ğ‚¶‚ğœŠO‚·‚é‚æ‚¤ˆ—’Ç‰Á
-@@@@@@@@@¨@‚±‚ê‚É”º‚¢‚Ğ‚¶‚ª‹tŒü‚«‚ÉœÜ‚·‚é‰Â”\«‚ªŒ¸‚Á‚½‚Í‚¸
-@@E‹@”\•ÏXF˜rƒXƒ^ƒ“ƒX•â³
-@@@@@@@@EISAO®ƒ~ƒN‚Åèñ‚ªÜ‚ê‚é‚Ì‚ğ‰ñ”ğ‚Å‚«‚é‚æ‚¤ˆ—’²®
-@@@@@@@@@iISAO®ƒ~ƒN‚Ìê‡Aèñ‚Æ’†w‚ª•ª’f‚³‚ê‚Ä‚é‚Ì‚ÅA•\¦æ‚ğƒx[ƒX‚É’²®‚·‚éj
+ver4.05 (2020/02/22)
+    ãƒ»Adjusted binary structure for faster VMD loading during output
+    ãƒ»Added sound on sizing completion (Windows INFO sound)
+    ãƒ»Fixed file button with history to open folder of first history file when "Open" is clicked
 
+ver4.04 (2019/12/10)
+    ãƒ»Bugfix: Fixed "unexpected error" with floor position alignment option
 
-ver5.01.02@i2021/05/04j
-@@Ed—l•ÏXFƒXƒ^ƒ“ƒX’Ç‰Á•â³‚Ìu‘«‚h‚j•â³v‚ªƒm[ƒ}ƒ‹‘ÌŒ^‚¾‚Æ‘«‚ªŠŠ‚Á‚Ä‚µ‚Ü‚¤‚Ì‚ÅƒfƒtƒHƒ‹ƒgOFF‚É•ÏX
-@@EBugfix: IKŒvZˆ—‚ÌƒNƒH[ƒ^ƒjƒIƒ“‚Ì‚©‚¯Z‡”Ô‚ªŠÔˆá‚Á‚Ä‚¢‚½‚Ì‚ÅC³iˆÊ’u‡‚í‚¹EÚG‰ñ”ğ‚Ì¸“xŒüãj
-@@EBugfix: ƒXƒ^ƒ“ƒX’Ç‰Á•â³
-@@@@@@@EŒ¨•â³FŒvZè‡’l‚ğ‚¿‚å‚Á‚Æ’²®
-@@@@@@@EƒZƒ“ƒ^[Y•â³FƒIƒtƒZƒbƒgŒvZˆ—C³
-@@EBugfix: ÚG‰ñ”ğ
-@@@@@@@E˜r‚Ğ‚¶’†ŠÔ‚Ì‰ñ”ğ˜g‚ğ­‚µ¬‚³‚ß‚É’²®
-@@@@@@@E‚Ğ‚¶ƒLƒƒƒ“ƒZƒ‹ˆ—‚ğ10“x‚©‚ç30“x‚É‚Ü‚Å’²®iœÜ‚ªŒ¸‚Á‚½‚Í‚¸j
-@@@@@@@EˆÊ’u‡‚í‚¹‚Æ‚ÌŒ“‚Ë‡‚¢‚ğ’²®
-@@EBugfix: ƒJƒƒ‰•â³
-@@@@@@@Eƒ[ƒ‹——£ƒJƒƒ‰‚Å‚½‚Ü‚ÉŒvZ‚ªƒoƒO‚é‚Ì‚ğC³i“à•”“I‚É0.00001‚ÅŒvZj
-@@@@@@@Ecython‰»i”•b‘‚­‚È‚Á‚Ä‚é‚Í‚¸j
+ver4.03 (2019/12/04)
+    ãƒ»Added "Finger Position Alignment" option for finger tutting motions
+    ãƒ»Adjusted processing for floor position alignment option
+    ãƒ»Internalized center up/down parameter for floor position alignment option
+    ãƒ»Bugfix: Fixed "unexpected error" with floor position alignment option
 
-ver5.01.01@i2020/12/20j
-@@EBugfix: •¡”lƒTƒCƒWƒ“ƒO‚Åƒ‚[ƒt’uŠ·‚Ìã‘‚«”»’è‚É¸”s‚·‚éê‡‚ª‚ ‚Á‚½‚Ì‚ğC³
+ver4.02 (2019/11/17)
+    ãƒ»Externalized wrist/foot to floor distance adjustment parameters for floor position alignment option
+    ãƒ»Added warning message for infinite loop error when traversing parent bones with circular reference
+    ãƒ»Bugfix: Fixed error when model name contains non-Japanese/English (cp932) characters
 
-ver5.01@i2020/11/21j
-@@Eˆ—‚Ì‚‘¬‰»i–ñ30%ƒXƒs[ƒhƒAƒbƒvj
-@@Ei’»ƒXƒe[ƒ^ƒX•\¦‹@”\’Ç‰Á
-@@EˆêŠ‡ƒTƒCƒWƒ“ƒO‹@”\’Ç‰Á
-@@E€‚è•ªU‚Ì¸“xŒüã
-@@EƒJƒƒ‰ƒTƒCƒWƒ“ƒO‚ÉA‹——£‰Â“®”ÍˆÍ§ŒÀƒIƒvƒVƒ‡ƒ“’Ç‰Á
-@@EƒXƒ€[ƒWƒ“ƒOEƒ‚[ƒtƒuƒŒƒ“ƒhE•âŠÔ‹Èüƒrƒ…[ƒ[‚ğAƒ‚[ƒVƒ‡ƒ“ƒTƒ|[ƒ^[‚ÉˆÚA
-@@EBugfix: ƒJƒƒ‰ƒTƒCƒWƒ“ƒO‚ÅX‹——£ikÚ”ä—¦j‚ª‚¨‚©‚µ‚­‚È‚Á‚Ä‚¢‚½‚Ì‚ğC³
-@@EBugfix: vpd‚ğˆÊ’u‡‚í‚¹‚·‚é‚Æ¸”s‚µ‚Ä‚¢‚½‚Ì‚ğC³
-@@EBugfix: ÚG‰ñ”ğ‚Å“ªƒ{[ƒ“‚ÉƒEƒFƒCƒg‚ªæ‚Á‚Ä‚¢‚é’¸“_‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½
-@@@@@@@@@•“ªÚG‰ñ”ğ‚ğw’è‚µ‚Ä‚¢‚½ê‡‚ÉAƒGƒ‰[‚ª”­¶‚µ‚Ä‚¢‚½‚Ì‚ğC³
+ver4.01 (2019/10/29)
+    ãƒ»Bugfix: Fixed crash when specifying model without "Center" as target
 
-ver5.00@i2020/07/05j
-@@E”Šwƒ‰ƒCƒuƒ‰ƒŠ‚ğ PyQt5 ‚©‚ç numpy ‚É•ÏX‚É”º‚¢Aì‚è’¼‚µ
-@@E•¡”l”ƒ‚[ƒVƒ‡ƒ“‚É‘Î‰
-@@EƒXƒ^ƒ“ƒX’Ç‰Á•â³’Ç‰Á
-@@E€‚è•ªU‹@”\’Ç‰Á
-@@EƒXƒ€[ƒWƒ“ƒO‹@”\’Ç‰Á
-@@Eƒ‚[ƒtƒuƒŒƒ“ƒh‹@”\’Ç‰Á
+ver4.00 (2019/10/25)
+    ãƒ»Added camera sizing feature
+    ãƒ»Added floor position alignment option
+    ãƒ»Added toe position alignment feature
+    ãƒ»Added VMD converter feature
+    ãƒ»Bugfix: Fixed calculation formula for center of gravity correction
 
-ver4.05@i2020/02/22j
-@@EVMDo—Í‚ÉƒoƒCƒiƒŠ\¬‚ğ’²®‚µ‚ÄAVMD‚Ì“Ç‚İ‚İ‚ª‘‚­‚È‚é‚æ‚¤ˆ—’Ç‰Á
-@@EƒTƒCƒWƒ“ƒOI—¹‚ÉA‰¹‚ªo‚é‚æ‚¤‹@”\’Ç‰ÁiWindows‚ÌINFO‰¹j
-@@E—š—ğ‹@”\•t‚«ƒtƒ@ƒCƒ‹ƒ{ƒ^ƒ“‚ÌuŠJ‚­v‚ğƒNƒŠƒbƒN‚µ‚½Û‚ÉA—š—ğ‚Ì1Œ–Ú‚Ìƒtƒ@ƒCƒ‹‚ª‘¶İ‚·‚éƒtƒHƒ‹ƒ_‚ğŠJ‚­‚æ‚¤C³
+ver3.00 (2019/07/26)
+    ãƒ»Changed UI to tab format
+    ãƒ»Added wrist position alignment processing
+    ãƒ»Added arm stance adjustment processing
+    ãƒ»Changed morph replacement processing (now supports split/merge)
+    ãƒ»Changed movement bone scale ratio
+    ãƒ»Added CSV converter feature
+    ãƒ»Bugfix: Added leg IK parent to adjustment targets, fixed hand position estimation in collision avoidance
 
-ver4.04@i2019/12/10j
-@@EBugix: °ˆÊ’u‡‚í‚¹ƒIƒvƒVƒ‡ƒ“‚ÅuˆÓ}‚¹‚ÊƒGƒ‰[v‚ª”­¶‚µ‚Ä‚¢‚½‚Ì‚ğC³
+ver2.03 (2019/06/05)
+    ãƒ»Added center of gravity adjustment offset processing
+    ãƒ»Added processing to display model name when specifying VMD file
+    ãƒ»Added processing to output target model name when outputting VMD file
+    ãƒ»Bugfix: Excluded unnecessary output in missing bone/morph check
 
-ver4.03@i2019/12/04j
-@@EƒtƒBƒ“ƒK[ƒ^ƒbƒgƒ‚[ƒVƒ‡ƒ“—p‚ÉuwˆÊ’u‡‚í‚¹vƒIƒvƒVƒ‡ƒ“’Ç‰Á
-@@E°ˆÊ’u‡‚í‚¹ƒIƒvƒVƒ‡ƒ“‚Ìˆ—‚ğ’²®
-@@E°ˆÊ’u‡‚í‚¹ƒIƒvƒVƒ‡ƒ“‚ÌƒZƒ“ƒ^[ã‰ºƒpƒ‰ƒ[ƒ^[‚ğ“à•”‰»
-@@EBugfix: °ˆÊ’u‡‚í‚¹ƒIƒvƒVƒ‡ƒ“‚ÅuˆÓ}‚¹‚ÊƒGƒ‰[v‚ª”­¶‚µ‚Ä‚¢‚½‚Ì‚ğC³
+ver2.02 (2019/06/02)
+    ãƒ»Changed all parent bones to sizing targets
+    ãƒ»Added dropdown to select collision avoidance detection point (index finger or wrist)
+    ãƒ»Bugfix: Fixed bug where elbow sometimes flipped
 
-ver4.02@i2019/11/17j
-@@E°ˆÊ’u‡‚í‚¹ƒIƒvƒVƒ‡ƒ“‚Ìèñ‚â‘«‚Æ°‚Ì‹——£’²®‚ğƒpƒ‰ƒ[ƒ^[ŠO•”‰»
-@@Eeƒ{[ƒ“‚ğ’H‚éˆ—‚ÅAzŠÂQÆ‚Å–³ŒÀƒ‹[ƒvƒGƒ‰[‚É‚È‚Á‚½ê‡‚ÉŒxƒƒbƒZ[ƒW‚ğo—Í‚·‚é‚æ‚¤ˆ—’Ç‰Á
-@@EBugfix: ƒ‚ƒfƒ‹–¼‚É“ú–{ŒêE‰pŒê(cp932)ˆÈŠO‚Ì•¶š‚ª“ü‚Á‚Ä‚¢‚éê‡‚ÉƒGƒ‰[‚Æ‚È‚Á‚Ä‚¢‚½‚Ì‚ğC³
+ver2.01 (2019/05/29)
+    ãƒ»Added morph replacement feature
 
-ver4.01@i2019/10/29j
-@@EBugfix: uƒZƒ“ƒ^[v‚ª‚È‚¢ƒ‚ƒfƒ‹‚ğ•ÏŠ·æ‚Éw’è‚·‚é‚Æ—‚¿‚Ä‚µ‚Ü‚Á‚Ä‚¢‚½‚Ì‚ğC³
+ver2.00 (2019/05/26)
+    ãƒ»Started general distribution of local version
 
-ver4.00@i2019/10/25j
-@@EƒJƒƒ‰ƒTƒCƒWƒ“ƒO‹@”\’Ç‰Á
-@@E°ˆÊ’u‡‚í‚¹ƒIƒvƒVƒ‡ƒ“‹@”\’Ç‰Á
-@@E‚Â‚ÜæˆÊ’u‡‚í‚¹‹@”\’Ç‰Á
-@@EVMDƒRƒ“ƒo[ƒ^[‹@”\’Ç‰Á
-@@EBugfix: dS•â³‚ÌŒvZ®‚ğC³
+ver1.10
+    ãƒ»Started test distribution of local version
 
-ver3.00@i2019/07/26j
-@@EUI‚ğƒ^ƒuŒ`®‚É•ÏX
-@@EèñˆÊ’u‡‚í‚¹ˆ—’Ç‰Á
-@@E˜rƒXƒ^ƒ“ƒX’²®ˆ—’Ç‰Á
-@@Eƒ‚[ƒt’uŠ·‚Ì’uŠ·ˆ—•ÏXi•ªŠ„E‡Z‚ğ‰Â”\‚Éj
-@@EˆÚ“®Œnƒ{[ƒ“kÚ‚Ì”ä—¦‚ğ•ÏX
-@@ECSVƒRƒ“ƒo[ƒ^[‹@”\’Ç‰Á
-@@EBugfixF‘«IKe‚ğ’²®‘ÎÛ‚É’Ç‰ÁAÚG‰ñ”ğ‚Åè‚ÌˆÊ’u„’èˆ—C³
-
-ver2.03@i2019/06/05j
-@@EdS’²®ƒIƒtƒZƒbƒgˆ—’Ç‰Á
-@@EVMDƒtƒ@ƒCƒ‹‚ğw’è‚µ‚½Û‚Éƒ‚ƒfƒ‹–¼‚ğ•\¦‚·‚é‚æ‚¤ˆ—’Ç‰Á
-@@EVMDƒtƒ@ƒCƒ‹‚Ìo—Í‚É•ÏŠ·æƒ‚ƒfƒ‹–¼‚ğo—Í‚·‚é‚æ‚¤ˆ—’Ç‰Á
-@@EBugFix: •s‘«ƒ{[ƒ“Eƒ‚[ƒt‚Ìƒ`ƒFƒbƒN‚Å•s—v‚Èo—Í‚ğœŠO
-
-ver2.02@i2019/06/02j
-@@E‘S‚Ä‚Ìe‚ğƒTƒCƒWƒ“ƒO‘ÎÛ‚É•ÏX
-@@EÚG‰ñ”ğ”»’èæ‚ğl·‚µw‚©èñ‚©‘I‚×‚é‚æ‚¤‚Éƒvƒ‹ƒ_ƒEƒ“’Ç‰Á
-@@EBugFix: ‚Ğ‚¶‚ª‚½‚Ü‚É”½“]‚µ‚Ä‚µ‚Ü‚¤•s‹ï‡‚ğC³
-
-ver2.01@i2019/05/29j
-@@Eƒ‚[ƒt’uŠ·‹@”\’Ç‰Á
-
-ver2.00@i2019/05/26j
-@@Eƒ[ƒJƒ‹”Åˆê”Ê”z•zŠJn
-
-ver1.10@i2019/05/22j
-@@Eƒ[ƒJƒ‹”ÅƒeƒXƒg”z•zŠJn
-
-ver1.00@i2019/4/29j
-@@Ecolab”Å”z•zŠJn
+ver1.00
+    ãƒ»Started distribution of colab version
 
 
 
